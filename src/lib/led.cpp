@@ -1,17 +1,10 @@
 /**
  * @file led.cpp
  *
- * @author Comp ThundeRatz <comp@thunderatz.org>
- *
  * @brief Proxy Led class source.
  *
- * @date 01/2024
- *
- * @copyright MIT License - Copyright (c) 2024 ThundeRatz
- *
+ * @date 03/2024
  */
-
-#include <stdio.h>
 
 #include "proxy/led.hpp"
 

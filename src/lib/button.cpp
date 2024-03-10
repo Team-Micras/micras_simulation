@@ -1,30 +1,22 @@
 /**
  * @file button.cpp
  *
- * @author Comp ThundeRatz <comp@thunderatz.org>
- *
  * @brief Proxy Button class source.
  *
- * @date 01/2024
- *
- * @copyright MIT License - Copyright (c) 2024 ThundeRatz
- *
+ * @date 03/2024
  */
-
-#include <stdio.h>
 
 #include "proxy/button.hpp"
 
 namespace proxy {
 Button::Button(Config button_config) : rclcpp::Node(button_config.name) {
-    this->subscriber =
-        this->create_subscription<std_msgs::msg::Bool>(button_config.topic, 1,
-                                                       [this](const std_msgs::msg::Bool::SharedPtr msg) {
-                                                           this->state = msg->data;
-                                                       });
+    this->subscriber = this->create_subscription<std_msgs::msg::Bool>(
+        button_config.topic, 1, [this](const std_msgs::msg::Bool& msg) {
+            this->state.data = msg.data;
+        });
 }
 
-bool Button::get_state() {
-    return this->state;
+bool Button::get_state() const {
+    return this->state.data;
 }
 }  // namespace proxy
