@@ -1,0 +1,30 @@
+# .gitignore taken from https://github.com/ThundeRatz/ThunderTrekking
+
+# Hidden files
+~*
+
+# vscode files
+.vscode/*
+!.vscode/c_cpp_properties.json
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+
+# Doxygen generated files
+Doxygen/
+
+# Local files
+local/
+
+# Cache files
+*.cache
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Build files
+build/
+install/
+log/
