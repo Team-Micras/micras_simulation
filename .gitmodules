@@ -1,0 +1,4 @@
+[submodule "MicrasFirmware"]
+	path = MicrasFirmware
+	url = git@github.com:Team-Micras/MicrasFirmware.git
+	branch = feature/gpio
