@@ -1,17 +1,23 @@
+/**
+ * @file target.hpp
+ *
+ * @brief Target configuration constants
+ *
+ * @date 03/2024
+ */
+
 #ifndef __TARGET_HPP__
 #define __TARGET_HPP__
+
+#include <memory>
+#include <rclcpp/rclcpp.hpp>
 
 #include "proxy/button.hpp"
 #include "proxy/led.hpp"
 
-proxy::Led::Config led_config{
-    "led_node", // name
-    "led",      // topic
-};
+extern std::shared_ptr<rclcpp::Node> micras_node;
 
-proxy::Button::Config button_config{
-    "button_node", // name
-    "button",      // topic
-};
+extern proxy::Led::Config led_config;
+extern proxy::Button::Config button_config;
 
 #endif // __TARGET_HPP__

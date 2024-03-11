@@ -17,15 +17,14 @@ namespace proxy {
 /**
  * @brief Class for controlling an LED
  */
-class Led :
-    public rclcpp::Node {
+class Led {
     public:
         /**
          * @brief Configuration structure for led
          */
         struct Config {
-            std::string name;
-            std::string topic;
+            std::shared_ptr<rclcpp::Node>& node;
+            std::string                    topic;
         };
 
         /**
@@ -33,7 +32,12 @@ class Led :
          *
          * @param led_config Configuration for the led
          */
-        Led(Config led_config);
+        Led(const Config& led_config);
+
+        /**
+         * @brief Destroy the Led object
+         */
+        ~Led() = default;
 
         /**
          * @brief Turn the led on

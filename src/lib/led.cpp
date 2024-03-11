@@ -1,7 +1,7 @@
 /**
  * @file led.cpp
  *
- * @brief Proxy Led class source.
+ * @brief Proxy Led class source
  *
  * @date 03/2024
  */
@@ -9,8 +9,8 @@
 #include "proxy/led.hpp"
 
 namespace proxy {
-Led::Led(Config led_config) : rclcpp::Node(led_config.name) {
-    this->publisher = this->create_publisher<std_msgs::msg::Bool>(led_config.topic, 1);
+Led::Led(const Config& led_config) {
+    this->publisher = led_config.node->create_publisher<std_msgs::msg::Bool>(led_config.topic, 1);
 }
 
 void Led::turn_on() {

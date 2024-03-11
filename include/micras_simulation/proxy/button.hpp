@@ -17,15 +17,14 @@ namespace proxy {
 /**
  * @brief Class for controlling a Button
  */
-class Button :
-    public rclcpp::Node {
+class Button {
     public:
         /**
          * @brief Configuration structure for button
          */
         struct Config {
-            std::string name;
-            std::string topic;
+            std::shared_ptr<rclcpp::Node>& node;
+            std::string                    topic;
         };
 
         /**
@@ -33,7 +32,12 @@ class Button :
          *
          * @param button_config Configuration for the button
          */
-        Button(Config button_config);
+        Button(const Config& button_config);
+
+        /**
+         * @brief Destroy the Button object
+         */
+        ~Button() = default;
 
         /**
          * @brief Get the button state

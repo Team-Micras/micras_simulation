@@ -31,9 +31,10 @@ include_directories(
 )
 
 add_library(${PROJECT_NAME}_lib
+  cfg/target.cpp
   src/lib/button.cpp
   src/lib/led.cpp
-  MicrasFirmware/src/controller/micras_controller_test.cpp
+  MicrasFirmware/src/controller/micras_controller.cpp
 )
 
 ament_target_dependencies(${PROJECT_NAME}_lib ${ROS_CODE_DEPS})
