@@ -35,11 +35,6 @@ class Led {
         Led(const Config& led_config);
 
         /**
-         * @brief Destroy the Led object
-         */
-        ~Led() = default;
-
-        /**
          * @brief Turn the led on
          */
         void turn_on();
