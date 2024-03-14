@@ -50,6 +50,10 @@ install(DIRECTORY include/
   DESTINATION include
 )
 
+install(DIRECTORY gazebo
+  DESTINATION share/${PROJECT_NAME}/gazebo
+)
+
 install(TARGETS ${PROJECT_NAME}_lib
   EXPORT export_${PROJECT_NAME}
   ARCHIVE DESTINATION lib
