@@ -36,7 +36,7 @@
       </collision>
     </link>
     <link name="FLW_link">
-      <pose relative_to="base_link">-0.0275 -0.002 0.008 0 0 3.14159265359</pose>
+      <pose relative_to="base_link">-0.02925 -0.002 0.008 0 0 3.14159265359</pose>
       <inertial>
         <mass>0.00135156970824209</mass>
         <inertia>
@@ -71,13 +71,12 @@
         <surface>
           <friction>
             <ode>
-              <mu>1.0</mu>
-              <mu2>0.0</mu2>
-              <fdir1 gz:expressed_in="base_link">1 -1 0</fdir1>
+              <mu>0.95</mu>
+              <mu2>0.95</mu2>
             </ode>
             <bullet>
-              <friction>1</friction>
-              <friction2>1</friction2>
+              <friction>0.95</friction>
+              <friction2>0.95</friction2>
               <rolling_friction>0.1</rolling_friction>
             </bullet>
           </friction>
@@ -85,7 +84,7 @@
       </collision>
     </link>
     <joint name="FLW_joint" type="revolute">
-      <pose relative_to='FLW_link'/>
+      <pose relative_to="FLW_link">0 0 0 0 0 0</pose>
       <parent>base_link</parent>
       <child>FLW_link</child>
       <axis>
@@ -97,7 +96,7 @@
       </axis>
     </joint>
     <link name="RLW_link">
-      <pose relative_to="base_link">-0.0275 -0.025 0.008 0 0 3.14159265359</pose>
+      <pose relative_to="base_link">-0.02925 -0.025 0.008 0 0 3.14159265359</pose>
       <inertial>
         <mass>0.00135156970824209</mass>
         <inertia>
@@ -132,13 +131,12 @@
         <surface>
           <friction>
             <ode>
-              <mu>1.0</mu>
-              <mu2>0.0</mu2>
-              <fdir1 gz:expressed_in="base_link">1 -1 0</fdir1>
+              <mu>0.95</mu>
+              <mu2>0.95</mu2>
             </ode>
             <bullet>
-              <friction>1</friction>
-              <friction2>1</friction2>
+              <friction>0.95</friction>
+              <friction2>0.95</friction2>
               <rolling_friction>0.1</rolling_friction>
             </bullet>
           </friction>
@@ -146,7 +144,7 @@
       </collision>
     </link>
     <joint name="RLW_joint" type="revolute">
-      <pose relative_to='RLW_link'/>
+      <pose relative_to="RLW_link">0 0 0 0 0 0</pose>
       <parent>base_link</parent>
       <child>RLW_link</child>
       <axis>
@@ -158,7 +156,7 @@
       </axis>
     </joint>
     <link name="FRW_link">
-      <pose relative_to="base_link">0.0285 -0.002 0.008 0 0 3.14159265359</pose>
+      <pose relative_to="base_link">0.02925 -0.002 0.008 0 0 3.14159265359</pose>
       <inertial>
         <mass>0.00135156970824209</mass>
         <inertia>
@@ -193,13 +191,12 @@
         <surface>
           <friction>
             <ode>
-              <mu>1.0</mu>
-              <mu2>0.0</mu2>
-              <fdir1 gz:expressed_in="base_link">1 -1 0</fdir1>
+              <mu>0.95</mu>
+              <mu2>0.95</mu2>
             </ode>
             <bullet>
-              <friction>1</friction>
-              <friction2>1</friction2>
+              <friction>0.95</friction>
+              <friction2>0.95</friction2>
               <rolling_friction>0.1</rolling_friction>
             </bullet>
           </friction>
@@ -207,7 +204,7 @@
       </collision>
     </link>
     <joint name="FRW_joint" type="revolute">
-      <pose relative_to='FRW_link'/>
+      <pose relative_to="FRW_link">0 0 0 0 0 0</pose>
       <parent>base_link</parent>
       <child>FRW_link</child>
       <axis>
@@ -219,7 +216,7 @@
       </axis>
     </joint>
     <link name="RRW_link">
-      <pose relative_to="base_link">0.0285 -0.025 0.008 0 0 3.14159265359</pose>
+      <pose relative_to="base_link">0.02925 -0.025 0.008 0 0 3.14159265359</pose>
       <inertial>
         <mass>0.00135156970824209</mass>
         <inertia>
@@ -254,13 +251,12 @@
         <surface>
           <friction>
             <ode>
-              <mu>1.0</mu>
-              <mu2>0.0</mu2>
-              <fdir1 gz:expressed_in="base_link">1 -1 0</fdir1>
+              <mu>0.95</mu>
+              <mu2>0.95</mu2>
             </ode>
             <bullet>
-              <friction>1</friction>
-              <friction2>1</friction2>
+              <friction>0.95</friction>
+              <friction2>0.95</friction2>
               <rolling_friction>0.1</rolling_friction>
             </bullet>
           </friction>
@@ -268,7 +264,7 @@
       </collision>
     </link>
     <joint name="RRW_joint" type="revolute">
-      <pose relative_to='RRW_link'/>
+      <pose relative_to="RRW_link">0 0 0 0 0 0</pose>
       <parent>base_link</parent>
       <child>RRW_link</child>
       <axis>
