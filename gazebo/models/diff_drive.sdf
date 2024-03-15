@@ -4,7 +4,10 @@
 		<plugin filename="libignition-gazebo-imu-system.so"
 				name="ignition::gazebo::systems::Imu">
 		</plugin>
-		<plugin filename="gz-sim-joint-state-publisher-system"
+		<plugin filename="libignition-gazebo-forcetorque-system.so"
+				name="ignition::gazebo::systems::ForceTorque">
+		</plugin>
+		<plugin filename="libignition-gazebo-joint-state-publisher-system"
   				name="gz::sim::systems::JointStatePublisher">
 			<topic>joint_states</topic>
 			<joint_name>RLW_joint</joint_name>
@@ -47,14 +50,14 @@
 		</frame>
 		<link name="base_link">
 			<inertial>
-				<mass>0.0206254177502013</mass>
+				<mass>0.0825016710008052</mass>
 				<inertia>
-					<ixx>1.78587720432087E-05</ixx>
+					<ixx>7.14350881728348E-05</ixx>
 					<ixy>0</ixy>
 					<ixz>0</ixz>
-					<iyy>5.6820499519587E-06</iyy>
+					<iyy>2.27281998078348E-05</iyy>
 					<iyz>0</iyz>
-					<izz>2.35320218169273E-05</izz>
+					<izz>9.41280872677092E-05</izz>
 				</inertia>
 			</inertial>
 			<visual name="base_vis">
@@ -262,7 +265,7 @@
 				<visualize>true</visualize>
 				<topic>FLW_torque</topic>
 				<force_torque>
-					<frame>parent</frame>
+					<frame>child</frame>
 					<measure_direction>parent_to_child</measure_direction>
 				</force_torque>
 			</sensor>
@@ -332,7 +335,7 @@
 				<visualize>true</visualize>
 				<topic>RLW_torque</topic>
 				<force_torque>
-					<frame>parent</frame>
+					<frame>child</frame>
 					<measure_direction>parent_to_child</measure_direction>
 				</force_torque>
 			</sensor>
@@ -402,7 +405,7 @@
 				<visualize>true</visualize>
 				<topic>FRW_torque</topic>
 				<force_torque>
-					<frame>parent</frame>
+					<frame>child</frame>
 					<measure_direction>parent_to_child</measure_direction>
 				</force_torque>
 			</sensor>
@@ -472,7 +475,7 @@
 				<visualize>true</visualize>
 				<topic>RRW_torque</topic>
 				<force_torque>
-					<frame>parent</frame>
+					<frame>child</frame>
 					<measure_direction>parent_to_child</measure_direction>
 				</force_torque>
 			</sensor>
