@@ -3,21 +3,18 @@
     <world name="car_world">
         <gravity>0 0 -58.8</gravity>
         <physics name="1ms" type="ode">
-            <max_step_size>0.0001</max_step_size>
+            <max_step_size>0.001</max_step_size>
             <real_time_factor>1.0</real_time_factor>
-            <real_time_update_rate>10000.0</real_time_update_rate>
+            <real_time_update_rate>1000.0</real_time_update_rate>
         </physics>
-        <plugin
-            filename="libignition-gazebo-physics-system.so"
-            name="ignition::gazebo::systems::Physics">
+        <plugin filename="libignition-gazebo-physics-system.so"
+                name="ignition::gazebo::systems::Physics">
         </plugin>
-        <plugin
-            filename="libignition-gazebo-user-commands-system.so"
-            name="ignition::gazebo::systems::UserCommands">
+        <plugin filename="libignition-gazebo-user-commands-system.so"
+                name="ignition::gazebo::systems::UserCommands">
         </plugin>
-        <plugin
-            filename="libignition-gazebo-scene-broadcaster-system.so"
-            name="ignition::gazebo::systems::SceneBroadcaster">
+        <plugin filename="libignition-gazebo-scene-broadcaster-system.so"
+                name="ignition::gazebo::systems::SceneBroadcaster">
         </plugin>
 
         <light type="directional" name="sun">
@@ -60,34 +57,41 @@
             </link>
         </model>
 
-        <model name="diff_drive">
-          <self_collide>true</self_collide>
-          <pose>0 0 0.05 0 0 0</pose>
-          <include merge="true">
-            <uri>package://gazebo/models/diff_drive.sdf</uri>
-          </include>
-          <plugin filename="libignition-gazebo-diff-drive-system.so"
-                  name="ignition::gazebo::systems::DiffDrive">
-                <left_joint>FLW_joint</left_joint>
-                <left_joint>RLW_joint</left_joint>
-                <right_joint>FRW_joint</right_joint>
-                <right_joint>RRW_joint</right_joint>
-                <wheel_separation>0.05</wheel_separation>
-                <wheel_radius>0.021</wheel_radius>
-                <topic>cmd_vel</topic>
-                <odom_publish_frequency>100</odom_publish_frequency>
-                <min_linear_velocity>-10.0</min_linear_velocity>
-                <max_linear_velocity>10.0</max_linear_velocity>
-                <min_angular_velocity>-250.0</min_angular_velocity>
-                <max_angular_velocity>250.0</max_angular_velocity>
-                <min_linear_acceleration>-50.0</min_linear_acceleration>
-                <max_linear_acceleration>50.0</max_linear_acceleration>
-                <min_angular_acceleration>-3000.0</min_angular_acceleration>
-                <max_angular_acceleration>3000.0</max_angular_acceleration>
-            </plugin>
+        <model name='wall'>
+            <static>true</static>
+            <pose>0 0.2 0.025 0 0 0</pose>
+            <link name='box'>
+                <pose/>
+                <visual name='visual'>
+                    <geometry>
+                        <box>
+                            <size>0.54 0.012 0.05</size>
+                        </box>
+                    </geometry>
+                    <material>
+                        <ambient>0.0 0.0 1.0 1</ambient>
+                        <diffuse>0.0 0.0 1.0 1</diffuse>
+                        <specular>0.0 0.0 1.0 1</specular>
+                    </material>
+                </visual>
+                <collision name='collision'>
+                    <geometry>
+                        <box>
+                            <size>0.54 0.012 0.05</size>
+                        </box>
+                    </geometry>
+                </collision>
+            </link>
         </model>
 
-                <!-- Moving Forward-->
+        <model name="diff_drive">
+            <self_collide>true</self_collide>
+            <pose>0 0 0.05 0 0 0</pose>
+            <include merge="true">
+                <uri>package://gazebo/models/diff_drive.sdf</uri>
+            </include>
+        </model>
+
         <plugin filename="libignition-gazebo-triggered-publisher-system.so"
                 name="ignition::gazebo::systems::TriggeredPublisher">
             <input type="ignition.msgs.Int32" topic="/keyboard/keypress">
@@ -98,7 +102,6 @@
             </output>
         </plugin>
 
-        <!-- Moving Backward-->
         <plugin filename="libignition-gazebo-triggered-publisher-system.so"
                 name="ignition::gazebo::systems::TriggeredPublisher">
             <input type="ignition.msgs.Int32" topic="/keyboard/keypress">
@@ -109,7 +112,6 @@
             </output>
         </plugin>
 
-        <!-- Rotating right-->
         <plugin filename="libignition-gazebo-triggered-publisher-system.so"
                 name="ignition::gazebo::systems::TriggeredPublisher">
             <input type="ignition.msgs.Int32" topic="/keyboard/keypress">
@@ -120,7 +122,6 @@
             </output>
         </plugin>
 
-        <!--Rotating left-->
         <plugin filename="libignition-gazebo-triggered-publisher-system.so"
                 name="ignition::gazebo::systems::TriggeredPublisher">
             <input type="ignition.msgs.Int32" topic="/keyboard/keypress">
