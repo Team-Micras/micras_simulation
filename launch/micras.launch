@@ -1,0 +1,54 @@
+<launch>
+    <set_env name="GZ_SIM_RESOURCE_PATH" value="$(find-pkg-share micras_simulation)/gazebo"/>
+
+    <group>
+        <push-ros-namespace namespace="micras"/>
+
+        <include file="$(find-pkg-share ros_gz_sim)/launch/gz_sim.launch.py">
+            <arg name="gz_args" value="$(find-pkg-share micras_simulation)/gazebo/worlds/maze.sdf"/>
+        </include>
+_
+        <node name="bridge_lidar_0" pkg="ros_gz_bridge" exec="parameter_bridge" args="/lidar_0@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan" output="screen">
+            <remap from="/lidar_0" to="distance_sensor_0"/>
+        </node>
+        <node name="bridge_lidar_1" pkg="ros_gz_bridge" exec="parameter_bridge" args="/lidar_1@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan" output="screen">
+            <remap from="/lidar_1" to="distance_sensor_1"/>
+        </node>
+        <node name="bridge_lidar_2" pkg="ros_gz_bridge" exec="parameter_bridge" args="/lidar_2@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan" output="screen">
+            <remap from="/lidar_2" to="distance_sensor_2"/>
+        </node>
+        <node name="bridge_lidar_3" pkg="ros_gz_bridge" exec="parameter_bridge" args="/lidar_3@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan" output="screen">
+            <remap from="/lidar_3" to="distance_sensor_3"/>
+        </node>
+
+        <node name="bridge_imu" pkg="ros_gz_bridge" exec="parameter_bridge" args="/imu@sensor_msgs/msg/Imu@gz.msgs.IMU" output="screen">
+            <remap from="/imu" to="imu"/>
+        </node>
+
+        <node name="bridge_cmd_vel" pkg="ros_gz_bridge" exec="parameter_bridge" args="/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist" output="screen">
+            <remap from="/cmd_vel" to="cmd_vel"/>
+        </node>
+
+        <node name="bridge_encoder" pkg="ros_gz_bridge" exec="parameter_bridge" args="/encoders@sensor_msgs/msg/JointState@gz.msgs.Model" output="screen">
+            <remap from="/encoders" to="encoders"/>
+        </node>
+
+        <node name="bridge_torque_flw" pkg="ros_gz_bridge" exec="parameter_bridge" args="/torque_flw@geometry_msgs/msg/WrenchStamped@gz.msgs.Wrench" output="screen">
+            <remap from="/torque_flw" to="torque_flw"/>
+        </node>
+        <node name="bridge_torque_frw" pkg="ros_gz_bridge" exec="parameter_bridge" args="/torque_frw@geometry_msgs/msg/WrenchStamped@gz.msgs.Wrench" output="screen">
+            <remap from="/torque_frw" to="torque_frw"/>
+        </node>
+        <node name="bridge_torque_rlw" pkg="ros_gz_bridge" exec="parameter_bridge" args="/torque_rlw@geometry_msgs/msg/WrenchStamped@gz.msgs.Wrench" output="screen">
+            <remap from="/torque_rlw" to="torque_rlw"/>
+        </node>
+        <node name="bridge_torque_rrw" pkg="ros_gz_bridge" exec="parameter_bridge" args="/torque_rrw@geometry_msgs/msg/WrenchStamped@gz.msgs.Wrench" output="screen">
+            <remap from="/torque_rrw" to="torque_rrw"/>
+        </node>
+
+        <node name="bridge_odometry" pkg="ros_gz_bridge" exec="parameter_bridge" args="/odometry@nav_msgs/msg/Odometry@gz.msgs.Odometry" output="screen">
+            <remap from="/odometry" to="odometry"/>
+        </node>
+        
+    </group>
+</launch>
