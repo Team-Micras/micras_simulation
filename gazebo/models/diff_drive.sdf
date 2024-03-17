@@ -26,6 +26,7 @@
 			<wheel_separation>0.05</wheel_separation>
 			<wheel_radius>0.021</wheel_radius>
 			<topic>cmd_vel</topic>
+			<odometry_topic>odometry</odometry_topic>
 			<odom_publish_frequency>100</odom_publish_frequency>
 			<min_linear_velocity>-10.0</min_linear_velocity>
 			<max_linear_velocity>10.0</max_linear_velocity>
@@ -64,7 +65,7 @@
 				<pose relative_to="base_link">0 0.07 0.017 0 0 0</pose>
 				<geometry>
 					<mesh>
-						<uri>file://gazebo/meshes/base_link.stl</uri>
+						<uri>model://meshes/base_link.stl</uri>
 					</mesh> 
 				</geometry>
 				<material>
@@ -77,7 +78,7 @@
 				<pose relative_to="base_link">0 0.07 0.017 0 0 0</pose>
 				<geometry>
 					<mesh>
-						<uri>file://gazebo/meshes/base_link.stl</uri>
+						<uri>model://meshes/base_link.stl</uri>
 					</mesh> 
 				</geometry>
 			</collision>
@@ -89,7 +90,7 @@
 			</sensor>
 			<sensor name="gpu_lidar0" type="gpu_lidar">"
 				<pose relative_to="lidar0_frame">0 0 0 0 0 0</pose>
-				<topic>lidar0</topic>
+				<topic>lidar_0</topic>
 				<update_rate>100</update_rate>
 				<ray>
 					<scan>
@@ -117,7 +118,7 @@
 			</sensor>
 			<sensor name="gpu_lidar1" type="gpu_lidar">"
 				<pose relative_to="lidar1_frame">0 0 0 0 0 0</pose>
-				<topic>lidar1</topic>
+				<topic>lidar_1</topic>
 				<update_rate>100</update_rate>
 				<ray>
 					<scan>
@@ -145,7 +146,7 @@
 			</sensor>
 			<sensor name="gpu_lidar2" type="gpu_lidar">"
 				<pose relative_to="lidar2_frame">0 0 0 0 0 0</pose>
-				<topic>lidar2</topic>
+				<topic>lidar_2</topic>
 				<update_rate>100</update_rate>
 				<ray>
 					<scan>
@@ -173,7 +174,7 @@
 			</sensor>
 			<sensor name="gpu_lidar3" type="gpu_lidar">"
 				<pose relative_to="lidar3_frame">0 0 0 0 0 0</pose>
-				<topic>lidar3</topic>
+				<topic>lidar_3</topic>
 				<update_rate>100</update_rate>
 				<ray>
 					<scan>
@@ -217,7 +218,7 @@
 				<pose relative_to="FLW_link">-0.00425 0 0 0 0 3.14159265359</pose>
 				<geometry>
 					<mesh>
-						<uri>file://gazebo/meshes/wheel.stl</uri>
+						<uri>model://meshes/wheel.stl</uri>
 					</mesh>
 				</geometry>
 				<material>
@@ -230,7 +231,7 @@
 				<pose relative_to="FLW_link">-0.00425 0 0 0 0 3.14159265359</pose>
 				<geometry>
 					<mesh>
-						<uri>file://gazebo/meshes/wheel.stl</uri>
+						<uri>model://meshes/wheel.stl</uri>
 					</mesh>
 				</geometry>
 				<surface>
@@ -263,7 +264,7 @@
 				<always_on>1</always_on>
 				<update_rate>100</update_rate>
 				<visualize>true</visualize>
-				<topic>FLW_torque</topic>
+				<topic>torque_flw</topic>
 				<force_torque>
 					<frame>child</frame>
 					<measure_direction>parent_to_child</measure_direction>
@@ -287,7 +288,7 @@
 				<pose relative_to="RLW_link">-0.00425 0 0 0 0 3.14159265359</pose>
 				<geometry>
 					<mesh>
-						<uri>file://gazebo/meshes/wheel.stl</uri>
+						<uri>model://meshes/wheel.stl</uri>
 					</mesh>
 				</geometry>
 				<material>
@@ -300,7 +301,7 @@
 				<pose relative_to="RLW_link">-0.00425 0 0 0 0 3.14159265359</pose>
 				<geometry>
 					<mesh>
-						<uri>file://gazebo/meshes/wheel.stl</uri>
+						<uri>model://meshes/wheel.stl</uri>
 					</mesh>
 				</geometry>
 				<surface>
@@ -333,7 +334,7 @@
 				<always_on>1</always_on>
 				<update_rate>100</update_rate>
 				<visualize>true</visualize>
-				<topic>RLW_torque</topic>
+				<topic>torque_rlw</topic>
 				<force_torque>
 					<frame>child</frame>
 					<measure_direction>parent_to_child</measure_direction>
@@ -357,7 +358,7 @@
 				<pose relative_to="FRW_link">0.00425 0 0 0 0 0</pose>
 				<geometry>
 					<mesh>
-						<uri>file://gazebo/meshes/wheel.stl</uri>
+						<uri>model://meshes/wheel.stl</uri>
 					</mesh>
 				</geometry>
 				<material>
@@ -370,7 +371,7 @@
 				<pose relative_to="FRW_link">0.00425 0 0 0 0 0</pose>
 				<geometry>
 					<mesh>
-						<uri>file://gazebo/meshes/wheel.stl</uri>
+						<uri>model://meshes/wheel.stl</uri>
 					</mesh>
 				</geometry>
 				<surface>
@@ -403,7 +404,7 @@
 				<always_on>1</always_on>
 				<update_rate>100</update_rate>
 				<visualize>true</visualize>
-				<topic>FRW_torque</topic>
+				<topic>torque_frw</topic>
 				<force_torque>
 					<frame>child</frame>
 					<measure_direction>parent_to_child</measure_direction>
@@ -427,7 +428,7 @@
 				<pose relative_to="RRW_link">0.00425 0 0 0 0 0</pose>
 				<geometry>
 					<mesh>
-						<uri>file://gazebo/meshes/wheel.stl</uri>
+						<uri>model://meshes/wheel.stl</uri>
 					</mesh>
 				</geometry>
 				<material>
@@ -440,7 +441,7 @@
 				<pose relative_to="RRW_link">0.00425 0 0 0 0 0</pose>
 				<geometry>
 					<mesh>
-						<uri>file://gazebo/meshes/wheel.stl</uri>
+						<uri>model://meshes/wheel.stl</uri>
 					</mesh>
 				</geometry>
 				<surface>
@@ -473,7 +474,7 @@
 				<always_on>1</always_on>
 				<update_rate>100</update_rate>
 				<visualize>true</visualize>
-				<topic>RRW_torque</topic>
+				<topic>torque_rrw</topic>
 				<force_torque>
 					<frame>child</frame>
 					<measure_direction>parent_to_child</measure_direction>
