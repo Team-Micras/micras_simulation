@@ -29,8 +29,8 @@ _
             <remap from="/cmd_vel" to="cmd_vel"/>
         </node>
 
-        <node name="bridge_encoder" pkg="ros_gz_bridge" exec="parameter_bridge" args="/encoders@sensor_msgs/msg/JointState@gz.msgs.Model" output="screen">
-            <remap from="/encoders" to="encoders"/>
+        <node name="bridge_encoder" pkg="ros_gz_bridge" exec="parameter_bridge" args="/joint_states@sensor_msgs/msg/JointState@gz.msgs.Model" output="screen">
+            <remap from="/joint_states" to="encoders"/>
         </node>
 
         <node name="bridge_torque_flw" pkg="ros_gz_bridge" exec="parameter_bridge" args="/torque_flw@geometry_msgs/msg/WrenchStamped@gz.msgs.Wrench" output="screen">
