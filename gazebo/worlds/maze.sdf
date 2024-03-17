@@ -84,11 +84,11 @@
             </link>
         </model>
 
-        <model name="diff_drive">
+        <model name="robot">
             <self_collide>true</self_collide>
             <pose>0 0 0.05 0 0 0</pose>
             <include merge="true">
-                <uri>model://models/diff_drive.sdf</uri>
+                <uri>model://models/robot.sdf</uri>
             </include>
         </model>
 
