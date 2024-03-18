@@ -3,21 +3,18 @@
     <world name="car_world">
         <gravity>0 0 -58.8</gravity>
         <physics name="1ms" type="ode">
-            <max_step_size>0.0001</max_step_size>
+            <max_step_size>0.001</max_step_size>
             <real_time_factor>1.0</real_time_factor>
-            <real_time_update_rate>10000.0</real_time_update_rate>
+            <real_time_update_rate>1000.0</real_time_update_rate>
         </physics>
-        <plugin
-            filename="libignition-gazebo-physics-system.so"
-            name="ignition::gazebo::systems::Physics">
+        <plugin filename="libignition-gazebo-physics-system.so"
+                name="ignition::gazebo::systems::Physics">
         </plugin>
-        <plugin
-            filename="libignition-gazebo-user-commands-system.so"
-            name="ignition::gazebo::systems::UserCommands">
+        <plugin filename="libignition-gazebo-user-commands-system.so"
+                name="ignition::gazebo::systems::UserCommands">
         </plugin>
-        <plugin
-            filename="libignition-gazebo-scene-broadcaster-system.so"
-            name="ignition::gazebo::systems::SceneBroadcaster">
+        <plugin filename="libignition-gazebo-scene-broadcaster-system.so"
+                name="ignition::gazebo::systems::SceneBroadcaster">
         </plugin>
 
         <light type="directional" name="sun">
@@ -34,101 +31,62 @@
             <direction>-0.5 0.1 -0.9</direction>
         </light>
 
-        <model name="ground_plane">
+        <model name="ground">
             <static>true</static>
-            <link name="link">
-                <collision name="collision">
-                <geometry>
-                    <plane>
-                    <normal>0 0 1</normal>
-                    </plane>
-                </geometry>
-                </collision>
-                <visual name="visual">
-                <geometry>
-                    <plane>
-                    <normal>0 0 1</normal>
-                    <size>100 100</size>
-                    </plane>
-                </geometry>
-                <material>
-                    <ambient>0.8 0.8 0.8 1</ambient>
-                    <diffuse>0.8 0.8 0.8 1</diffuse>
-                    <specular>0.8 0.8 0.8 1</specular>
-                </material>
+            <link name="ground_link">
+                <visual name="ground_vis">
+                    <geometry>
+                        <plane>
+                            <normal>0 0 1</normal>
+                            <size>3 3</size>
+                        </plane>
+                    </geometry>
+                    <material>
+                        <ambient>0.2 0.2 0.2 1</ambient>
+                        <diffuse>0.2 0.2 0.2 1</diffuse>
+                        <specular>0.2 0.2 0.2 1</specular>
+                    </material>
                 </visual>
+                <collision name="ground_coll">
+                    <geometry>
+                        <plane>
+                            <normal>0 0 1</normal>
+                            <size>3 3</size>
+                        </plane>
+                    </geometry>
+                </collision>
             </link>
         </model>
 
-        <model name="diff_drive">
-          <self_collide>true</self_collide>
-          <pose>0 0 0.05 0 0 0</pose>
-          <include merge="true">
-            <uri>package://gazebo/models/diff_drive.sdf</uri>
-          </include>
-          <plugin filename="libignition-gazebo-diff-drive-system.so"
-                  name="ignition::gazebo::systems::DiffDrive">
-                <left_joint>FLW_joint</left_joint>
-                <left_joint>RLW_joint</left_joint>
-                <right_joint>FRW_joint</right_joint>
-                <right_joint>RRW_joint</right_joint>
-                <wheel_separation>0.05</wheel_separation>
-                <wheel_radius>0.021</wheel_radius>
-                <topic>cmd_vel</topic>
-                <odom_publish_frequency>100</odom_publish_frequency>
-                <min_linear_velocity>-10.0</min_linear_velocity>
-                <max_linear_velocity>10.0</max_linear_velocity>
-                <min_angular_velocity>-250.0</min_angular_velocity>
-                <max_angular_velocity>250.0</max_angular_velocity>
-                <min_linear_acceleration>-50.0</min_linear_acceleration>
-                <max_linear_acceleration>50.0</max_linear_acceleration>
-                <min_angular_acceleration>-3000.0</min_angular_acceleration>
-                <max_angular_acceleration>3000.0</max_angular_acceleration>
-            </plugin>
+        <model name="maze">
+            <pose>-1.44 1.44 0 1.57079632679489 0 0</pose>
+            <static>true</static>
+            <link name="maze_link">
+                <visual name="maze_vis">
+                  <geometry>
+                    <mesh>
+                      <uri>model://meshes/maze.stl</uri>
+                      <scale>0.001 0.001 0.001</scale>
+                    </mesh>
+                  </geometry>
+                </visual>
+                <collision name="maze_coll">
+                    <geometry>
+                        <mesh>
+                            <uri>model://meshes/maze.stl</uri>
+                            <scale>0.001 0.001 0.001</scale>
+                        </mesh>
+                    </geometry>
+                </collision>
+            </link>
         </model>
 
-                <!-- Moving Forward-->
-        <plugin filename="libignition-gazebo-triggered-publisher-system.so"
-                name="ignition::gazebo::systems::TriggeredPublisher">
-            <input type="ignition.msgs.Int32" topic="/keyboard/keypress">
-                <match field="data">16777235</match>
-            </input>
-            <output type="ignition.msgs.Twist" topic="/cmd_vel">
-                linear: {x: 5.0}, angular: {z: 0.0}
-            </output>
-        </plugin>
-
-        <!-- Moving Backward-->
-        <plugin filename="libignition-gazebo-triggered-publisher-system.so"
-                name="ignition::gazebo::systems::TriggeredPublisher">
-            <input type="ignition.msgs.Int32" topic="/keyboard/keypress">
-                <match field="data">16777237</match>
-            </input>
-            <output type="ignition.msgs.Twist" topic="/cmd_vel">
-                linear: {x: -5.0}, angular: {z: 0.0}
-            </output>
-        </plugin>
-
-        <!-- Rotating right-->
-        <plugin filename="libignition-gazebo-triggered-publisher-system.so"
-                name="ignition::gazebo::systems::TriggeredPublisher">
-            <input type="ignition.msgs.Int32" topic="/keyboard/keypress">
-                <match field="data">16777236</match>
-            </input>
-            <output type="ignition.msgs.Twist" topic="/cmd_vel">
-                linear: {x: 0.0}, angular: {z: -50.0}
-            </output>
-        </plugin>
-
-        <!--Rotating left-->
-        <plugin filename="libignition-gazebo-triggered-publisher-system.so"
-                name="ignition::gazebo::systems::TriggeredPublisher">
-            <input type="ignition.msgs.Int32" topic="/keyboard/keypress">
-                <match field="data">16777234</match>
-            </input>
-            <output type="ignition.msgs.Twist" topic="/cmd_vel">
-                linear: {x: 0.0}, angular: {z: 50.0}
-            </output>
-        </plugin>
+        <model name="robot">
+            <self_collide>true</self_collide>
+            <pose>-1.35 1.35 0.02 0 0 -1.57079632679489</pose>
+            <include merge="true">
+                <uri>model://models/robot.sdf</uri>
+            </include>
+        </model>
     </world>
 </sdf>

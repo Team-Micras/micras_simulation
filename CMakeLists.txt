@@ -51,7 +51,11 @@ install(DIRECTORY include/
 )
 
 install(DIRECTORY gazebo
-  DESTINATION share/${PROJECT_NAME}/gazebo
+  DESTINATION share/${PROJECT_NAME}
+)
+
+install(DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME}
 )
 
 install(TARGETS ${PROJECT_NAME}_lib

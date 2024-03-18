@@ -1,0 +1,485 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+	<model name="robot" canonical_link="base_link">
+		<plugin filename="libignition-gazebo-imu-system.so"
+				name="ignition::gazebo::systems::Imu">
+		</plugin>
+		<plugin filename="libignition-gazebo-forcetorque-system.so"
+				name="ignition::gazebo::systems::ForceTorque">
+		</plugin>
+		<plugin filename="libignition-gazebo-joint-state-publisher-system"
+  				name="gz::sim::systems::JointStatePublisher">
+			<topic>joint_states</topic>
+			<joint_name>RLW_joint</joint_name>
+			<joint_name>RRW_joint</joint_name>
+		</plugin>
+		<plugin filename="libignition-gazebo-sensors-system.so"
+				name="ignition::gazebo::systems::Sensors">
+			<render_engine>ogre2</render_engine>
+		</plugin>
+		<plugin filename="libignition-gazebo-diff-drive-system.so"
+				name="ignition::gazebo::systems::DiffDrive">
+			<left_joint>FLW_joint</left_joint>
+			<left_joint>RLW_joint</left_joint>
+			<right_joint>FRW_joint</right_joint>
+			<right_joint>RRW_joint</right_joint>
+			<wheel_separation>0.05</wheel_separation>
+			<wheel_radius>0.021</wheel_radius>
+			<topic>cmd_vel</topic>
+			<odometry_topic>odometry</odometry_topic>
+			<odom_publish_frequency>100</odom_publish_frequency>
+			<min_linear_velocity>-10.0</min_linear_velocity>
+			<max_linear_velocity>10.0</max_linear_velocity>
+			<min_angular_velocity>-250.0</min_angular_velocity>
+			<max_angular_velocity>250.0</max_angular_velocity>
+			<min_linear_acceleration>-50.0</min_linear_acceleration>
+			<max_linear_acceleration>50.0</max_linear_acceleration>
+			<min_angular_acceleration>-3000.0</min_angular_acceleration>
+			<max_angular_acceleration>3000.0</max_angular_acceleration>
+		</plugin>
+		<frame name="lidar0_frame" attached_to="base_link">
+			<pose relative_to="base_link">-0.0285 0.02 0.005 0 0 1.57079632679489</pose>
+		</frame>
+		<frame name="lidar1_frame" attached_to="base_link">
+			<pose relative_to="base_link">-0.017 0.052 0.005 0 0 2.35619449019234</pose>
+		</frame>
+		<frame name="lidar2_frame" attached_to="base_link">
+			<pose relative_to="base_link">0.017 0.052 0.005 0 0 0.78539816339744</pose>
+		</frame>
+		<frame name="lidar3_frame" attached_to="base_link">
+			<pose relative_to="base_link">0.0285 0.02 0.005 0 0 1.57079632679489</pose>
+		</frame>
+		<link name="base_link">
+			<inertial>
+				<mass>0.0825016710008052</mass>
+				<inertia>
+					<ixx>7.14350881728348E-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>2.27281998078348E-05</iyy>
+					<iyz>0</iyz>
+					<izz>9.41280872677092E-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="base_vis">
+				<pose relative_to="base_link">0 0.07 0.017 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://meshes/base_link.stl</uri>
+					</mesh> 
+				</geometry>
+				<material>
+					<ambient>0.0 0.5 0.0 1</ambient>
+					<diffuse>0.0 0.5 0.0 1</diffuse>
+					<specular>0.0 0.5 0.0 1</specular>
+				</material>
+			</visual>
+			<collision name="base_coll">
+				<pose relative_to="base_link">0 0.07 0.017 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://meshes/base_link.stl</uri>
+					</mesh> 
+				</geometry>
+			</collision>
+			<sensor name="imu_sensor" type="imu">
+				<always_on>1</always_on>
+				<update_rate>100</update_rate>
+				<visualize>true</visualize>
+				<topic>imu</topic>
+			</sensor>
+			<sensor name="gpu_lidar0" type="gpu_lidar">"
+				<pose relative_to="lidar0_frame">0 0 0 0 0 0</pose>
+				<topic>lidar_0</topic>
+				<update_rate>100</update_rate>
+				<ray>
+					<scan>
+						<horizontal>
+							<samples>1</samples>
+							<resolution>1</resolution>
+							<min_angle>0</min_angle>
+							<max_angle>0</max_angle>
+						</horizontal>
+						<vertical>
+							<samples>1</samples>
+							<resolution>1</resolution>
+							<min_angle>0</min_angle>
+							<max_angle>0</max_angle>
+						</vertical>
+					</scan>
+					<range>
+						<min>0.0001</min>
+						<max>0.3</max>
+						<resolution>0.0001</resolution>
+					</range>
+				</ray>
+				<always_on>1</always_on>
+				<visualize>true</visualize>
+			</sensor>
+			<sensor name="gpu_lidar1" type="gpu_lidar">"
+				<pose relative_to="lidar1_frame">0 0 0 0 0 0</pose>
+				<topic>lidar_1</topic>
+				<update_rate>100</update_rate>
+				<ray>
+					<scan>
+						<horizontal>
+							<samples>1</samples>
+							<resolution>1</resolution>
+							<min_angle>0</min_angle>
+							<max_angle>0</max_angle>
+						</horizontal>
+						<vertical>
+							<samples>1</samples>
+							<resolution>1</resolution>
+							<min_angle>0</min_angle>
+							<max_angle>0</max_angle>
+						</vertical>
+					</scan>
+					<range>
+						<min>0.0001</min>
+						<max>0.3</max>
+						<resolution>0.0001</resolution>
+					</range>
+				</ray>
+				<always_on>1</always_on>
+				<visualize>true</visualize>
+			</sensor>
+			<sensor name="gpu_lidar2" type="gpu_lidar">"
+				<pose relative_to="lidar2_frame">0 0 0 0 0 0</pose>
+				<topic>lidar_2</topic>
+				<update_rate>100</update_rate>
+				<ray>
+					<scan>
+						<horizontal>
+							<samples>1</samples>
+							<resolution>1</resolution>
+							<min_angle>0</min_angle>
+							<max_angle>0</max_angle>
+						</horizontal>
+						<vertical>
+							<samples>1</samples>
+							<resolution>1</resolution>
+							<min_angle>0</min_angle>
+							<max_angle>0</max_angle>
+						</vertical>
+					</scan>
+					<range>
+						<min>0.0001</min>
+						<max>0.3</max>
+						<resolution>0.0001</resolution>
+					</range>
+				</ray>
+				<always_on>1</always_on>
+				<visualize>true</visualize>
+			</sensor>
+			<sensor name="gpu_lidar3" type="gpu_lidar">"
+				<pose relative_to="lidar3_frame">0 0 0 0 0 0</pose>
+				<topic>lidar_3</topic>
+				<update_rate>100</update_rate>
+				<ray>
+					<scan>
+						<horizontal>
+							<samples>1</samples>
+							<resolution>1</resolution>
+							<min_angle>0</min_angle>
+							<max_angle>0</max_angle>
+						</horizontal>
+						<vertical>
+							<samples>1</samples>
+							<resolution>1</resolution>
+							<min_angle>0</min_angle>
+							<max_angle>0</max_angle>
+						</vertical>
+					</scan>
+					<range>
+						<min>0.0001</min>
+						<max>0.3</max>
+						<resolution>0.0001</resolution>
+					</range>
+				</ray>
+				<always_on>1</always_on>
+				<visualize>true</visualize>
+			</sensor>
+		</link>
+		<link name="FLW_link">
+			<pose relative_to="base_link">-0.02925 -0.002 0.008 0 0 3.14159265359</pose>
+			<inertial>
+				<mass>0.00135156970824209</mass>
+				<inertia>
+					<ixx>8.00075362261772E-08</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>4.82352157196683E-08</iyy>
+					<iyz>0</iyz>
+					<izz>4.82352157196683E-08</izz>
+				</inertia>
+			</inertial>
+			<visual name="FLW_vis">
+				<pose relative_to="FLW_link">-0.00425 0 0 0 0 3.14159265359</pose>
+				<geometry>
+					<mesh>
+						<uri>model://meshes/wheel.stl</uri>
+					</mesh>
+				</geometry>
+				<material>
+					<ambient>1.0 0.7 0 1</ambient>
+					<diffuse>1.0 0.7 0 1</diffuse>
+					<specular>1.0 0.7 0 1</specular>
+				</material>
+			</visual>
+			<collision name="FLW_coll">
+				<pose relative_to="FLW_link">-0.00425 0 0 0 0 3.14159265359</pose>
+				<geometry>
+					<mesh>
+						<uri>model://meshes/wheel.stl</uri>
+					</mesh>
+				</geometry>
+				<surface>
+					<friction>
+						<ode>
+							<mu>0.95</mu>
+							<mu2>0.95</mu2>
+						</ode>
+						<bullet>
+							<friction>0.95</friction>
+							<friction2>0.95</friction2>
+							<rolling_friction>0.1</rolling_friction>
+						</bullet>
+					</friction>
+				</surface>
+			</collision>
+		</link>
+		<joint name="FLW_joint" type="revolute">
+			<pose relative_to="FLW_link">0 0 0 0 0 0</pose>
+			<parent>base_link</parent>
+			<child>FLW_link</child>
+			<axis>
+				<xyz>1 0 0</xyz>
+				<limit>
+					<lower>-1.79769e+308</lower>
+					<upper>1.79769e+308</upper>
+				</limit>
+			</axis>
+			<sensor name="FLW_torque" type="force_torque">
+				<always_on>1</always_on>
+				<update_rate>100</update_rate>
+				<visualize>true</visualize>
+				<topic>torque_flw</topic>
+				<force_torque>
+					<frame>child</frame>
+					<measure_direction>parent_to_child</measure_direction>
+				</force_torque>
+			</sensor>
+		</joint>
+		<link name="RLW_link">
+			<pose relative_to="base_link">-0.02925 -0.025 0.008 0 0 3.14159265359</pose>
+			<inertial>
+				<mass>0.00135156970824209</mass>
+				<inertia>
+					<ixx>8.00075362261772E-08</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>4.82352157196683E-08</iyy>
+					<iyz>0</iyz>
+					<izz>4.82352157196683E-08</izz>
+				</inertia>
+			</inertial>
+			<visual name="RLW_vis">
+				<pose relative_to="RLW_link">-0.00425 0 0 0 0 3.14159265359</pose>
+				<geometry>
+					<mesh>
+						<uri>model://meshes/wheel.stl</uri>
+					</mesh>
+				</geometry>
+				<material>
+					<ambient>1.0 0.7 0 1</ambient>
+					<diffuse>1.0 0.7 0 1</diffuse>
+					<specular>1.0 0.7 0 1</specular>
+				</material>
+			</visual>
+			<collision name="RLW_coll">
+				<pose relative_to="RLW_link">-0.00425 0 0 0 0 3.14159265359</pose>
+				<geometry>
+					<mesh>
+						<uri>model://meshes/wheel.stl</uri>
+					</mesh>
+				</geometry>
+				<surface>
+					<friction>
+						<ode>
+							<mu>0.95</mu>
+							<mu2>0.95</mu2>
+						</ode>
+						<bullet>
+							<friction>0.95</friction>
+							<friction2>0.95</friction2>
+							<rolling_friction>0.1</rolling_friction>
+						</bullet>
+					</friction>
+				</surface>
+			</collision>
+		</link>
+		<joint name="RLW_joint" type="revolute">
+			<pose relative_to="RLW_link">0 0 0 0 0 0</pose>
+			<parent>base_link</parent>
+			<child>RLW_link</child>
+			<axis>
+				<xyz>1 0 0</xyz>
+				<limit>
+					<lower>-1.79769e+308</lower>
+					<upper>1.79769e+308</upper>
+				</limit>
+			</axis>
+			<sensor name="RLW_torque" type="force_torque">
+				<always_on>1</always_on>
+				<update_rate>100</update_rate>
+				<visualize>true</visualize>
+				<topic>torque_rlw</topic>
+				<force_torque>
+					<frame>child</frame>
+					<measure_direction>parent_to_child</measure_direction>
+				</force_torque>
+			</sensor>
+		</joint>
+		<link name="FRW_link">
+			<pose relative_to="base_link">0.02925 -0.002 0.008 0 0 3.14159265359</pose>
+			<inertial>
+				<mass>0.00135156970824209</mass>
+				<inertia>
+					<ixx>8.00075362261772E-08</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>4.82352157196683E-08</iyy>
+					<iyz>0</iyz>
+					<izz>4.82352157196683E-08</izz>
+				</inertia>
+			</inertial>
+			<visual name="FRW_vis">
+				<pose relative_to="FRW_link">0.00425 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://meshes/wheel.stl</uri>
+					</mesh>
+				</geometry>
+				<material>
+					<ambient>1.0 0.7 0 1</ambient>
+					<diffuse>1.0 0.7 0 1</diffuse>
+					<specular>1.0 0.7 0 1</specular>
+				</material>
+			</visual>
+			<collision name="FRW_coll">
+				<pose relative_to="FRW_link">0.00425 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://meshes/wheel.stl</uri>
+					</mesh>
+				</geometry>
+				<surface>
+					<friction>
+						<ode>
+							<mu>0.95</mu>
+							<mu2>0.95</mu2>
+						</ode>
+						<bullet>
+							<friction>0.95</friction>
+							<friction2>0.95</friction2>
+							<rolling_friction>0.1</rolling_friction>
+						</bullet>
+					</friction>
+				</surface>
+			</collision>
+		</link>
+		<joint name="FRW_joint" type="revolute">
+			<pose relative_to="FRW_link">0 0 0 0 0 0</pose>
+			<parent>base_link</parent>
+			<child>FRW_link</child>
+			<axis>
+				<xyz>1 0 0</xyz>
+				<limit>
+					<lower>-1.79769e+308</lower>
+					<upper>1.79769e+308</upper>
+				</limit>
+			</axis>
+			<sensor name="FRW_torque" type="force_torque">
+				<always_on>1</always_on>
+				<update_rate>100</update_rate>
+				<visualize>true</visualize>
+				<topic>torque_frw</topic>
+				<force_torque>
+					<frame>child</frame>
+					<measure_direction>parent_to_child</measure_direction>
+				</force_torque>
+			</sensor>
+		</joint>
+		<link name="RRW_link">
+			<pose relative_to="base_link">0.02925 -0.025 0.008 0 0 3.14159265359</pose>
+			<inertial>
+				<mass>0.00135156970824209</mass>
+				<inertia>
+					<ixx>8.00075362261772E-08</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>4.82352157196683E-08</iyy>
+					<iyz>0</iyz>
+					<izz>4.82352157196683E-08</izz>
+				</inertia>
+			</inertial>
+			<visual name="RRW_vis">
+				<pose relative_to="RRW_link">0.00425 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://meshes/wheel.stl</uri>
+					</mesh>
+				</geometry>
+				<material>
+					<ambient>1.0 0.7 0 1</ambient>
+					<diffuse>1.0 0.7 0 1</diffuse>
+					<specular>1.0 0.7 0 1</specular>
+				</material>
+			</visual>
+			<collision name="RRW_coll">
+				<pose relative_to="RRW_link">0.00425 0 0 0 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://meshes/wheel.stl</uri>
+					</mesh>
+				</geometry>
+				<surface>
+					<friction>
+						<ode>
+							<mu>0.95</mu>
+							<mu2>0.95</mu2>
+						</ode>
+						<bullet>
+							<friction>0.95</friction>
+							<friction2>0.95</friction2>
+							<rolling_friction>0.1</rolling_friction>
+						</bullet>
+					</friction>
+				</surface>
+			</collision>
+		</link>
+		<joint name="RRW_joint" type="revolute">
+			<pose relative_to="RRW_link">0 0 0 0 0 0</pose>
+			<parent>base_link</parent>
+			<child>RRW_link</child>
+			<axis>
+				<xyz>1 0 0</xyz>
+				<limit>
+					<lower>-1.79769e+308</lower>
+					<upper>1.79769e+308</upper>
+				</limit>
+			</axis>
+			<sensor name="RRW_torque" type="force_torque">
+				<always_on>1</always_on>
+				<update_rate>100</update_rate>
+				<visualize>true</visualize>
+				<topic>torque_rrw</topic>
+				<force_torque>
+					<frame>child</frame>
+					<measure_direction>parent_to_child</measure_direction>
+				</force_torque>
+			</sensor>
+		</joint>
+	</model>
+</sdf>
