@@ -15,7 +15,7 @@
 
 namespace proxy {
 /**
- * @brief Class for controlling a Button
+ * @brief Class for getting button data
  */
 class Button {
     public:

@@ -20,7 +20,7 @@ namespace proxy {
 class Led {
     public:
         /**
-         * @brief Configuration structure for led
+         * @brief Configuration structure for the LED
          */
         struct Config {
             std::shared_ptr<rclcpp::Node>& node;
@@ -30,33 +30,33 @@ class Led {
         /**
          * @brief Constructor for the Led class
          *
-         * @param led_config Configuration for the led
+         * @param led_config Configuration for the LED
          */
         Led(const Config& led_config);
 
         /**
-         * @brief Turn the led on
+         * @brief Turn the LED on
          */
         void turn_on();
 
         /**
-         * @brief Turn the led off
+         * @brief Turn the LED off
          */
         void turn_off();
 
         /**
-         * @brief Toggle led
+         * @brief Toggle the LED
          */
         void toggle();
 
     private:
         /**
-         * @brief Current state of the led
+         * @brief Current state of the LED
          */
         std_msgs::msg::Bool state;
 
         /**
-         * @brief Publisher for the led state topic
+         * @brief Publisher for the LED state topic
          */
         rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr publisher;
 };
