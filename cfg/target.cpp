@@ -63,7 +63,7 @@ proxy::Locomotion::Config locomotion_config{
 proxy::Odometry::Config odometry_config{
     micras_node, // node
     "odometry",  // topic
-}
+};
 
 proxy::TorqueSensor::Config torque_sensor_left_config{
     micras_node,  // node

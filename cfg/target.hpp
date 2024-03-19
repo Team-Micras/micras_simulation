@@ -18,6 +18,7 @@
 #include "proxy/imu.hpp"
 #include "proxy/led.hpp"
 #include "proxy/locomotion.hpp"
+#include "proxy/odometry.hpp"
 #include "proxy/torque_sensor.hpp"
 
 extern std::shared_ptr<rclcpp::Node> micras_node;
