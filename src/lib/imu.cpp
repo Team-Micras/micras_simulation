@@ -30,6 +30,9 @@ double Imu::get_orientation(Axis axis) const {
 
         case Axis::Z:
             return this->data.orientation.z;
+
+        default:
+            return 0.0;
     }
 }
 
