@@ -18,6 +18,9 @@ find_package(ament_cmake REQUIRED)
 set(ROS_CODE_DEPS
   rclcpp
   std_msgs
+  sensor_msgs
+  geometry_msgs
+  nav_msgs
 )
 
 foreach(dependency ${ROS_CODE_DEPS})
