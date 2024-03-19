@@ -46,8 +46,16 @@
   publisher_queue: 1
   direction: ROS_TO_GZ
 
-- ros_topic_name: "encoders"
-  gz_topic_name: "/joint_states"
+- ros_topic_name: "encoder_left"
+  gz_topic_name: "/joint_state_left"
+  ros_type_name: "sensor_msgs/msg/JointState"
+  gz_type_name: "gz.msgs.Model"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "encoder_right"
+  gz_topic_name: "/joint_state_right"
   ros_type_name: "sensor_msgs/msg/JointState"
   gz_type_name: "gz.msgs.Model"
   subscriber_queue: 1
