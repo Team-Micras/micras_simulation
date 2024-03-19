@@ -16,7 +16,6 @@ Imu::Imu(const Config& imu_config) {
         });
 }
 
-// @todo Implement get_orientation method
 double Imu::get_orientation(Axis axis) const {
     switch (axis) {
         case Axis::W:

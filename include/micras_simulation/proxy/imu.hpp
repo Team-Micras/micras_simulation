@@ -46,23 +46,23 @@ class Imu {
          *
          * @param axis Axis to get the orientation from
          *
-         * @return Orientation over the desired axis in radians
+         * @return Orientation over the desired axis using quaternions
          */
         double get_orientation(Axis axis) const;
 
         /**
-         * @brief Get the IMU angular_velocity over an axis
+         * @brief Get the IMU angular velocity over an axis
          *
-         * @param axis Axis to get the angular_velocity from
+         * @param axis Axis to get the angular velocity from
          *
          * @return Angular velocity over the desired axis in rad/s
          */
         double get_angular_velocity(Axis axis) const;
 
         /**
-         * @brief Get the IMU linear_acceleration over an axis
+         * @brief Get the IMU linear acceleration over an axis
          *
-         * @param axis Axis to get the linear_acceleration from
+         * @param axis Axis to get the linear acceleration from
          *
          * @return Linear acceleration over the desired axis in m/s²
          */
