@@ -13,11 +13,26 @@
 #include <rclcpp/rclcpp.hpp>
 
 #include "proxy/button.hpp"
+#include "proxy/distance_sensor.hpp"
+#include "proxy/encoder.hpp"
+#include "proxy/imu.hpp"
 #include "proxy/led.hpp"
+#include "proxy/locomotion.hpp"
+#include "proxy/torque_sensor.hpp"
 
 extern std::shared_ptr<rclcpp::Node> micras_node;
 
-extern proxy::Led::Config led_config;
 extern proxy::Button::Config button_config;
+extern proxy::DistanceSensor::Config distance_sensor_0_config;
+extern proxy::DistanceSensor::Config distance_sensor_1_config;
+extern proxy::DistanceSensor::Config distance_sensor_2_config;
+extern proxy::DistanceSensor::Config distance_sensor_3_config;
+extern proxy::Encoder::Config encoder_left_config;
+extern proxy::Encoder::Config encoder_right_config;
+extern proxy::Imu::Config imu_config;
+extern proxy::Led::Config led_config;
+extern proxy::Locomotion::Config locomotion_config;
+extern proxy::TorqueSensor::Config torque_sensor_left_config;
+extern proxy::TorqueSensor::Config torque_sensor_right_config;
 
 #endif // __TARGET_HPP__
