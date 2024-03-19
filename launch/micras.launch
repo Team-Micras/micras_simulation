@@ -12,6 +12,6 @@
             <param name="config_file" value="$(find-pkg-share micras_simulation)/launch/ros_gz_bridge.yaml"/>
         </node>
 
-        <node name="micras_node" pkg="micras_simulation" type="micras_node" output="screen"/>
+        <node name="micras_node" pkg="micras_simulation" exec="micras_node" output="screen"/>
     </group>
 </launch>
