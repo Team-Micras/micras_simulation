@@ -30,7 +30,7 @@
 			<wheel_separation>0.0585</wheel_separation>
 			<wheel_radius>0.0105</wheel_radius>
 			<topic>cmd_vel</topic>
-			<odometry_topic>odometry</odometry_topic>
+			<odom_topic>odometry</odom_topic>
 			<odom_publish_frequency>100</odom_publish_frequency>
 			<min_linear_velocity>-10.0</min_linear_velocity>
 			<max_linear_velocity>10.0</max_linear_velocity>
