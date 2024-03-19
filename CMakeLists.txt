@@ -41,6 +41,7 @@ add_library(${PROJECT_NAME}_lib
   src/lib/imu.cpp
   src/lib/led.cpp
   src/lib/locomotion.cpp
+  src/lib/odometry.cpp
   src/lib/torque_sensor.cpp
   MicrasFirmware/src/controller/micras_controller.cpp
 )

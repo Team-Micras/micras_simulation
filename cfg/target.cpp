@@ -60,6 +60,11 @@ proxy::Locomotion::Config locomotion_config{
     "cmd_vel",   // topic
 };
 
+proxy::Odometry::Config odometry_config{
+    micras_node, // node
+    "odometry",  // topic
+}
+
 proxy::TorqueSensor::Config torque_sensor_left_config{
     micras_node,  // node
     "torque_flw", // front_topic

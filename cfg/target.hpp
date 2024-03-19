@@ -32,6 +32,7 @@ extern proxy::Encoder::Config encoder_right_config;
 extern proxy::Imu::Config imu_config;
 extern proxy::Led::Config led_config;
 extern proxy::Locomotion::Config locomotion_config;
+extern proxy::Odometry::Config odometry_config;
 extern proxy::TorqueSensor::Config torque_sensor_left_config;
 extern proxy::TorqueSensor::Config torque_sensor_right_config;
 
