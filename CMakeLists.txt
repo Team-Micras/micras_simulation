@@ -36,7 +36,12 @@ include_directories(
 add_library(${PROJECT_NAME}_lib
   cfg/target.cpp
   src/lib/button.cpp
+  src/lib/distance_sensor.cpp
+  src/lib/encoder.cpp
+  src/lib/imu.cpp
   src/lib/led.cpp
+  src/lib/locomotion.cpp
+  src/lib/torque_sensor.cpp
   MicrasFirmware/src/controller/micras_controller.cpp
 )
 
