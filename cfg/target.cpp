@@ -15,24 +15,15 @@ proxy::Button::Config button_config{
     "button",    // topic
 };
 
-proxy::DistanceSensor::Config distance_sensor_0_config{
-    micras_node,         // node
-    "distance_sensor_0", // topic
-};
-
-proxy::DistanceSensor::Config distance_sensor_1_config{
-    micras_node,         // node
-    "distance_sensor_1", // topic
-};
-
-proxy::DistanceSensor::Config distance_sensor_2_config{
-    micras_node,         // node
-    "distance_sensor_2", // topic
-};
-
-proxy::DistanceSensor::Config distance_sensor_3_config{
-    micras_node,         // node
-    "distance_sensor_3", // topic
+proxy::DistanceSensors<4>::Config distance_sensors_config{
+    micras_node,  // node
+    {
+        "distance_sensor_0",
+        "distance_sensor_1",
+        "distance_sensor_2",
+        "distance_sensor_3"
+    },    // topic_array
+    0.3f, // max_distance
 };
 
 proxy::Encoder::Config encoder_left_config{

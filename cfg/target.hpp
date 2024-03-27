@@ -24,10 +24,7 @@
 extern std::shared_ptr<rclcpp::Node> micras_node;
 
 extern proxy::Button::Config button_config;
-extern proxy::DistanceSensor::Config distance_sensor_0_config;
-extern proxy::DistanceSensor::Config distance_sensor_1_config;
-extern proxy::DistanceSensor::Config distance_sensor_2_config;
-extern proxy::DistanceSensor::Config distance_sensor_3_config;
+extern proxy::DistanceSensors<4>::Config distance_sensors_config;
 extern proxy::Encoder::Config encoder_left_config;
 extern proxy::Encoder::Config encoder_right_config;
 extern proxy::Imu::Config imu_config;
