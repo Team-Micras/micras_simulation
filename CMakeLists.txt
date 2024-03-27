@@ -18,6 +18,9 @@ find_package(ament_cmake REQUIRED)
 set(ROS_CODE_DEPS
   rclcpp
   std_msgs
+  sensor_msgs
+  geometry_msgs
+  nav_msgs
 )
 
 foreach(dependency ${ROS_CODE_DEPS})
@@ -33,7 +36,13 @@ include_directories(
 add_library(${PROJECT_NAME}_lib
   cfg/target.cpp
   src/lib/button.cpp
+  src/lib/distance_sensors.cpp
+  src/lib/imu.cpp
   src/lib/led.cpp
+  src/lib/locomotion.cpp
+  src/lib/odometry.cpp
+  src/lib/rotary_sensor.cpp
+  src/lib/torque_sensor.cpp
   MicrasFirmware/src/controller/micras_controller.cpp
 )
 
