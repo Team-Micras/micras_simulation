@@ -65,6 +65,6 @@ class DipSwitch {
 };
 }  // namespace proxy
 
-#include "../src/proxy/dip_switch.cpp"  // NOLINT(bugprone-suspicious-include)
+#include "../../../src/lib/dip_switch.cpp"  // NOLINT(bugprone-suspicious-include)
 
 #endif // MICRAS_PROXY_DIP_SWITCH_HPP
