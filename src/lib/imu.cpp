@@ -16,7 +16,10 @@ Imu::Imu(const Config& imu_config) {
         });
 }
 
-double Imu::get_orientation(Axis axis) const {
+void Imu::update_data() {
+}
+
+float Imu::get_orientation(Axis axis) const {
     switch (axis) {
         case Axis::W:
             return this->data.orientation.w;
@@ -31,11 +34,11 @@ double Imu::get_orientation(Axis axis) const {
             return this->data.orientation.z;
 
         default:
-            return 0.0;
+            return 0.0F;
     }
 }
 
-double Imu::get_angular_velocity(Axis axis) const {
+float Imu::get_angular_velocity(Axis axis) const {
     switch (axis) {
         case Axis::X:
             return this->data.angular_velocity.x;
@@ -47,11 +50,11 @@ double Imu::get_angular_velocity(Axis axis) const {
             return this->data.angular_velocity.z;
 
         default:
-            return 0.0;
+            return 0.0F;
     }
 }
 
-double Imu::get_linear_acceleration(Axis axis) const {
+float Imu::get_linear_acceleration(Axis axis) const {
     switch (axis) {
         case Axis::X:
             return this->data.linear_acceleration.x;
@@ -63,7 +66,7 @@ double Imu::get_linear_acceleration(Axis axis) const {
             return this->data.linear_acceleration.z;
 
         default:
-            return 0.0;
+            return 0.0F;
     }
 }
 }  // namespace proxy

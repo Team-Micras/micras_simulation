@@ -1,13 +1,13 @@
 /**
  * @file imu.hpp
  *
- * @brief Proxy Imu class header
+ * @brief STM32 IMU HAL wrapper
  *
  * @date 03/2024
  */
 
-#ifndef __IMU_HPP__
-#define __IMU_HPP__
+#ifndef MICRAS_PROXY_IMU_HPP
+#define MICRAS_PROXY_IMU_HPP
 
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/imu.hpp>
@@ -15,17 +15,24 @@
 
 namespace proxy {
 /**
- * @brief Class for getting IMU data
+ * @brief Class to handle IMU peripheral on STM32 microcontrollers
  */
 class Imu {
     public:
         /**
-         * @brief Configuration structure for the IMU
+         * @brief IMU configuration struct
          */
         struct Config {
             std::shared_ptr<rclcpp::Node>& node;
             std::string                    topic;
         };
+
+        /**
+         * @brief Construct a new Imu object
+         *
+         * @param config Configuration for the IMU
+         */
+        explicit Imu(const Config& config);
 
         enum Axis {
             W,
@@ -35,38 +42,37 @@ class Imu {
         };
 
         /**
-         * @brief Constructor for the Imu class
-         *
-         * @param imu_config Configuration for the IMU
+         * @brief Update the IMU data
          */
-        Imu(const Config& imu_config);
+        void update_data();
 
         /**
          * @brief Get the IMU orientation over an axis
+         * @todo implement function using sensior fusion
          *
          * @param axis Axis to get the orientation from
          *
-         * @return Orientation over the desired axis using quaternions
+         * @return float Orientation over the desired axis using quaternions
          */
-        double get_orientation(Axis axis) const;
+        float get_orientation(Axis axis) const;
 
         /**
          * @brief Get the IMU angular velocity over an axis
          *
          * @param axis Axis to get the angular velocity from
          *
-         * @return Angular velocity over the desired axis in rad/s
+         * @return float Angular velocity over the desired axis in rad/s
          */
-        double get_angular_velocity(Axis axis) const;
+        float get_angular_velocity(Axis axis) const;
 
         /**
          * @brief Get the IMU linear acceleration over an axis
          *
          * @param axis Axis to get the linear acceleration from
          *
-         * @return Linear acceleration over the desired axis in m/s²
+         * @return float Linear acceleration over the desired axis in m/s²
          */
-        double get_linear_acceleration(Axis axis) const;
+        float get_linear_acceleration(Axis axis) const;
 
     private:
         /**
@@ -81,4 +87,4 @@ class Imu {
 };
 }  // namespace proxy
 
-#endif // __IMU_HPP__
+#endif // MICRAS_PROXY_IMU_HPP
