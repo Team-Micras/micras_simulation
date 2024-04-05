@@ -69,7 +69,7 @@ class DistanceSensors {
         /**
          * @brief Distance sensor subscribers array
          */
-        std::array<rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr> subscribers;
+        std::array<rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr, num_of_sensors> subscribers;
 };
 }  // namespace proxy
 

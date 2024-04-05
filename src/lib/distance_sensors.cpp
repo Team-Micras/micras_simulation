@@ -6,14 +6,17 @@
  * @date 03/2024
  */
 
-#include "proxy/distance_sensor.hpp"
+#ifndef MICRAS_PROXY_DISTANCE_SENSORS_CPP
+#define MICRAS_PROXY_DISTANCE_SENSORS_CPP
+
+#include "proxy/distance_sensors.hpp"
 
 namespace proxy {
 template <uint8_t num_of_sensors>
 DistanceSensors<num_of_sensors>::DistanceSensors(const Config& config) {
     for (uint8_t i = 0; i < num_of_sensors; i++) {
-        this->subscribers[i] = config.node->create_subscription<sensor_msgs::msg::LaserScan>(
-            config.topic_array[i], 1, [this](const sensor_msgs::msg::LaserScan& msg) {
+        this->subscribers[i] = config.node->template create_subscription<sensor_msgs::msg::LaserScan>(
+            config.topic_array[i], 1, [this, i](const sensor_msgs::msg::LaserScan& msg) {
                 this->distances[i] = msg.ranges[0];
             });
     }
@@ -33,3 +36,5 @@ uint32_t DistanceSensors<num_of_sensors>::get_distance_raw(uint8_t sensor_index)
     return this->distances.at(sensor_index);
 }
 }  // namespace proxy
+
+#endif // MICRAS_PROXY_DISTANCE_SENSORS_CPP
