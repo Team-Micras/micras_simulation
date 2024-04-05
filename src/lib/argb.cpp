@@ -15,7 +15,8 @@ namespace proxy {
 template <uint8_t num_of_leds>
 Argb<num_of_leds>::Argb(const Config& config) {
     for (uint8_t i = 0; i < num_of_leds; i++) {
-        this->publishers.at(i) = config.node->create_publisher<std_msgs::msg::ColorRGBA>(config.topic_array.at(i), 1);
+        this->publishers.at(i) =
+            config.node->template create_publisher<std_msgs::msg::ColorRGBA>(config.topic_array.at(i), 1);
     }
 }
 
