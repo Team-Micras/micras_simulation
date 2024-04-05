@@ -10,6 +10,7 @@
 #define MICRAS_PROXY_DIP_SWITCH_HPP
 
 #include <rclcpp/rclcpp.hpp>
+#include <std_msgs/msg/bool.hpp>
 #include <string>
 #include <array>
 #include <cstdint>
