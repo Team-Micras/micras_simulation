@@ -10,9 +10,9 @@
 
 namespace proxy {
 Button::Button(const Config& config) :
-    node{config.node},
     long_press_delay{config.long_press_delay},
-    extra_long_press_delay{config.extra_long_press_delay} {
+    extra_long_press_delay{config.extra_long_press_delay},
+    node{config.node} {
     this->subscriber = config.node->create_subscription<std_msgs::msg::Bool>(
         config.topic, 1, [this](const std_msgs::msg::Bool& msg) {
             this->state.data = msg.data;
@@ -35,6 +35,8 @@ Button::Status Button::get_status() {
             return SHORT_PRESS;
         }
     }
+
+    return NO_PRESS;
 }
 
 void Button::update_state() {
