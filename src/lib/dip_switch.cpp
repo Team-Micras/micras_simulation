@@ -12,27 +12,27 @@
 #include "proxy/dip_switch.hpp"
 
 namespace proxy {
-template <uint8_t num_of_sensors>
-DipSwitch<num_of_sensors>::DipSwitch(const Config& config) {
+template <uint8_t num_of_switches>
+DipSwitch<num_of_switches>::DipSwitch(const Config& config) {
     for (uint8_t i = 0; i < num_of_switches; i++) {
-        this->subscribers[i] = config.node->create_subscription<std_msgs::msg::Bool>(
-            config.topic_array[i], 1, [this](const std_msgs::msg::Bool& msg) {
-                this->states[i] = msg.data;
+        this->subscribers[i] = config.node->template create_subscription<std_msgs::msg::Bool>(
+            config.topic_array[i], 1, [this, i](const std_msgs::msg::Bool& msg) {
+                this->states[i] = msg;
             });
     }
 }
 
-template <uint8_t num_of_sensors>
-bool DipSwitch<num_of_sensors>::get_switch_state(uint8_t switch_index) const {
-    return this->states.at(switch_index);
+template <uint8_t num_of_switches>
+bool DipSwitch<num_of_switches>::get_switch_state(uint8_t switch_index) const {
+    return this->states.at(switch_index).data;
 }
 
-template <uint8_t num_of_sensors>
-uint8_t DipSwitch<num_of_sensors>::get_switches_value() const {
+template <uint8_t num_of_switches>
+uint8_t DipSwitch<num_of_switches>::get_switches_value() const {
     uint8_t switches_value = 0;
 
-    for (uint8_t i = 0; i < num_of_sensors; i++) {
-        switches_value |= (this->states.at(switch_index) << i);
+    for (uint8_t i = 0; i < num_of_switches; i++) {
+        switches_value |= (this->states.at(i).data << i);
     }
 
     return switches_value;
