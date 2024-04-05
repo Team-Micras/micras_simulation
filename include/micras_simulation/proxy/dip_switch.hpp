@@ -3,7 +3,7 @@
  *
  * @brief Proxy Dip Switch class header
  *
- * @date 03/2024
+ * @date 04/2024
  */
 
 #ifndef MICRAS_PROXY_DIP_SWITCH_HPP
