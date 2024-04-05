@@ -10,7 +10,7 @@
 
 namespace proxy {
 template <uint8_t num_of_sensors>
-DistanceSensors<num_of_sensors>::DistanceSensors(Config& config) {
+DistanceSensors<num_of_sensors>::DistanceSensors(const Config& config) {
     for (uint8_t i = 0; i < num_of_sensors; i++) {
         this->subscribers[i] = config.node->create_subscription<sensor_msgs::msg::LaserScan>(
             config.topic_array[i], 1, [this](const sensor_msgs::msg::LaserScan& msg) {

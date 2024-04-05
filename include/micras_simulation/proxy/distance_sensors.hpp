@@ -1,13 +1,13 @@
 /**
- * @file distance_sensor.hpp
+ * @file distance_sensors.hpp
  *
- * @brief Proxy Distance Sensor class header
+ * @brief Proxy DistanceSensors class header
  *
  * @date 03/2024
  */
 
-#ifndef __DISTANCE_SENSOR_HPP__
-#define __DISTANCE_SENSOR_HPP__
+#ifndef MICRAS_PROXY_DISTANCE_SENSORS_HPP
+#define MICRAS_PROXY_DISTANCE_SENSORS_HPP
 
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/laser_scan.hpp>
@@ -22,13 +22,11 @@ template <uint8_t num_of_sensors>
 class DistanceSensors {
     public:
         /**
-         * @brief configuration structure for distance sensors
+         * @brief Configuration structure for distance sensors
          */
         struct Config {
             std::shared_ptr<rclcpp::Node>&          node;
             std::array<std::string, num_of_sensors> topic_array;
-
-            // std::string                    topic;
             float                                   max_distance;
         };
 
@@ -37,7 +35,7 @@ class DistanceSensors {
          *
          * @param config Configuration for the distance sensors
          */
-        DistanceSensors(Config& config);
+        explicit DistanceSensors(const Config& config);
 
         /**
          * @brief Set the distance sensors led intensity
@@ -81,6 +79,6 @@ class DistanceSensors {
 };
 }  // namespace proxy
 
-#include "../../../src/lib/distance_sensor.cpp"
+#include "../../../src/lib/distance_sensors.cpp"  // NOLINT(bugprone-suspicious-include)
 
-#endif // __DISTANCE_SENSOR_HPP__
+#endif // MICRAS_PROXY_DISTANCE_SENSORS_HPP
