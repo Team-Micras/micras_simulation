@@ -10,12 +10,40 @@
 
 std::shared_ptr<rclcpp::Node> micras_node;
 
-proxy::Button::Config button_config{
-    micras_node, // node
-    "button",    // topic
+const proxy::Argb<2>::Config argb_config {
+    micras_node,  // node
+    {
+        "rgb_0",
+        "rgb_1"
+    },  // topic_array
 };
 
-proxy::DistanceSensors<4>::Config distance_sensors_config{
+const proxy::Battery::Config battery_config {
+    micras_node, // node
+    "battery"    // topic
+};
+
+const proxy::Button::Config button_config {
+    micras_node, // node
+    "button"     // topic
+};
+
+const proxy::Buzzer::Config buzzer_config {
+    micras_node, // node
+    "buzzer"     // topic
+};
+
+const proxy::DipSwitch<4>::Config dip_switch_config {
+    micras_node,  // node
+    {
+        "dip_switch_0",
+        "dip_switch_1",
+        "dip_switch_2",
+        "dip_switch_3"
+    },  // topic_array
+};
+
+const proxy::DistanceSensors<4>::Config distance_sensors_config {
     micras_node,  // node
     {
         "distance_sensor_0",
@@ -26,44 +54,48 @@ proxy::DistanceSensors<4>::Config distance_sensors_config{
     0.3f, // max_distance
 };
 
-proxy::Encoder::Config encoder_left_config{
-    micras_node,    // node
-    "encoder_left", // topic
-};
-
-proxy::Encoder::Config encoder_right_config{
-    micras_node,     // node
-    "encoder_right", // topic
-};
-
-proxy::Imu::Config imu_config{
+const proxy::Fan::Config fan_config {
     micras_node, // node
-    "imu",       // topic
+    "fan"        // topic
 };
 
-proxy::Led::Config led_config{
+const proxy::Imu::Config imu_config {
     micras_node, // node
-    "led",       // topic
+    "imu"        // topic
 };
 
-proxy::Locomotion::Config locomotion_config{
+const proxy::Led::Config led_config {
     micras_node, // node
-    "cmd_vel",   // topic
+    "led"        // topic
 };
 
-proxy::Odometry::Config odometry_config{
+const proxy::Locomotion::Config locomotion_config {
     micras_node, // node
-    "odometry",  // topic
+    "cmd_vel"    // topic
 };
 
-proxy::TorqueSensor::Config torque_sensor_left_config{
+const proxy::RotarySensor::Config rotary_sensor_left_config {
+    micras_node,         // node
+    "rotary_sensor_left" // topic
+};
+
+const proxy::RotarySensor::Config rotary_sensor_right_config {
+    micras_node,          // node
+    "rotary_sensor_right" // topic
+};
+
+const proxy::TorqueSensors<2>::Config torque_sensors_config {
     micras_node,  // node
-    "torque_flw", // front_topic
-    "torque_rlw", // rear_topic
-};
-
-proxy::TorqueSensor::Config torque_sensor_right_config{
-    micras_node,  // node
-    "torque_frw", // front_topic
-    "torque_rrw", // rear_topic
+    {
+        {
+            {
+                "torque_flw",
+                "torque_rlw"
+            },  // front_topic, rear_topic
+            {
+                "torque_frw",
+                "torque_rrw"
+            }  // front_topic, rear_topic
+        }
+    }  // wheel_pairs_topics
 };

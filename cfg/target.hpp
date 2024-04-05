@@ -1,7 +1,7 @@
 /**
  * @file target.hpp
  *
- * @brief Target configuration constants
+ * @brief Target specific configuration
  *
  * @date 03/2024
  */
@@ -12,26 +12,33 @@
 #include <memory>
 #include <rclcpp/rclcpp.hpp>
 
+#include "proxy/argb.hpp"
+#include "proxy/battery.hpp"
 #include "proxy/button.hpp"
-#include "proxy/distance_sensor.hpp"
-#include "proxy/encoder.hpp"
+#include "proxy/buzzer.hpp"
+#include "proxy/dip_switch.hpp"
+#include "proxy/distance_sensors.hpp"
+#include "proxy/fan.hpp"
 #include "proxy/imu.hpp"
 #include "proxy/led.hpp"
 #include "proxy/locomotion.hpp"
-#include "proxy/odometry.hpp"
-#include "proxy/torque_sensor.hpp"
+#include "proxy/rotary_sensor.hpp"
+#include "proxy/torque_sensors.hpp"
 
 extern std::shared_ptr<rclcpp::Node> micras_node;
 
-extern proxy::Button::Config button_config;
-extern proxy::DistanceSensors<4>::Config distance_sensors_config;
-extern proxy::Encoder::Config encoder_left_config;
-extern proxy::Encoder::Config encoder_right_config;
-extern proxy::Imu::Config imu_config;
-extern proxy::Led::Config led_config;
-extern proxy::Locomotion::Config locomotion_config;
-extern proxy::Odometry::Config odometry_config;
-extern proxy::TorqueSensor::Config torque_sensor_left_config;
-extern proxy::TorqueSensor::Config torque_sensor_right_config;
+extern const proxy::Argb<2>::Config argb_config;
+extern const proxy::Battery::Config battery_config;
+extern const proxy::Button::Config button_config;
+extern const proxy::Buzzer::Config buzzer_config;
+extern const proxy::DipSwitch<4>::Config dip_switch_config;
+extern const proxy::DistanceSensors<4>::Config distance_sensors_config;
+extern const proxy::Fan::Config fan_config;
+extern const proxy::Imu::Config imu_config;
+extern const proxy::Led::Config led_config;
+extern const proxy::Locomotion::Config locomotion_config;
+extern const proxy::RotarySensor::Config rotary_sensor_left_config;
+extern const proxy::RotarySensor::Config rotary_sensor_right_config;
+extern const proxy::TorqueSensors<2>::Config torque_sensors_config;
 
 #endif // __TARGET_HPP__
