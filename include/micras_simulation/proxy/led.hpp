@@ -6,8 +6,8 @@
  * @date 03/2024
  */
 
-#ifndef __LED_HPP__
-#define __LED_HPP__
+#ifndef MICRAS_PROXY_LED_HPP
+#define MICRAS_PROXY_LED_HPP
 
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/bool.hpp>
@@ -20,7 +20,7 @@ namespace proxy {
 class Led {
     public:
         /**
-         * @brief Configuration structure for the LED
+         * @brief Configuration structure for LED
          */
         struct Config {
             std::shared_ptr<rclcpp::Node>& node;
@@ -30,9 +30,9 @@ class Led {
         /**
          * @brief Constructor for the Led class
          *
-         * @param led_config Configuration for the LED
+         * @param config Configuration for the LED
          */
-        Led(const Config& led_config);
+        explicit Led(const Config& config);
 
         /**
          * @brief Turn the LED on
@@ -62,4 +62,4 @@ class Led {
 };
 }  // namespace proxy
 
-#endif // __LED_HPP__
+#endif // MICRAS_PROXY_LED_HPP
