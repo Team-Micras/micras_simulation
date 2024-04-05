@@ -6,8 +6,8 @@
  * @date 03/2024
  */
 
-#ifndef __BUTTON_HPP__
-#define __BUTTON_HPP__
+#ifndef MICRAS_PROXY_BUTTON_HPP
+#define MICRAS_PROXY_BUTTON_HPP
 
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/bool.hpp>
@@ -15,7 +15,7 @@
 
 namespace proxy {
 /**
- * @brief Class for getting button data
+ * @brief Class for controlling a button
  */
 class Button {
     public:
@@ -44,19 +44,19 @@ class Button {
          *
          * @param config Button configuration
          */
-        Button(Config& config);
+        explicit Button(const Config& config);
 
         /**
          * @brief Check if button is pressed
          *
-         * @return True if button is pressed, false otherwise
+         * @return bool True if button is pressed, false otherwise
          */
         bool is_pressed();
 
         /**
          * @brief Get button status
          *
-         * @return Button status
+         * @return Status Button status
          */
         Status get_status();
 
@@ -113,4 +113,4 @@ class Button {
 };
 }  // namespace proxy
 
-#endif // __BUTTON_HPP__
+#endif // MICRAS_PROXY_BUTTON_HPP
