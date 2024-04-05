@@ -1,13 +1,13 @@
 /**
  * @file locomotion.hpp
  *
- * @brief Proxy Locomotion class header
+ * @brief Proxy Locomotion class declaration
  *
- * @date 03/2024
+ * @date 04/2024
  */
 
-#ifndef __LOCOMOTION_HPP__
-#define __LOCOMOTION_HPP__
+#ifndef MICRAS_PROXY_LOCOMOTION_HPP
+#define MICRAS_PROXY_LOCOMOTION_HPP
 
 #include <rclcpp/rclcpp.hpp>
 #include <geometry_msgs/msg/twist.hpp>
@@ -15,7 +15,7 @@
 
 namespace proxy {
 /**
- * @brief Class for controlling the robot locomotion
+ * @brief Class for controlling the locomotion driver
  */
 class Locomotion {
     public:
@@ -28,21 +28,59 @@ class Locomotion {
         };
 
         /**
-         * @brief Constructor for the Locomotion class
+         * @brief Construct a new locomotion object
          *
-         * @param locomotion_config Configuration for the locomotion
+         * @param config Configuration for the locomotion driver
          */
-        Locomotion(const Config& locomotion_config);
+        explicit Locomotion(const Config& config);
 
         /**
-         * @brief Set the velocity command of the robot
-         *
-         * @param linear Linear velocity command
-         * @param angular Angular velocity command
+         * @brief Enable the locomotion driver
          */
-        void set_velocity_command(double linear, double angular);
+        void enable();
+
+        /**
+         * @brief Disable the locomotion driver
+         */
+        void disable();
+
+        /**
+         * @brief Set the speed of the wheels
+         *
+         * @param left_speed Speed of the left wheels
+         * @param right_speed Speed of the right wheels
+         */
+        void set_wheel_speed(float left_speed, float right_speed);
+
+        /**
+         * @brief Set the linear and angular speeds of the robot
+         *
+         * @param linear Linear speed of the robot
+         * @param angular Angular speed of the robot
+         */
+        void set_speed(float linear, float angular);
+
+        /**
+         * @brief Stop the motors
+         */
+        void stop();
+
+        /**
+         * @brief Stop the left motor
+         */
+        void stop_left();
+
+        /**
+         * @brief Stop the right motor
+         */
+        void stop_right();
 
     private:
+        /**
+         * @brief Flag to enable/disable the locomotion driver
+         */
+        bool enabled;
+
         /**
          * @brief Current velocity command of the robot
          */
@@ -55,4 +93,4 @@ class Locomotion {
 };
 }  // namespace proxy
 
-#endif // __LOCOMOTION_HPP__
+#endif // MICRAS_PROXY_LOCOMOTION_HPP
