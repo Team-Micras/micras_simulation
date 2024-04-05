@@ -15,15 +15,17 @@ namespace proxy {
 template <uint8_t num_of_sensors>
 TorqueSensors<num_of_sensors>::TorqueSensors(const Config& config) {
     for (uint8_t i = 0; i < num_of_sensors; i++) {
-        this->wheel_pairs[i].front_subscriber = config.node->create_subscription<geometry_msgs::msg::WrenchStamped>(
-            config.wheel_pairs_topics[i][0], 1, [this, i](const geometry_msgs::msg::WrenchStamped& msg) {
-                this->wheel_pairs[i].front_torque = msg.wrench.torque.x;
-            });
+        this->wheel_pairs[i].front_subscriber =
+            config.node->template create_subscription<geometry_msgs::msg::WrenchStamped>(
+                config.wheel_pairs_topics[i][0], 1, [this, i](const geometry_msgs::msg::WrenchStamped& msg) {
+                    this->wheel_pairs[i].front_torque = msg.wrench.torque.x;
+                });
 
-        this->wheel_pairs[i].rear_subscriber = config.node->create_subscription<geometry_msgs::msg::WrenchStamped>(
-            config.wheel_pairs_topics[i][1], 1, [this, i](const geometry_msgs::msg::WrenchStamped& msg) {
-                this->wheel_pairs[i].rear_torque = msg.wrench.torque.x;
-            });
+        this->wheel_pairs[i].rear_subscriber =
+            config.node->template create_subscription<geometry_msgs::msg::WrenchStamped>(
+                config.wheel_pairs_topics[i][1], 1, [this, i](const geometry_msgs::msg::WrenchStamped& msg) {
+                    this->wheel_pairs[i].rear_torque = msg.wrench.torque.x;
+                });
     }
 }
 
