@@ -3,11 +3,11 @@
  *
  * @brief STM32 rotary sensor HAL wrapper
  *
- * @date 03/2024
+ * @date 04/2024
  */
 
-#ifndef __ROTARY_SENSOR_HPP__
-#define __ROTARY_SENSOR_HPP__
+#ifndef MICRAS_PROXY_ROTARY_SENSOR_HPP
+#define MICRAS_PROXY_ROTARY_SENSOR_HPP
 
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/joint_state.hpp>
@@ -15,7 +15,7 @@
 
 namespace proxy {
 /**
- * @brief Class to handle rotary sensor peripheral on STM32 microcontrollers
+ * @brief Class to handle rotary sensor
  */
 class RotarySensor {
     public:
@@ -32,14 +32,14 @@ class RotarySensor {
          *
          * @param config Configuration for the rotary sensor
          */
-        RotarySensor(Config& config);
+        explicit RotarySensor(const Config& config);
 
         /**
          * @brief Get the rotary sensor position over an axis
          *
-         * @return Current angular position of the sensor in radians
+         * @return float Current angular position of the sensor in radians
          */
-        float get_position();
+        float get_position() const;
 
     private:
         /**
@@ -54,4 +54,4 @@ class RotarySensor {
 };
 }  // namespace proxy
 
-#endif // __ROTARY_SENSOR_HPP__
+#endif // MICRAS_PROXY_ROTARY_SENSOR_HPP
