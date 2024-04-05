@@ -62,19 +62,13 @@ class DistanceSensors {
 
     private:
         /**
-         * @brief Current distance measured by the distance sensor
+         * @brief Distance sensor readings array
          */
-
-        // double distance;
-
         std::array<float, num_of_sensors> distances;
 
         /**
-         * @brief Subscriber for the distance sensor topic
+         * @brief Distance sensor subscribers array
          */
-
-        // rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr subscriber;
-
         std::array<rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr> subscribers;
 };
 }  // namespace proxy
