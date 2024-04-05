@@ -81,6 +81,6 @@ class Argb {
 };
 }  // namespace proxy
 
-#include "../src/proxy/argb.cpp"  // NOLINT(bugprone-suspicious-include)
+#include "../../../src/lib/argb.cpp"  // NOLINT(bugprone-suspicious-include)
 
 #endif // MICRAS_PROXY_ARGB_HPP
