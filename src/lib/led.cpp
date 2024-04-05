@@ -9,8 +9,8 @@
 #include "proxy/led.hpp"
 
 namespace proxy {
-Led::Led(const Config& led_config) {
-    this->publisher = led_config.node->create_publisher<std_msgs::msg::Bool>(led_config.topic, 1);
+Led::Led(const Config& config) {
+    this->publisher = config.node->create_publisher<std_msgs::msg::Bool>(config.topic, 1);
 }
 
 void Led::turn_on() {
