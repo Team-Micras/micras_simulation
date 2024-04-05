@@ -10,6 +10,7 @@
 
 namespace proxy {
 Button::Button(const Config& config) :
+    node{config.node},
     long_press_delay{config.long_press_delay},
     extra_long_press_delay{config.extra_long_press_delay} {
     this->subscriber = config.node->create_subscription<std_msgs::msg::Bool>(
@@ -22,10 +23,9 @@ Button::Status Button::get_status() {
     this->update_state();
 
     if (this->is_rising_edge()) {
-        this->press_time = std::chrono::steady_clock::now();
+        this->press_time = this->node->now();
     } else if (this->is_falling_edge()) {
-        auto elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(
-            std::chrono::steady_clock::now() - this->press_time).count();
+        auto elapsed_time = ((this->node->now() - this->press_time).nanoseconds()) * 1e-6;
 
         if (elapsed_time > this->extra_long_press_delay) {
             return EXTRA_LONG_PRESS;
