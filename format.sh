@@ -4,6 +4,10 @@
 # Brief: Format the code using clang-format
 # 04/2023
 
+Green='\033[0;32m'      # Green
+BGreen='\033[1;32m'     # Bold Green
+BPurple='\033[1;35m'    # Bold Purple
+
 # Check if clang-format is installed
 if ! [ -x "$(command -v clang-format)" ]; then
   echo 'Error: clang-format is not installed.' >&2
@@ -20,8 +24,8 @@ for FILE in $FILES; do
     if [ -f "$FILE" ] && [ -r "$FILE" ]; then
         # Format the file using clang-format
         clang-format -style=file -i "$FILE"
-        echo "Formatted: $FILE"
+        echo -e "${BGreen}Formatted: ${Green}$FILE"
     fi
 done
 
-echo "Formatting complete."
+echo -e "${BPurple}Formatting complete."
