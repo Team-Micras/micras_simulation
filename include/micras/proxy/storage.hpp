@@ -17,7 +17,7 @@
 
 #include "serializable_interface.hpp"
 
-namespace proxy {
+namespace micras::proxy {
 template <typename T>
 concept Fundamental = std::is_fundamental<T>::value;
 

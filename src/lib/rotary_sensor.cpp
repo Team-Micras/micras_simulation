@@ -12,9 +12,9 @@
 
 std::vector<uint8_t> data;
 
-#include "proxy/rotary_sensor.hpp"
+#include "micras/proxy/rotary_sensor.hpp"
 
-namespace proxy {
+namespace micras::proxy {
 RotarySensor::RotarySensor(const Config& config) {
     this->subscriber = config.node->create_subscription<sensor_msgs::msg::JointState>(
         config.topic, 1, [this](const sensor_msgs::msg::JointState& msg) {

@@ -13,7 +13,7 @@
 #include <geometry_msgs/msg/wrench_stamped.hpp>
 #include <string>
 
-namespace proxy {
+namespace micras::proxy {
 /**
  * @brief Class for controlling TorqueSensors
  */

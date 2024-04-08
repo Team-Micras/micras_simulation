@@ -13,7 +13,7 @@
 #include <sensor_msgs/msg/joint_state.hpp>
 #include <string>
 
-namespace proxy {
+namespace micras::proxy {
 /**
  * @brief Class to handle rotary sensor
  */

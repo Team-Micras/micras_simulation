@@ -13,7 +13,7 @@
 #include <std_msgs/msg/bool.hpp>
 #include <string>
 
-namespace proxy {
+namespace micras::proxy {
 /**
  * @brief Class for controlling a button
  */

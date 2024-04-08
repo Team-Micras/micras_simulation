@@ -6,9 +6,9 @@
  * @date 03/2024
  */
 
-#include "proxy/fan.hpp"
+#include "micras/proxy/fan.hpp"
 
-namespace proxy {
+namespace micras::proxy {
 Fan::Fan(const Config& config) {
     (void) config;
     this->stop();

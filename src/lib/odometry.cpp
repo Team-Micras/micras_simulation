@@ -6,9 +6,9 @@
  * @date 03/2024
  */
 
-#include "proxy/odometry.hpp"
+#include "micras/proxy/odometry.hpp"
 
-namespace proxy {
+namespace micras::proxy {
 Odometry::Odometry(const Config& odometry_config) {
     this->subscriber = odometry_config.node->create_subscription<nav_msgs::msg::Odometry>(
         odometry_config.topic, 1, [this](const nav_msgs::msg::Odometry& msg) {

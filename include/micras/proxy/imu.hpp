@@ -13,7 +13,7 @@
 #include <sensor_msgs/msg/imu.hpp>
 #include <string>
 
-namespace proxy {
+namespace micras::proxy {
 /**
  * @brief Class to handle IMU peripheral on STM32 microcontrollers
  */

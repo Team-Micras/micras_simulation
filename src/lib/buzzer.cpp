@@ -6,9 +6,9 @@
  * @date 03/2024
  */
 
-#include "proxy/buzzer.hpp"
+#include "micras/proxy/buzzer.hpp"
 
-namespace proxy {
+namespace micras::proxy {
 Buzzer::Buzzer(const Config& config) : node{config.node} {
     this->publisher = config.node->create_publisher<std_msgs::msg::UInt32>(config.topic, 1);
     this->message = std_msgs::msg::UInt32();

@@ -14,7 +14,7 @@
 #include <string>
 #include <array>
 
-namespace proxy {
+namespace micras::proxy {
 /**
  * @brief Class for controlling DistanceSensors
  */

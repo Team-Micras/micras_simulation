@@ -6,9 +6,9 @@
  * @date 04/2024
  */
 
-#include "proxy/battery.hpp"
+#include "micras/proxy/battery.hpp"
 
-namespace proxy {
+namespace micras::proxy {
 Battery::Battery(const Config& config) {
     this->subscriber = config.node->create_subscription<std_msgs::msg::UInt32>(
         config.topic, 1, [this](const std_msgs::msg::UInt32& msg) {

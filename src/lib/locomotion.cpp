@@ -6,9 +6,9 @@
  * @date 03/2024
  */
 
-#include "proxy/locomotion.hpp"
+#include "micras/proxy/locomotion.hpp"
 
-namespace proxy {
+namespace micras::proxy {
 Locomotion::Locomotion(const Config& locomotion_config) {
     this->publisher = locomotion_config.node->create_publisher<geometry_msgs::msg::Twist>(locomotion_config.topic, 1);
     this->stop();

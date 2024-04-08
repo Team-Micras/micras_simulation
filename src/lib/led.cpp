@@ -6,9 +6,9 @@
  * @date 03/2024
  */
 
-#include "proxy/led.hpp"
+#include "micras/proxy/led.hpp"
 
-namespace proxy {
+namespace micras::proxy {
 Led::Led(const Config& config) {
     this->publisher = config.node->create_publisher<std_msgs::msg::Bool>(config.topic, 1);
 }

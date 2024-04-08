@@ -6,9 +6,9 @@
  * @date 03/2024
  */
 
-#include "proxy/imu.hpp"
+#include "micras/proxy/imu.hpp"
 
-namespace proxy {
+namespace micras::proxy {
 Imu::Imu(const Config& imu_config) {
     this->subscriber = imu_config.node->create_subscription<sensor_msgs::msg::Imu>(
         imu_config.topic, 1, [this](const sensor_msgs::msg::Imu& msg) {

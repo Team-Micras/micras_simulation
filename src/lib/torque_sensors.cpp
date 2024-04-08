@@ -9,9 +9,9 @@
 #ifndef MICRAS_PROXY_TORQUE_SENSORS_CPP
 #define MICRAS_PROXY_TORQUE_SENSORS_CPP
 
-#include "proxy/torque_sensors.hpp"
+#include "micras/proxy/torque_sensors.hpp"
 
-namespace proxy {
+namespace micras::proxy {
 template <uint8_t num_of_sensors>
 TorqueSensors<num_of_sensors>::TorqueSensors(const Config& config) {
     for (uint8_t i = 0; i < num_of_sensors; i++) {

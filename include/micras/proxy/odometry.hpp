@@ -13,7 +13,7 @@
 #include <nav_msgs/msg/odometry.hpp>
 #include <string>
 
-namespace proxy {
+namespace micras::proxy {
 /**
  * @brief Class for getting odometry data
  */

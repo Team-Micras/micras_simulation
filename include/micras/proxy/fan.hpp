@@ -13,7 +13,7 @@
 #include <string>
 #include <cstdint>
 
-namespace proxy {
+namespace micras::proxy {
 /**
  * @brief Class for controlling the fan driver
  */

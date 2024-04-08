@@ -6,9 +6,9 @@
  * @date 03/2024
  */
 
-#include "proxy/button.hpp"
+#include "micras/proxy/button.hpp"
 
-namespace proxy {
+namespace micras::proxy {
 Button::Button(const Config& config) :
     long_press_delay{config.long_press_delay},
     extra_long_press_delay{config.extra_long_press_delay},
@@ -17,6 +17,11 @@ Button::Button(const Config& config) :
         config.topic, 1, [this](const std_msgs::msg::Bool& msg) {
             this->state.data = msg.data;
         });
+}
+
+bool Button::is_pressed() {
+    this->update_state();
+    return this->current_state;
 }
 
 Button::Status Button::get_status() {

@@ -9,9 +9,9 @@
 #ifndef MICRAS_PROXY_DISTANCE_SENSORS_CPP
 #define MICRAS_PROXY_DISTANCE_SENSORS_CPP
 
-#include "proxy/distance_sensors.hpp"
+#include "micras/proxy/distance_sensors.hpp"
 
-namespace proxy {
+namespace micras::proxy {
 template <uint8_t num_of_sensors>
 DistanceSensors<num_of_sensors>::DistanceSensors(const Config& config) {
     for (uint8_t i = 0; i < num_of_sensors; i++) {

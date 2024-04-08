@@ -15,7 +15,7 @@
 #include <array>
 #include <cstdint>
 
-namespace proxy {
+namespace micras::proxy {
 /**
  * @brief Class for controlling an addressable RGB LED
  */

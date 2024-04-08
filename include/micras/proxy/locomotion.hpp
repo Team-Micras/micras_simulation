@@ -13,7 +13,7 @@
 #include <geometry_msgs/msg/twist.hpp>
 #include <string>
 
-namespace proxy {
+namespace micras::proxy {
 /**
  * @brief Class for controlling the locomotion driver
  */

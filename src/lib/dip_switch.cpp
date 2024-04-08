@@ -9,9 +9,9 @@
 #ifndef MICRAS_PROXY_DIP_SWITCH_CPP
 #define MICRAS_PROXY_DIP_SWITCH_CPP
 
-#include "proxy/dip_switch.hpp"
+#include "micras/proxy/dip_switch.hpp"
 
-namespace proxy {
+namespace micras::proxy {
 template <uint8_t num_of_switches>
 DipSwitch<num_of_switches>::DipSwitch(const Config& config) {
     for (uint8_t i = 0; i < num_of_switches; i++) {

@@ -9,9 +9,9 @@
 #ifndef MICRAS_PROXY_ARGB_CPP
 #define MICRAS_PROXY_ARGB_CPP
 
-#include "proxy/argb.hpp"
+#include "micras/proxy/argb.hpp"
 
-namespace proxy {
+namespace micras::proxy {
 template <uint8_t num_of_leds>
 Argb<num_of_leds>::Argb(const Config& config) {
     for (uint8_t i = 0; i < num_of_leds; i++) {
