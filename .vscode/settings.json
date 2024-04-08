@@ -1,4 +1,30 @@
 {
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
+
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.eol": "\n",
+    "files.encoding": "utf8",
+
+    "editor.defaultFormatter": "xaver.clang-format",
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+
+    "[c, cpp]": {
+        "editor.formatOnSave": true
+    },
+
+    "doxdocgen.generic.dateFormat": "MM/YYYY",
+    "doxdocgen.file.fileOrder": [
+        "file",
+        "empty",
+        "brief",
+        "empty",
+        "date",
+        "custom"
+    ],
     "python.autoComplete.extraPaths": [
         "/opt/ros/humble/lib/python3.10/site-packages",
         "/opt/ros/humble/local/lib/python3.10/dist-packages"
