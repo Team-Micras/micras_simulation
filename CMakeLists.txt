@@ -36,13 +36,13 @@ foreach(dependency ${ROS_CODE_DEPS})
 endforeach()
 
 include_directories(
-    include/micras_simulation
-    cfg
-    MicrasFirmware/inc
+    "include"
+    config
+    MicrasFirmware/include
 )
 
 add_library(${PROJECT_NAME}_lib
-    cfg/target.cpp
+    config/target.cpp
     src/lib/argb.cpp
     src/lib/battery.cpp
     src/lib/button.cpp
@@ -57,7 +57,7 @@ add_library(${PROJECT_NAME}_lib
     src/lib/rotary_sensor.cpp
     src/lib/storage.cpp
     src/lib/torque_sensors.cpp
-    MicrasFirmware/src/controller/micras_controller.cpp
+    MicrasFirmware/src/micras_controller.cpp
 )
 
 ament_target_dependencies(${PROJECT_NAME}_lib ${ROS_CODE_DEPS})
