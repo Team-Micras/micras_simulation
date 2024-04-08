@@ -16,9 +16,8 @@ template <uint8_t num_of_switches>
 DipSwitch<num_of_switches>::DipSwitch(const Config& config) {
     for (uint8_t i = 0; i < num_of_switches; i++) {
         this->subscribers[i] = config.node->template create_subscription<std_msgs::msg::Bool>(
-            config.topic_array[i], 1, [this, i](const std_msgs::msg::Bool& msg) {
-                this->states[i] = msg;
-            });
+            config.topic_array[i], 1, [this, i](const std_msgs::msg::Bool& msg) { this->states[i] = msg; }
+        );
     }
 }
 
@@ -37,6 +36,6 @@ uint8_t DipSwitch<num_of_switches>::get_switches_value() const {
 
     return switches_value;
 }
-}  // namespace proxy
+}  // namespace micras::proxy
 
-#endif // MICRAS_PROXY_DIP_SWITCH_CPP
+#endif  // MICRAS_PROXY_DIP_SWITCH_CPP

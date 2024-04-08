@@ -11,9 +11,8 @@
 namespace micras::proxy {
 Battery::Battery(const Config& config) {
     this->subscriber = config.node->create_subscription<std_msgs::msg::UInt32>(
-        config.topic, 1, [this](const std_msgs::msg::UInt32& msg) {
-            this->reading = msg.data;
-        });
+        config.topic, 1, [this](const std_msgs::msg::UInt32& msg) { this->reading = msg.data; }
+    );
 }
 
 float Battery::get_voltage() const {
@@ -23,4 +22,4 @@ float Battery::get_voltage() const {
 uint32_t Battery::get_voltage_raw() const {
     return this->reading;
 }
-}  // namespace proxy
+}  // namespace micras::proxy

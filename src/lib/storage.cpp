@@ -15,7 +15,7 @@
 
 namespace micras::proxy {
 Storage::Storage(const Config& config) : start_page{config.start_page}, number_of_pages{config.number_of_pages} {
-    uint64_t header{ };
+    uint64_t header{};
 
     std::string package_share_directory = ament_index_cpp::get_package_share_directory("micras_simulation");
     this->storage_path = package_share_directory + "/storage/";
@@ -168,4 +168,4 @@ std::unordered_map<std::string, T> Storage::deserialize_var_map(std::vector<uint
     buffer.erase(buffer.begin(), buffer.begin() + current_addr);
     return variables;
 }
-}  // namespace proxy
+}  // namespace micras::proxy

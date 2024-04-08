@@ -43,4 +43,4 @@ void Buzzer::stop() {
     this->publisher->publish(message);
     this->is_playing = false;
 }
-}  // namespace proxy
+}  // namespace micras::proxy

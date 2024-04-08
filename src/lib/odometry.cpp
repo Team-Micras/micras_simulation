@@ -11,9 +11,8 @@
 namespace micras::proxy {
 Odometry::Odometry(const Config& odometry_config) {
     this->subscriber = odometry_config.node->create_subscription<nav_msgs::msg::Odometry>(
-        odometry_config.topic, 1, [this](const nav_msgs::msg::Odometry& msg) {
-            this->data = msg;
-        });
+        odometry_config.topic, 1, [this](const nav_msgs::msg::Odometry& msg) { this->data = msg; }
+    );
 }
 
 double Odometry::get_x_position() const {
@@ -35,4 +34,4 @@ double Odometry::get_linear_velocity() const {
 double Odometry::get_angular_velocity() const {
     return this->data.twist.twist.angular.z;
 }
-}  // namespace proxy
+}  // namespace micras::proxy

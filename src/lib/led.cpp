@@ -27,4 +27,4 @@ void Led::toggle() {
     this->state.data = not this->state.data;
     this->publisher->publish(this->state);
 }
-}  // namespace proxy
+}  // namespace micras::proxy

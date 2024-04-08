@@ -45,6 +45,6 @@ template <uint8_t num_of_leds>
 void Argb<num_of_leds>::turn_off() {
     this->set_color({0, 0, 0});
 }
-}  // namespace proxy
+}  // namespace micras::proxy
 
-#endif // MICRAS_PROXY_ARGB_CPP
+#endif  // MICRAS_PROXY_ARGB_CPP

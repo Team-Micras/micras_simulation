@@ -19,10 +19,7 @@ int main(int argc, char** argv) {
     micras::micras_node = std::make_shared<rclcpp::Node>("micras_node");
     micras::MicrasController micras_controller;
 
-    auto timer = micras::micras_node->create_wall_timer(
-        10ms, [&micras_controller]() {
-            micras_controller.run();
-        });
+    auto timer = micras::micras_node->create_wall_timer(10ms, [&micras_controller]() { micras_controller.run(); });
 
     while (true) {
         rclcpp::spin(micras::micras_node);

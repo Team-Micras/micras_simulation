@@ -51,9 +51,7 @@ void Locomotion::stop() {
     this->publisher->publish(this->twist);
 }
 
-void Locomotion::stop_left() {
-}
+void Locomotion::stop_left() { }
 
-void Locomotion::stop_right() {
-}
-}  // namespace proxy
+void Locomotion::stop_right() { }
+}  // namespace micras::proxy

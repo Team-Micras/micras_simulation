@@ -13,8 +13,8 @@ Button::Button(const Config& config) :
     long_press_delay{config.long_press_delay},
     extra_long_press_delay{config.extra_long_press_delay},
     node{config.node} {
-    this->subscriber = config.node->create_subscription<std_msgs::msg::Bool>(
-        config.topic, 1, [this](const std_msgs::msg::Bool& msg) {
+    this->subscriber =
+        config.node->create_subscription<std_msgs::msg::Bool>(config.topic, 1, [this](const std_msgs::msg::Bool& msg) {
             this->state.data = msg.data;
         });
 }
@@ -56,4 +56,4 @@ bool Button::is_rising_edge() const {
 bool Button::is_falling_edge() const {
     return not this->current_state and this->previous_state;
 }
-}  // namespace proxy
+}  // namespace micras::proxy

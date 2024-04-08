@@ -10,7 +10,7 @@
 
 namespace micras::proxy {
 Fan::Fan(const Config& config) {
-    (void) config;
+    (void)config;
     this->stop();
     this->enable();
 }
@@ -24,13 +24,12 @@ void Fan::disable() {
 }
 
 void Fan::set_speed(float speed) {
-    (void) speed;
+    (void)speed;
 }
 
-void Fan::stop() {
-}
+void Fan::stop() { }
 
 void Fan::set_direction(RotationDirection direction) {
-    (void) direction;
+    (void)direction;
 }
-}  // namespace proxy
+}  // namespace micras::proxy

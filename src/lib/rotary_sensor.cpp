@@ -17,12 +17,11 @@ std::vector<uint8_t> data;
 namespace micras::proxy {
 RotarySensor::RotarySensor(const Config& config) {
     this->subscriber = config.node->create_subscription<sensor_msgs::msg::JointState>(
-        config.topic, 1, [this](const sensor_msgs::msg::JointState& msg) {
-            this->data = msg;
-        });
+        config.topic, 1, [this](const sensor_msgs::msg::JointState& msg) { this->data = msg; }
+    );
 }
 
 float RotarySensor::get_position() const {
     return this->data.position[0];
 }
-}  // namespace proxy
+}  // namespace micras::proxy

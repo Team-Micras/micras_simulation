@@ -18,48 +18,48 @@ namespace micras::proxy {
  * @brief Class for controlling an LED
  */
 class Led {
-    public:
-        /**
-         * @brief Configuration structure for LED
-         */
-        struct Config {
-            std::shared_ptr<rclcpp::Node>& node;
-            std::string                    topic;
-        };
+public:
+    /**
+     * @brief Configuration structure for LED
+     */
+    struct Config {
+        std::shared_ptr<rclcpp::Node>& node;
+        std::string                    topic;
+    };
 
-        /**
-         * @brief Constructor for the Led class
-         *
-         * @param config Configuration for the LED
-         */
-        explicit Led(const Config& config);
+    /**
+     * @brief Constructor for the Led class
+     *
+     * @param config Configuration for the LED
+     */
+    explicit Led(const Config& config);
 
-        /**
-         * @brief Turn the LED on
-         */
-        void turn_on();
+    /**
+     * @brief Turn the LED on
+     */
+    void turn_on();
 
-        /**
-         * @brief Turn the LED off
-         */
-        void turn_off();
+    /**
+     * @brief Turn the LED off
+     */
+    void turn_off();
 
-        /**
-         * @brief Toggle the LED
-         */
-        void toggle();
+    /**
+     * @brief Toggle the LED
+     */
+    void toggle();
 
-    private:
-        /**
-         * @brief Current state of the LED
-         */
-        std_msgs::msg::Bool state;
+private:
+    /**
+     * @brief Current state of the LED
+     */
+    std_msgs::msg::Bool state;
 
-        /**
-         * @brief Publisher for the LED state topic
-         */
-        rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr publisher;
+    /**
+     * @brief Publisher for the LED state topic
+     */
+    rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr publisher;
 };
-}  // namespace proxy
+}  // namespace micras::proxy
 
-#endif // MICRAS_PROXY_LED_HPP
+#endif  // MICRAS_PROXY_LED_HPP

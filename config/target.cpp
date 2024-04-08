@@ -8,6 +8,7 @@
 
 #include "target.hpp"
 
+// clang-format off
 namespace micras {
 std::shared_ptr<rclcpp::Node> micras_node;
 
@@ -101,3 +102,5 @@ const proxy::TorqueSensors<2>::Config torque_sensors_config {
     }  // wheel_pairs_topics
 };
 }  // namespace micras
+
+// clang-format on

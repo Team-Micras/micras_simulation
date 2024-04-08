@@ -19,47 +19,47 @@ namespace micras::proxy {
  * @brief Class for getting the battery voltage
  */
 class Battery {
-    public:
-        /**
-         * @brief Configuration structure for the battery
-         */
-        struct Config {
-            std::shared_ptr<rclcpp::Node>& node;
-            std::string                    topic;
-        };
+public:
+    /**
+     * @brief Configuration structure for the battery
+     */
+    struct Config {
+        std::shared_ptr<rclcpp::Node>& node;
+        std::string                    topic;
+    };
 
-        /**
-         * @brief Constructor for the Battery class
-         *
-         * @param config Configuration for the battery
-         */
-        explicit Battery(const Config& config);
+    /**
+     * @brief Constructor for the Battery class
+     *
+     * @param config Configuration for the battery
+     */
+    explicit Battery(const Config& config);
 
-        /**
-         * @brief Get the battery voltage
-         *
-         * @return float Battery voltage in volts
-         */
-        float get_voltage() const;
+    /**
+     * @brief Get the battery voltage
+     *
+     * @return float Battery voltage in volts
+     */
+    float get_voltage() const;
 
-        /**
-         * @brief Get the raw reading from the battery
-         *
-         * @return uint32_t Raw reading from the battery
-         */
-        uint32_t get_voltage_raw() const;
+    /**
+     * @brief Get the raw reading from the battery
+     *
+     * @return uint32_t Raw reading from the battery
+     */
+    uint32_t get_voltage_raw() const;
 
-    private:
-        /**
-         * @brief Reading from the battery
-         */
-        uint32_t reading{ };
+private:
+    /**
+     * @brief Reading from the battery
+     */
+    uint32_t reading{};
 
-        /**
-         * @brief Subscriber for the battery topic
-         */
-        rclcpp::Subscription<std_msgs::msg::UInt32>::SharedPtr subscriber;
+    /**
+     * @brief Subscriber for the battery topic
+     */
+    rclcpp::Subscription<std_msgs::msg::UInt32>::SharedPtr subscriber;
 };
-}  // namespace proxy
+}  // namespace micras::proxy
 
-#endif // MICRAS_PROXY_BATTERY_HPP
+#endif  // MICRAS_PROXY_BATTERY_HPP
