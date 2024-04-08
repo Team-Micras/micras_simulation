@@ -12,19 +12,20 @@
 #include <memory>
 #include <rclcpp/rclcpp.hpp>
 
-#include "proxy/argb.hpp"
-#include "proxy/battery.hpp"
-#include "proxy/button.hpp"
-#include "proxy/buzzer.hpp"
-#include "proxy/dip_switch.hpp"
-#include "proxy/distance_sensors.hpp"
-#include "proxy/fan.hpp"
-#include "proxy/imu.hpp"
-#include "proxy/led.hpp"
-#include "proxy/locomotion.hpp"
-#include "proxy/rotary_sensor.hpp"
-#include "proxy/torque_sensors.hpp"
+#include "micras/proxy/argb.hpp"
+#include "micras/proxy/battery.hpp"
+#include "micras/proxy/button.hpp"
+#include "micras/proxy/buzzer.hpp"
+#include "micras/proxy/dip_switch.hpp"
+#include "micras/proxy/distance_sensors.hpp"
+#include "micras/proxy/fan.hpp"
+#include "micras/proxy/imu.hpp"
+#include "micras/proxy/led.hpp"
+#include "micras/proxy/locomotion.hpp"
+#include "micras/proxy/rotary_sensor.hpp"
+#include "micras/proxy/torque_sensors.hpp"
 
+namespace micras {
 extern std::shared_ptr<rclcpp::Node> micras_node;
 
 extern const proxy::Argb<2>::Config argb_config;
@@ -40,5 +41,6 @@ extern const proxy::Locomotion::Config locomotion_config;
 extern const proxy::RotarySensor::Config rotary_sensor_left_config;
 extern const proxy::RotarySensor::Config rotary_sensor_right_config;
 extern const proxy::TorqueSensors<2>::Config torque_sensors_config;
+}  // namespace micras
 
 #endif // __TARGET_HPP__

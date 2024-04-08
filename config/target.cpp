@@ -8,6 +8,7 @@
 
 #include "target.hpp"
 
+namespace micras {
 std::shared_ptr<rclcpp::Node> micras_node;
 
 const proxy::Argb<2>::Config argb_config {
@@ -99,3 +100,4 @@ const proxy::TorqueSensors<2>::Config torque_sensors_config {
         }
     }  // wheel_pairs_topics
 };
+}  // namespace micras
