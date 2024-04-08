@@ -1,6 +1,8 @@
 #!/bin/bash
-
-# Format the code using clang-format
+# Name: CMakeLists.txt
+# Micras Team
+# Brief: Format the code using clang-format
+# 04/2023
 
 # Check if clang-format is installed
 if ! [ -x "$(command -v clang-format)" ]; then
