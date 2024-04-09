@@ -16,14 +16,125 @@
 */
 import QtQuick 2.0
 import QtQuick.Controls 2.0
-Rectangle {
-  color: "transparent"
-  anchors.fill: parent
-  Button {
-    text: qsTr("Micras, plugin!")
-    highlighted: true
-    onClicked: { MicrasPlugin.OnButton(); }
-    anchors.horizontalCenter: parent.horizontalCenter
-    anchors.verticalCenter: parent.verticalCenter
-  }
+import QtQuick.Layouts 1.3
+
+ColumnLayout {
+
+    Layout.minimumWidth: 400
+    Layout.minimumHeight: 400
+    Layout.margins: 5
+    anchors.fill: parent
+    focus: true
+
+    Column {
+        anchors.centerIn: parent
+        spacing: 20
+
+        Button {
+            text: "Button"
+            width: 150
+            height: 50
+
+            onPressedChanged: {
+                if (pressed) {
+                    MicrasPlugin.on_button_click();
+                } else {
+                    MicrasPlugin.on_button_release();
+                }
+            }
+        }
+
+        Row {
+            spacing: 20
+            Switch {
+                id: switch0
+                onToggled: {
+                    MicrasPlugin.set_switch_state(0, switch0.checked);
+                }
+            }
+            Switch {
+                id: switch1
+                onToggled: {
+                    MicrasPlugin.set_switch_state(1, switch1.checked);
+                }
+            }
+            Switch {
+                id: switch2
+                onToggled: {
+                    MicrasPlugin.set_switch_state(2, switch2.checked);
+                }
+            }
+            Switch {
+                id: switch3
+                onToggled: {
+                    MicrasPlugin.set_switch_state(3, switch3.checked);
+                }
+            }
+        }
+
+        Row {
+            spacing: 20
+            Rectangle {
+                width: 50
+                height: 50
+                radius: 180
+                border.color: "black"
+                border.width: 1
+                color: "lightgrey"
+
+                Component.onCompleted: {
+                    MicrasPlugin.led_state_changed.connect(updateColor);
+                }
+
+                function updateColor(newState) {
+                    color = newState ? Qt.rgba(1, 0, 0) : "lightgrey";
+                }
+            }
+
+            Rectangle {
+                width: 50
+                height: 50
+                radius: 180
+                border.color: "black"
+                border.width: 1
+                color: "lightgrey"
+
+                Component.onCompleted: {
+                    MicrasPlugin.led_rgb_0_changed.connect(updateColor);
+                }
+
+                function updateColor(r, g, b) {
+                    color = Qt.rgba(r, g, b);
+                }
+            }
+            Rectangle {
+                width: 50
+                height: 50
+                radius: 180
+                border.color: "black"
+                border.width: 1
+                color: "lightgrey"
+
+                Component.onCompleted: {
+                    MicrasPlugin.led_rgb_1_changed.connect(updateColor);
+                }
+
+                function updateColor(r, g, b) {
+                    color = Qt.rgba(r, g, b);
+                }
+            }
+        }
+
+        Slider {
+            id: slider
+            width: parent.width
+            from: 0.0
+            to: 8.4
+            stepSize: 0.1
+            value: 8.4 // Initial value
+            onValueChanged: {
+                MicrasPlugin.on_slider_change(value);
+            }
+        }
+    }
 }
