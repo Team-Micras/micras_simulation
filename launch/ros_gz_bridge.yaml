@@ -1,3 +1,75 @@
+- ros_topic_name: "button"
+  gz_topic_name: "/button"
+  ros_type_name: "std_msgs/msg/Bool"
+  gz_type_name: "gz.msgs.Boolean"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "dip_switch_0"
+  gz_topic_name: "/dip_switch_0"
+  ros_type_name: "std_msgs/msg/Bool"
+  gz_type_name: "gz.msgs.Boolean"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "dip_switch_1"
+  gz_topic_name: "/dip_switch_1"
+  ros_type_name: "std_msgs/msg/Bool"
+  gz_type_name: "gz.msgs.Boolean"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "dip_switch_2"
+  gz_topic_name: "/dip_switch_2"
+  ros_type_name: "std_msgs/msg/Bool"
+  gz_type_name: "gz.msgs.Boolean"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "dip_switch_3"
+  gz_topic_name: "/dip_switch_3"
+  ros_type_name: "std_msgs/msg/Bool"
+  gz_type_name: "gz.msgs.Boolean"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "battery"
+  gz_topic_name: "/battery"
+  ros_type_name: "std_msgs/msg/Float32"
+  gz_type_name: "gz.msgs.Float"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "led"
+  gz_topic_name: "/led"
+  ros_type_name: "std_msgs/msg/Bool"
+  gz_type_name: "gz.msgs.Boolean"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "rgb_0"
+  gz_topic_name: "/rgb_0"
+  ros_type_name: "std_msgs/msg/ColorRGBA"
+  gz_type_name: "gz.msgs.Color"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "rgb_1"
+  gz_topic_name: "/rgb_1"
+  ros_type_name: "std_msgs/msg/ColorRGBA"
+  gz_type_name: "gz.msgs.Color"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: ROS_TO_GZ
+
 - ros_topic_name: "distance_sensor_0"
   gz_topic_name: "/lidar_0"
   ros_type_name: "sensor_msgs/msg/LaserScan"
