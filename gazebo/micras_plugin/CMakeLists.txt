@@ -41,7 +41,7 @@ link_directories(
 
 # Generate examples
 add_library(MicrasPlugin SHARED ${headers_MOC}
-  MicrasPlugin.cc
+  MicrasPlugin.cpp
   ${resources_RCC}
 )
 
