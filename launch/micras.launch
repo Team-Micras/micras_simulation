@@ -1,6 +1,8 @@
 <launch>
     <set_env name="GZ_SIM_RESOURCE_PATH" value="$(find-pkg-share micras_simulation)/gazebo"/>
 
+    <set_env name="IGN_GUI_PLUGIN_PATH" value="/home/santi/Documentos/MicroMouse/micras_ws/src/micras_simulation/gazebo/micras_plugin/build"/>
+
     <group>
         <push-ros-namespace namespace="micras"/>
 
