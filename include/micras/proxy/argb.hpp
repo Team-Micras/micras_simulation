@@ -75,6 +75,14 @@ public:
 
 private:
     /**
+     * @brief Map a color from 0-255 to 0-1
+     *
+     * @param color The color to map
+     * @return The mapped color
+     */
+    float map_color(uint8_t color);
+
+    /**
      * @brief Array of publishers for the ARGBs
      */
     std::array<std::shared_ptr<rclcpp::Publisher<std_msgs::msg::ColorRGBA>>, num_of_leds> publishers;
