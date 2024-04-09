@@ -10,7 +10,7 @@
 #define MICRAS_PROXY_BATTERY_HPP
 
 #include <rclcpp/rclcpp.hpp>
-#include <std_msgs/msg/u_int32.hpp>
+#include <std_msgs/msg/float32.hpp>
 #include <string>
 #include <cstdint>
 
@@ -58,7 +58,7 @@ private:
     /**
      * @brief Subscriber for the battery topic
      */
-    rclcpp::Subscription<std_msgs::msg::UInt32>::SharedPtr subscriber;
+    rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr subscriber;
 };
 }  // namespace micras::proxy
 
