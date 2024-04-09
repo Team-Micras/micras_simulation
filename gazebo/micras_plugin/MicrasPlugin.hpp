@@ -19,6 +19,9 @@
 #define IGNITION_GUI_HELLOPLUGIN_HH_
 
 #include <string>
+#include <array>
+
+#include <gz/transport.hh>
 
 #include <ignition/gui/qt.h>
 #include <ignition/gui/Plugin.hh>
@@ -28,30 +31,43 @@ namespace gui {
 class MicrasPlugin : public Plugin {
     Q_OBJECT
 
-    /// \brief Constructor
-
 public:
     MicrasPlugin();
-
-    /// \brief Destructor
 
 public:
     virtual ~MicrasPlugin();
 
-    /// \brief Called by Ignition GUI when plugin is instantiated.
-    /// \param[in] _pluginElem XML configuration for this plugin.
-
 public:
     virtual void LoadConfig(const tinyxml2::XMLElement* _pluginElem) override;
 
-    /// \brief Callback trigged when the button is pressed.
-protected slots:
-    void OnButton();
+signals:
+    void led_state_changed(bool new_state);
 
-    /// \brief Message to be printed when button is pressed.
+    void led_rgb_0_changed(float r, float g, float b);
+
+    void led_rgb_1_changed(float r, float g, float b);
+
+protected slots:
+    void on_button_click();
+
+    void on_button_release();
+
+    void on_slider_change(float _value);
+
+    void set_switch_state(int _index, bool _state);
 
 private:
     std::string message{"Micras, plugin!"};
+
+    gz::transport::Node node;
+
+    std::array<ignition::transport::v11::Node::Publisher, 4> switch_pub;
+
+    ignition::transport::v11::Node::Publisher button_pub;
+
+    ignition::transport::v11::Node::Publisher battery_pub;
+
+    gz::msgs::Boolean led_state;
 };
 }  // namespace gui
 }  // namespace ignition
