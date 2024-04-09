@@ -39,12 +39,12 @@ endforeach()
 
 include_directories(
     "include"
-    config
     MicrasFirmware/include
 )
 
+file(GLOB_RECURSE PROJECT_CONFIG_HEADERS CONFIGURE_DEPENDS "config/*.h*")
+
 add_library(${PROJECT_NAME}_lib
-    config/target.cpp
     src/lib/argb.cpp
     src/lib/battery.cpp
     src/lib/button.cpp
@@ -59,17 +59,24 @@ add_library(${PROJECT_NAME}_lib
     src/lib/rotary_sensor.cpp
     src/lib/storage.cpp
     src/lib/torque_sensors.cpp
-    MicrasFirmware/src/micras_controller.cpp
 )
 
 ament_target_dependencies(${PROJECT_NAME}_lib ${ROS_CODE_DEPS})
 
 add_executable(micras_node
     src/bin/micras_node.cpp
+    MicrasFirmware/src/micras_controller.cpp
 )
 
 ament_target_dependencies(micras_node ${ROS_CODE_DEPS})
-target_link_libraries(micras_node ${PROJECT_NAME}_lib)
+
+target_precompile_headers(micras_node PRIVATE
+    ${PROJECT_CONFIG_HEADERS}
+)
+
+target_link_libraries(micras_node
+    ${PROJECT_NAME}_lib
+)
 
 install(DIRECTORY include/
     DESTINATION include

@@ -9,7 +9,6 @@
 #include <rclcpp/rclcpp.hpp>
 
 #include "micras/micras_controller.hpp"
-#include "target.hpp"
 
 using namespace std::chrono_literals;
 
