@@ -16,7 +16,7 @@ fi
 
 # Find all C, C++ and header files excluding specified directories
 FILES=$(find . \( -name "*.c" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp" \) \
-                -not \( -path "./build/*" -o -path "./MicrasFirmware/*" \))
+                -not \( -path "*/build/*" -o -path "./MicrasFirmware/*" \))
 
 # Loop through each file and format if found
 for FILE in $FILES; do
