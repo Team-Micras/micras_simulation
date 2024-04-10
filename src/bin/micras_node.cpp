@@ -20,9 +20,7 @@ int main(int argc, char** argv) {
 
     auto timer = micras::micras_node->create_wall_timer(10ms, [&micras_controller]() { micras_controller.run(); });
 
-    while (true) {
-        rclcpp::spin(micras::micras_node);
-    }
+    rclcpp::spin(micras::micras_node);
 
     rclcpp::shutdown();
 
