@@ -38,6 +38,14 @@ void Buzzer::update() {
     }
 }
 
+void Buzzer::wait(uint32_t duration) {
+    auto wait_timer = this->node->now();
+
+    while (((this->node->now() - wait_timer).nanoseconds()) * 1e-6 < duration) {
+        this->update();
+    }
+}
+
 void Buzzer::stop() {
     this->message.data = 0;
     this->publisher->publish(message);
