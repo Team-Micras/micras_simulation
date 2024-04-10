@@ -38,7 +38,7 @@ foreach(dependency ${ROS_CODE_DEPS})
 endforeach()
 
 include_directories(
-    "include"
+    include
     MicrasFirmware/include
 )
 
