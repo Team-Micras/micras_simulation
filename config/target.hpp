@@ -29,6 +29,15 @@
 namespace micras {
 inline std::shared_ptr<rclcpp::Node> micras_node;
 
+/*****************************************
+ * Interface
+ *****************************************/
+
+const proxy::Led::Config led_config {
+    micras_node, // node
+    "led"        // topic
+};
+
 const proxy::Argb<2>::Config argb_config {
     micras_node,  // node
     {
@@ -37,19 +46,9 @@ const proxy::Argb<2>::Config argb_config {
     },  // topic_array
 };
 
-const proxy::Battery::Config battery_config {
-    micras_node, // node
-    "battery"    // topic
-};
-
 const proxy::Button::Config button_config {
     micras_node, // node
     "button"     // topic
-};
-
-const proxy::Buzzer::Config buzzer_config {
-    micras_node, // node
-    "buzzer"     // topic
 };
 
 const proxy::DipSwitch<4>::Config dip_switch_config {
@@ -62,36 +61,14 @@ const proxy::DipSwitch<4>::Config dip_switch_config {
     },  // topic_array
 };
 
-const proxy::DistanceSensors<4>::Config distance_sensors_config {
-    micras_node,  // node
-    {
-        "distance_sensor_0",
-        "distance_sensor_1",
-        "distance_sensor_2",
-        "distance_sensor_3"
-    },    // topic_array
-    0.3f, // max_distance
+const proxy::Buzzer::Config buzzer_config {
+    micras_node, // node
+    "buzzer"     // topic
 };
 
-const proxy::Fan::Config fan_config {
-    micras_node, // node
-    "fan"        // topic
-};
-
-const proxy::Imu::Config imu_config {
-    micras_node, // node
-    "imu"        // topic
-};
-
-const proxy::Led::Config led_config {
-    micras_node, // node
-    "led"        // topic
-};
-
-const proxy::Locomotion::Config locomotion_config {
-    micras_node, // node
-    "cmd_vel"    // topic
-};
+/*****************************************
+ * Sensors
+ *****************************************/
 
 const proxy::RotarySensor::Config rotary_sensor_left_config {
     micras_node,         // node
@@ -118,6 +95,42 @@ const proxy::TorqueSensors<2>::Config torque_sensors_config {
         }
     }  // wheel_pairs_topics
 };
+
+const proxy::DistanceSensors<4>::Config distance_sensors_config {
+    micras_node,  // node
+    {
+        "distance_sensor_0",
+        "distance_sensor_1",
+        "distance_sensor_2",
+        "distance_sensor_3"
+    },    // topic_array
+    0.3f, // max_distance
+};
+
+const proxy::Imu::Config imu_config {
+    micras_node, // node
+    "imu"        // topic
+};
+
+const proxy::Battery::Config battery_config {
+    micras_node, // node
+    "battery"    // topic
+};
+
+/*****************************************
+ * Actuators
+ *****************************************/
+
+const proxy::Fan::Config fan_config {
+    micras_node, // node
+    "fan"        // topic
+};
+
+const proxy::Locomotion::Config locomotion_config {
+    micras_node, // node
+    "cmd_vel"    // topic
+};
+
 }  // namespace micras
 
 // clang-format on
