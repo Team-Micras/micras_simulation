@@ -37,13 +37,13 @@ foreach(dependency ${ROS_CODE_DEPS})
     find_package(${dependency} REQUIRED)
 endforeach()
 
-include_directories(
-    include
-    config
-    MicrasFirmware/include
-)
-
-file(GLOB_RECURSE PROJECT_CONFIG_HEADERS CONFIGURE_DEPENDS "config/*.h*")
+# include_directories(
+#     include
+#     config
+#     MicrasFirmware/include
+# )
+file(GLOB_RECURSE PROJECT_TESTS_BIN CONFIGURE_DEPENDS "MicrasFirmware/tests/bin/*.c*")
+file(GLOB_RECURSE PROJECT_TESTS_SOURCES CONFIGURE_DEPENDS "tests/src/*.c*")
 
 add_library(${PROJECT_NAME}_lib
     src/lib/argb.cpp
@@ -60,6 +60,7 @@ add_library(${PROJECT_NAME}_lib
     src/lib/rotary_sensor.cpp
     src/lib/storage.cpp
     src/lib/torque_sensors.cpp
+    ${PROJECT_TESTS_SOURCES}
 )
 
 ament_target_dependencies(${PROJECT_NAME}_lib ${ROS_CODE_DEPS})
@@ -67,6 +68,13 @@ ament_target_dependencies(${PROJECT_NAME}_lib ${ROS_CODE_DEPS})
 add_executable(micras_node
     src/bin/micras_node.cpp
     MicrasFirmware/src/micras_controller.cpp
+)
+
+target_include_directories(${PROJECT_NAME}_lib PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/config>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/tests/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/include>
 )
 
 ament_target_dependencies(micras_node ${ROS_CODE_DEPS})
@@ -98,6 +106,29 @@ install(TARGETS ${PROJECT_NAME}_lib
 install(TARGETS micras_node
     RUNTIME DESTINATION lib/${PROJECT_NAME}
 )
+
+message(STATUS "Adding tests")
+
+foreach(TEST_FILE ${PROJECT_TESTS_BIN})
+
+    get_filename_component(TEST_NAME ${TEST_FILE} NAME_WLE)
+
+    add_executable(micras_${TEST_NAME}
+        ${TEST_FILE}
+    )
+    message(STATUS "Adding test: ${TEST_NAME} - ${TEST_FILE} - ${PROJECT_TESTS_SOURCES}")
+
+    ament_target_dependencies(micras_${TEST_NAME} ${ROS_CODE_DEPS})
+
+    target_link_libraries(micras_${TEST_NAME}
+        ${PROJECT_NAME}_lib
+    )
+
+    install(TARGETS micras_${TEST_NAME}
+        RUNTIME DESTINATION lib/${PROJECT_NAME}
+    )
+
+endforeach()
 
 if(BUILD_TESTING)
     set(ament_cmake_copyright_FOUND TRUE)
