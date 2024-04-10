@@ -1,3 +1,27 @@
+- ros_topic_name: "led"
+  gz_topic_name: "/led"
+  ros_type_name: "std_msgs/msg/Bool"
+  gz_type_name: "gz.msgs.Boolean"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "rgb_0"
+  gz_topic_name: "/rgb_0"
+  ros_type_name: "std_msgs/msg/ColorRGBA"
+  gz_type_name: "gz.msgs.Color"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "rgb_1"
+  gz_topic_name: "/rgb_1"
+  ros_type_name: "std_msgs/msg/ColorRGBA"
+  gz_type_name: "gz.msgs.Color"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: ROS_TO_GZ
+
 - ros_topic_name: "button"
   gz_topic_name: "/button"
   ros_type_name: "std_msgs/msg/Bool"
@@ -38,37 +62,55 @@
   publisher_queue: 1
   direction: GZ_TO_ROS
 
-- ros_topic_name: "battery"
-  gz_topic_name: "/battery"
-  ros_type_name: "std_msgs/msg/Float32"
-  gz_type_name: "gz.msgs.Float"
+# @TODO add buzz topic
+
+- ros_topic_name: "rotary_sensor_left"
+  gz_topic_name: "/joint_state_left"
+  ros_type_name: "sensor_msgs/msg/JointState"
+  gz_type_name: "gz.msgs.Model"
   subscriber_queue: 1
   publisher_queue: 1
   direction: GZ_TO_ROS
 
-- ros_topic_name: "led"
-  gz_topic_name: "/led"
-  ros_type_name: "std_msgs/msg/Bool"
-  gz_type_name: "gz.msgs.Boolean"
+- ros_topic_name: "rotary_sensor_right"
+  gz_topic_name: "/joint_state_right"
+  ros_type_name: "sensor_msgs/msg/JointState"
+  gz_type_name: "gz.msgs.Model"
   subscriber_queue: 1
   publisher_queue: 1
-  direction: ROS_TO_GZ
+  direction: GZ_TO_ROS
 
-- ros_topic_name: "rgb_0"
-  gz_topic_name: "/rgb_0"
-  ros_type_name: "std_msgs/msg/ColorRGBA"
-  gz_type_name: "gz.msgs.Color"
+- ros_topic_name: "torque_flw"
+  gz_topic_name: "/torque_flw"
+  ros_type_name: "geometry_msgs/msg/WrenchStamped"
+  gz_type_name: "gz.msgs.Wrench"
   subscriber_queue: 1
   publisher_queue: 1
-  direction: ROS_TO_GZ
+  direction: GZ_TO_ROS
 
-- ros_topic_name: "rgb_1"
-  gz_topic_name: "/rgb_1"
-  ros_type_name: "std_msgs/msg/ColorRGBA"
-  gz_type_name: "gz.msgs.Color"
+- ros_topic_name: "torque_frw"
+  gz_topic_name: "/torque_frw"
+  ros_type_name: "geometry_msgs/msg/WrenchStamped"
+  gz_type_name: "gz.msgs.Wrench"
   subscriber_queue: 1
   publisher_queue: 1
-  direction: ROS_TO_GZ
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "torque_rlw"
+  gz_topic_name: "/torque_rlw"
+  ros_type_name: "geometry_msgs/msg/WrenchStamped"
+  gz_type_name: "gz.msgs.Wrench"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "torque_rrw"
+  gz_topic_name: "/torque_rrw"
+  ros_type_name: "geometry_msgs/msg/WrenchStamped"
+  gz_type_name: "gz.msgs.Wrench"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
 
 - ros_topic_name: "distance_sensor_0"
   gz_topic_name: "/lidar_0"
@@ -110,6 +152,16 @@
   publisher_queue: 1
   direction: GZ_TO_ROS
 
+- ros_topic_name: "battery"
+  gz_topic_name: "/battery"
+  ros_type_name: "std_msgs/msg/Float32"
+  gz_type_name: "gz.msgs.Float"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+  # @TODO add fan topic
+
 - ros_topic_name: "cmd_vel"
   gz_topic_name: "/cmd_vel"
   ros_type_name: "geometry_msgs/msg/Twist"
@@ -117,54 +169,6 @@
   subscriber_queue: 1
   publisher_queue: 1
   direction: ROS_TO_GZ
-
-- ros_topic_name: "encoder_left"
-  gz_topic_name: "/joint_state_left"
-  ros_type_name: "sensor_msgs/msg/JointState"
-  gz_type_name: "gz.msgs.Model"
-  subscriber_queue: 1
-  publisher_queue: 1
-  direction: GZ_TO_ROS
-
-- ros_topic_name: "encoder_right"
-  gz_topic_name: "/joint_state_right"
-  ros_type_name: "sensor_msgs/msg/JointState"
-  gz_type_name: "gz.msgs.Model"
-  subscriber_queue: 1
-  publisher_queue: 1
-  direction: GZ_TO_ROS
-
-- ros_topic_name: "torque_flw"
-  gz_topic_name: "/torque_flw"
-  ros_type_name: "geometry_msgs/msg/WrenchStamped"
-  gz_type_name: "gz.msgs.Wrench"
-  subscriber_queue: 1
-  publisher_queue: 1
-  direction: GZ_TO_ROS
-
-- ros_topic_name: "torque_frw"
-  gz_topic_name: "/torque_frw"
-  ros_type_name: "geometry_msgs/msg/WrenchStamped"
-  gz_type_name: "gz.msgs.Wrench"
-  subscriber_queue: 1
-  publisher_queue: 1
-  direction: GZ_TO_ROS
-
-- ros_topic_name: "torque_rlw"
-  gz_topic_name: "/torque_rlw"
-  ros_type_name: "geometry_msgs/msg/WrenchStamped"
-  gz_type_name: "gz.msgs.Wrench"
-  subscriber_queue: 1
-  publisher_queue: 1
-  direction: GZ_TO_ROS
-
-- ros_topic_name: "torque_rrw"
-  gz_topic_name: "/torque_rrw"
-  ros_type_name: "geometry_msgs/msg/WrenchStamped"
-  gz_type_name: "gz.msgs.Wrench"
-  subscriber_queue: 1
-  publisher_queue: 1
-  direction: GZ_TO_ROS
 
 - ros_topic_name: "odometry"
   gz_topic_name: "/odometry"
