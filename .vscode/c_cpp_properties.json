@@ -9,7 +9,7 @@
         "${workspaceFolder}/MicrasFirmware/include/**"
       ],
       "name": "ROS",
-      "cppStandard": "c++17"
+      "cppStandard": "c++20"
     }
   ],
   "version": 4
