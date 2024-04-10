@@ -107,24 +107,21 @@ install(TARGETS micras_node
     RUNTIME DESTINATION lib/${PROJECT_NAME}
 )
 
-message(STATUS "Adding tests")
-
 foreach(TEST_FILE ${PROJECT_TESTS_BIN})
 
     get_filename_component(TEST_NAME ${TEST_FILE} NAME_WLE)
 
-    add_executable(micras_${TEST_NAME}
+    add_executable(${TEST_NAME}
         ${TEST_FILE}
     )
-    message(STATUS "Adding test: ${TEST_NAME} - ${TEST_FILE} - ${PROJECT_TESTS_SOURCES}")
 
-    ament_target_dependencies(micras_${TEST_NAME} ${ROS_CODE_DEPS})
+    ament_target_dependencies(${TEST_NAME} ${ROS_CODE_DEPS})
 
-    target_link_libraries(micras_${TEST_NAME}
+    target_link_libraries(${TEST_NAME}
         ${PROJECT_NAME}_lib
     )
 
-    install(TARGETS micras_${TEST_NAME}
+    install(TARGETS ${TEST_NAME}
         RUNTIME DESTINATION lib/${PROJECT_NAME}
     )
 
