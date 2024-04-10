@@ -39,6 +39,7 @@ endforeach()
 
 include_directories(
     include
+    config
     MicrasFirmware/include
 )
 
@@ -69,10 +70,6 @@ add_executable(micras_node
 )
 
 ament_target_dependencies(micras_node ${ROS_CODE_DEPS})
-
-target_precompile_headers(micras_node PRIVATE
-    ${PROJECT_CONFIG_HEADERS}
-)
 
 target_link_libraries(micras_node
     ${PROJECT_NAME}_lib
