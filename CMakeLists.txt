@@ -37,11 +37,6 @@ foreach(dependency ${ROS_CODE_DEPS})
     find_package(${dependency} REQUIRED)
 endforeach()
 
-# include_directories(
-#     include
-#     config
-#     MicrasFirmware/include
-# )
 file(GLOB_RECURSE PROJECT_TESTS_BIN CONFIGURE_DEPENDS "MicrasFirmware/tests/bin/*.c*")
 file(GLOB_RECURSE PROJECT_TESTS_SOURCES CONFIGURE_DEPENDS "tests/src/*.c*")
 
@@ -60,6 +55,7 @@ add_library(${PROJECT_NAME}_lib
     src/lib/rotary_sensor.cpp
     src/lib/storage.cpp
     src/lib/torque_sensors.cpp
+    src/lib/timer.cpp
     ${PROJECT_TESTS_SOURCES}
 )
 
