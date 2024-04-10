@@ -26,17 +26,25 @@ void Argb<num_of_leds>::set_color(const Color& color, uint8_t index) {
         return;
     }
 
-    this->publishers.at(index)->publish(
-        {this->map_color(color.red), this->map_color(color.green), this->map_color(color.blue), 1}
-    );
+    std_msgs::msg::ColorRGBA color_msg;
+    color_msg.r = this->map_color(color.red);
+    color_msg.g = this->map_color(color.green);
+    color_msg.b = this->map_color(color.blue);
+    color_msg.a = 1;
+
+    this->publishers.at(index)->publish(color_msg);
 }
 
 template <uint8_t num_of_leds>
 void Argb<num_of_leds>::set_color(const Color& color) {
+    std_msgs::msg::ColorRGBA color_msg;
+    color_msg.r = this->map_color(color.red);
+    color_msg.g = this->map_color(color.green);
+    color_msg.b = this->map_color(color.blue);
+    color_msg.a = 1;
+
     for (uint8_t i = 0; i < num_of_leds; i++) {
-        this->publishers.at(i)->publish(
-            {this->map_color(color.red), this->map_color(color.green), this->map_color(color.blue), 1}
-        );
+        this->publishers.at(i)->publish(color_msg);
     }
 }
 
