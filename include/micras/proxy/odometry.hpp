@@ -6,8 +6,8 @@
  * @date 03/2024
  */
 
-#ifndef __ODOMETRY_HPP__
-#define __ODOMETRY_HPP__
+#ifndef MICRAS_PROXY_ODOMETRY_HPP
+#define MICRAS_PROXY_ODOMETRY_HPP
 
 #include <rclcpp/rclcpp.hpp>
 #include <nav_msgs/msg/odometry.hpp>
@@ -82,4 +82,4 @@ private:
 };
 }  // namespace micras::proxy
 
-#endif  // __ODOMETRY_HPP__
+#endif  // MICRAS_PROXY_ODOMETRY_HPP

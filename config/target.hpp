@@ -6,8 +6,8 @@
  * @date 03/2024
  */
 
-#ifndef __TARGET_HPP__
-#define __TARGET_HPP__
+#ifndef MICRAS_TARGET_HPP
+#define MICRAS_TARGET_HPP
 
 #include <memory>
 #include <rclcpp/rclcpp.hpp>
@@ -122,4 +122,4 @@ const proxy::TorqueSensors<2>::Config torque_sensors_config {
 
 // clang-format on
 
-#endif  // __TARGET_HPP__
+#endif  // MICRAS_TARGET_HPP
