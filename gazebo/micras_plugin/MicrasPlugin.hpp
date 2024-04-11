@@ -1,77 +1,157 @@
-/*
- * Copyright (C) 2017 Open Source Robotics Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
-#ifndef IGNITION_GUI_HELLOPLUGIN_HH_
-#define IGNITION_GUI_HELLOPLUGIN_HH_
+#ifndef IGNITION_GUI_MICRAS_PLUGIN_HPP
+#define IGNITION_GUI_MICRAS_PLUGIN_HPP
 
 #include <string>
 #include <array>
-
 #include <gz/transport.hh>
-
 #include <ignition/gui/qt.h>
 #include <ignition/gui/Plugin.hh>
 
 namespace ignition {
 namespace gui {
+
+/**
+ * @brief MicrasPlugin class
+ */
 class MicrasPlugin : public Plugin {
     Q_OBJECT
 
 public:
+    /**
+     * @brief Construct a new Micras Plugin object
+     */
     MicrasPlugin();
 
-public:
+    /**
+     * @brief Destroy the Micras Plugin object
+     */
     virtual ~MicrasPlugin();
 
-public:
+    /**
+     * @brief Load the plugin configuration
+     *
+     * @param _pluginElem Plugin configuration xml element
+     */
     virtual void LoadConfig(const tinyxml2::XMLElement* _pluginElem) override;
 
 signals:
+    /**
+     * @brief Signal emitted when the led state changes
+     *
+     * @param new_state New led state
+     */
     void led_state_changed(bool new_state);
 
+    /**
+     * @brief Signal emitted when the rgb_0 led color changes
+     *
+     * @param r Red color component
+     * @param g Green color component
+     * @param b Blue color component
+     */
     void led_rgb_0_changed(float r, float g, float b);
 
+    /**
+     * @brief Signal emitted when the rgb_1 led color changes
+     *
+     * @param r Red color component
+     * @param g Green color component
+     * @param b Blue color component
+     */
     void led_rgb_1_changed(float r, float g, float b);
 
+    /**
+     * @brief Signal emitted when the buzzer frequency changes
+     *
+     * @param freq New buzzer frequency
+     */
     void buzzer_changed(int freq);
 
 protected slots:
+
+    /**
+     * @brief Slot called when the button is clicked
+     */
     void on_button_click();
 
+    /**
+     * @brief Slot called when the button is released
+     */
     void on_button_release();
 
-    void on_slider_change(float _value);
+    /**
+     * @brief Slot called when the slider value changes
+     *
+     * @param value New slider value
+     */
+    void on_slider_change(float value);
 
-    void set_switch_state(int _index, bool _state);
+    /**
+     * @brief Slot called when a switch state changes
+     *
+     * @param index Switch index
+     * @param state New switch state
+     */
+    void set_switch_state(int index, bool state);
 
 private:
-    std::string message{"Micras, plugin!"};
+    /**
+     * @brief Set the ignition transport publishers
+     */
+    void set_publishers();
 
+    /**
+     * @brief Set the ignition transport subscriber for the led topic
+     */
+    void set_led_subscriber();
+
+    /**
+     * @brief Set the ignition transport subscriber for the rgb_0 topic
+     */
+    void set_rgb_0_subscriber();
+
+    /**
+     * @brief Set the ignition transport subscriber for the rgb_1 topic
+     */
+    void set_rgb_1_subscriber();
+
+    /**
+     * @brief Set the ignition transport subscriber for the buzzer topic
+     */
+    void set_buzzer_subscriber();
+
+    /**
+     * @brief Ignition transport node
+     */
     gz::transport::Node node;
 
+    /**
+     * @brief Ignition transport publishers
+     */
     std::array<ignition::transport::v11::Node::Publisher, 4> switch_pub;
 
+    /**
+     * @brief Ignition transport publisher for the button topic
+     */
     ignition::transport::v11::Node::Publisher button_pub;
 
+    /**
+     * @brief Ignition transport publisher for the battery topic
+     */
     ignition::transport::v11::Node::Publisher battery_pub;
 
-    gz::msgs::Boolean led_state;
+    /**
+     * @brief Plugin topic names
+     */
+    const std::string button_topic = "/button";
+    const std::string battery_topic = "/battery";
+    const std::string dip_switch_topic = "/dip_switch_";
+    const std::string led_topic = "/led";
+    const std::string led_rgb_0_topic = "/rgb_0";
+    const std::string led_rgb_1_topic = "/rgb_1";
+    const std::string buzzer_topic = "/buzzer";
 };
 }  // namespace gui
 }  // namespace ignition
 
-#endif
+#endif  // IGNITION_GUI_MICRAS_PLUGIN_HPP
