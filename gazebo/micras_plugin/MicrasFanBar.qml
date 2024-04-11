@@ -130,7 +130,7 @@ ColumnLayout {
     }
   }
 
-  Text {
+  Label {
     text: " Fan Speed: 0%"
     font.pixelSize: 15
     Component.onCompleted: {

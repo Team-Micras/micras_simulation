@@ -22,7 +22,7 @@ Column {
     }
   }
 
-  Text {
+  Label {
     text: "LED"
     anchors.horizontalCenter: parent.horizontalCenter
   }

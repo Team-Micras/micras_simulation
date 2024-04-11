@@ -28,7 +28,7 @@ Row {
 
     }
 
-    Text {
+    Label {
       text: "ARGB 0"
       anchors.horizontalCenter: parent.horizontalCenter
     }
@@ -55,7 +55,7 @@ Row {
       }
     }
 
-    Text {
+    Label {
       text: "ARGB 1"
       anchors.horizontalCenter: parent.horizontalCenter
     }
