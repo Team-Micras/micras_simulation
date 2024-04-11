@@ -67,6 +67,13 @@ signals:
      */
     void buzzer_changed(int freq);
 
+    /**
+     * @brief Signal emitted when the fan speed changes
+     *
+     * @param speed New fan speed
+     */
+    void fan_speed_changed(float speed);
+
 protected slots:
 
     /**
@@ -94,6 +101,8 @@ protected slots:
      */
     void set_switch_state(int index, bool state);
 
+    void log();
+
 private:
     /**
      * @brief Set the ignition transport publishers
@@ -119,6 +128,11 @@ private:
      * @brief Set the ignition transport subscriber for the buzzer topic
      */
     void set_buzzer_subscriber();
+
+    /**
+     * @brief Set the ignition transport subscriber for the fan topic
+     */
+    void set_fan_subscriber();
 
     /**
      * @brief Ignition transport node
@@ -150,6 +164,7 @@ private:
     const std::string led_rgb_0_topic{"/rgb_0"};
     const std::string led_rgb_1_topic{"/rgb_1"};
     const std::string buzzer_topic{"/buzzer"};
+    const std::string fan_topic{"/fan"};
 };
 }  // namespace gui
 }  // namespace ignition

@@ -14,6 +14,7 @@ MicrasPlugin::MicrasPlugin() {
     this->set_rgb_0_subscriber();
     this->set_rgb_1_subscriber();
     this->set_buzzer_subscriber();
+    this->set_fan_subscriber();
 }
 
 void MicrasPlugin::LoadConfig(const tinyxml2::XMLElement* /*_pluginElem*/) { }
@@ -44,6 +45,10 @@ void MicrasPlugin::set_switch_state(int _index, bool _state) {
     gz::msgs::Boolean msg;
     msg.set_data(_state);
     this->switch_pub.at(_index).Publish(msg);
+}
+
+void MicrasPlugin::log() {
+    std::cout << "loooooog" << std::endl;
 }
 
 void MicrasPlugin::set_publishers() {
@@ -80,6 +85,13 @@ void MicrasPlugin::set_buzzer_subscriber() {
         emit this->buzzer_changed(msg.data());
     };
     this->node.Subscribe(this->buzzer_topic, buzzer_cb);
+}
+
+void MicrasPlugin::set_fan_subscriber() {
+    std::function<void(const gz::msgs::Float&)> fan_cb = [this](const gz::msgs::Float& msg) {
+        emit this->fan_speed_changed(msg.data());
+    };
+    this->node.Subscribe(this->fan_topic, fan_cb);
 }
 
 /**
