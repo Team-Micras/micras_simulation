@@ -15,18 +15,35 @@ Imu::Imu(const Config& config) {
     );
 }
 
-void Imu::update_data() { }
+void Imu::update_data() {
+    const auto& quat = this->data.orientation;
+
+    // roll (x-axis rotation)
+    float sinp = 2 * (quat.w * quat.x + quat.y * quat.z);
+    float cosp = 1 - 2 * (quat.x * quat.x + quat.y * quat.y);
+    this->orientation[0] = std::atan2(sinp, cosp);
+
+    // pitch (y-axis rotation)
+    sinp = std::sqrt(1 + 2 * (quat.w * quat.y - quat.x * quat.z));
+    cosp = std::sqrt(1 - 2 * (quat.w * quat.y - quat.x * quat.z));
+    this->orientation[1] = 2 * std::atan2(sinp, cosp) - M_PI / 2;
+
+    // yaw (z-axis rotation)
+    sinp = 2 * (quat.w * quat.z + quat.x * quat.y);
+    cosp = 1 - 2 * (quat.y * quat.y + quat.z * quat.z);
+    this->orientation[2] = std::atan2(sinp, cosp);
+}
 
 float Imu::get_orientation(Axis axis) const {
     switch (axis) {
         case Axis::X:
-            return this->data.orientation.x;
+            return this->orientation[0];
 
         case Axis::Y:
-            return this->data.orientation.y;
+            return this->orientation[1];
 
         case Axis::Z:
-            return this->data.orientation.z;
+            return this->orientation[2];
 
         default:
             return 0.0F;

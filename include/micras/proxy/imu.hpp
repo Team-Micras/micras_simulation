@@ -83,6 +83,11 @@ private:
      * @brief Subscriber for the IMU topic
      */
     rclcpp::Subscription<sensor_msgs::msg::Imu>::SharedPtr subscriber;
+
+    /**
+     * @brief Array to store the IMU orientation in euler angles
+     */
+    std::array<float, 3> orientation;
 };
 }  // namespace micras::proxy
 
