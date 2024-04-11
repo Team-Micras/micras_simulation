@@ -20,8 +20,7 @@ Button::Button(const Config& config) :
 }
 
 bool Button::is_pressed() {
-    this->update_state();
-    return this->current_state;
+    return this->state.data;
 }
 
 Button::Status Button::get_status() {
