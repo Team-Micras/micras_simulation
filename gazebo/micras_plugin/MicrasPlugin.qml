@@ -18,9 +18,7 @@ ColumnLayout {
 
     RowLayout {
       width: parent.width
-      MicrasButton {
-
-      }
+      MicrasButton {}
       Rectangle { Layout.fillWidth: true }
       MicrasDipSwitch {}
     }
