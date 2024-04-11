@@ -1,11 +1,11 @@
 #ifndef IGNITION_GUI_MICRAS_PLUGIN_HPP
 #define IGNITION_GUI_MICRAS_PLUGIN_HPP
 
-#include <string>
 #include <array>
 #include <gz/transport.hh>
-#include <ignition/gui/qt.h>
 #include <ignition/gui/Plugin.hh>
+#include <ignition/gui/qt.h>
+#include <string>
 
 namespace ignition {
 namespace gui {
@@ -25,7 +25,7 @@ public:
     /**
      * @brief Destroy the Micras Plugin object
      */
-    virtual ~MicrasPlugin();
+    virtual ~MicrasPlugin() = default;
 
     /**
      * @brief Load the plugin configuration

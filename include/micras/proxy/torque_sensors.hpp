@@ -57,8 +57,8 @@ private:
      * @brief Structure for a pair of wheels topics subscribers
      */
     struct WheelPair {
-        float                                                              front_torque;
-        float                                                              rear_torque;
+        float                                                              front_torque{};
+        float                                                              rear_torque{};
         rclcpp::Subscription<geometry_msgs::msg::WrenchStamped>::SharedPtr front_subscriber;
         rclcpp::Subscription<geometry_msgs::msg::WrenchStamped>::SharedPtr rear_subscriber;
     };

@@ -79,7 +79,7 @@ private:
     /**
      * @brief Flag to enable/disable the locomotion driver
      */
-    bool enabled;
+    bool enabled{};
 
     /**
      * @brief Current velocity command of the robot

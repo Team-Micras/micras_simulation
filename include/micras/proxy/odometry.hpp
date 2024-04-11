@@ -32,7 +32,7 @@ public:
      *
      * @param odometry_config Configuration for the odometry
      */
-    Odometry(const Config& odometry_config);
+    explicit Odometry(const Config& odometry_config);
 
     /**
      * @brief Get the odometry x position
