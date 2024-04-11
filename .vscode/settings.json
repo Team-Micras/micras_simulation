@@ -15,6 +15,9 @@
     "[c, cpp]": {
         "editor.formatOnSave": true
     },
+    "[qml]": {
+        "editor.tabSize": 2,
+    },
 
     "doxdocgen.generic.dateFormat": "MM/YYYY",
     "doxdocgen.file.fileOrder": [
