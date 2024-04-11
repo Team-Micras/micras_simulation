@@ -9,7 +9,7 @@
 #include "micras/proxy/buzzer.hpp"
 
 namespace micras::proxy {
-Buzzer::Buzzer(const Config& config) : node{config.node} {
+Buzzer::Buzzer(const Config& config) {
     this->publisher = config.node->create_publisher<std_msgs::msg::UInt32>(config.topic, 1);
     this->message = std_msgs::msg::UInt32();
     this->stop();
@@ -22,7 +22,7 @@ void Buzzer::play(uint32_t frequency, uint32_t duration) {
 
     if (duration > 0) {
         this->duration = duration;
-        this->playing_timer = this->node->now();
+        this->playing_timer.reset_ms();
     }
 }
 
@@ -31,17 +31,15 @@ void Buzzer::update() {
         return;
     }
 
-    auto elapsed_time = ((this->node->now() - this->playing_timer).nanoseconds()) * 1e-6;
-
-    if (this->duration > 0 and elapsed_time > this->duration) {
+    if (this->duration > 0 and this->playing_timer.elapsed_time_ms() > this->duration) {
         this->stop();
     }
 }
 
 void Buzzer::wait(uint32_t duration) {
-    auto wait_timer = this->node->now();
+    hal::Timer wait_timer;
 
-    while (((this->node->now() - wait_timer).nanoseconds()) * 1e-6 < duration) {
+    while (wait_timer.elapsed_time_ms() < duration) {
         this->update();
     }
 }

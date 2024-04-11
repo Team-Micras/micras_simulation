@@ -9,7 +9,13 @@
 #include "micras/hal/timer.hpp"
 
 namespace micras::hal {
-Timer::Timer(const Config& /*config*/) { }
+Timer::Timer() {
+    this->reset_ms();
+}
+
+Timer::Timer(const Config& /*config*/) {
+    this->reset_us();
+}
 
 void Timer::reset_ms() {
     this->counter = get_counter_ms();

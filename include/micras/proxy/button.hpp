@@ -14,6 +14,8 @@
 #include <std_msgs/msg/bool.hpp>
 #include <string>
 
+#include "micras/hal/timer.hpp"
+
 namespace micras::proxy {
 /**
  * @brief Class for receiving a button data
@@ -98,14 +100,9 @@ private:
     const uint16_t extra_long_press_delay;
 
     /**
-     * @brief Node for the button
-     */
-    std::shared_ptr<rclcpp::Node>& node;
-
-    /**
      * @brief Timer for button press time
      */
-    rclcpp::Time press_time;
+    hal::Timer status_timer{};
 
     /**
      * @brief Flag to know if button was being pressed

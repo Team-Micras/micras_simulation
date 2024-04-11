@@ -10,9 +10,7 @@
 
 namespace micras::proxy {
 Button::Button(const Config& config) :
-    long_press_delay{config.long_press_delay},
-    extra_long_press_delay{config.extra_long_press_delay},
-    node{config.node} {
+    long_press_delay{config.long_press_delay}, extra_long_press_delay{config.extra_long_press_delay} {
     this->subscriber =
         config.node->create_subscription<std_msgs::msg::Bool>(config.topic, 1, [this](const std_msgs::msg::Bool& msg) {
             this->state.data = msg.data;
@@ -27,15 +25,13 @@ Button::Status Button::get_status() {
     this->update_state();
 
     if (this->is_rising_edge()) {
-        this->press_time = this->node->now();
+        this->status_timer.reset_ms();
     } else if (this->is_falling_edge()) {
-        auto elapsed_time = ((this->node->now() - this->press_time).nanoseconds()) * 1e-6;
-
-        if (elapsed_time > this->extra_long_press_delay) {
+        if (this->status_timer.elapsed_time_ms() > this->extra_long_press_delay) {
             return EXTRA_LONG_PRESS;
         }
 
-        if (elapsed_time > this->long_press_delay) {
+        if (this->status_timer.elapsed_time_ms() > this->long_press_delay) {
             return LONG_PRESS;
         }
 

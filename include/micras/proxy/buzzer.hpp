@@ -14,6 +14,8 @@
 #include <std_msgs/msg/u_int32.hpp>
 #include <string>
 
+#include "micras/hal/timer.hpp"
+
 namespace micras::proxy {
 /**
  * @brief Class for controlling a buzzer
@@ -72,11 +74,6 @@ private:
     std_msgs::msg::UInt32 message;
 
     /**
-     * @brief Node for the buzzer
-     */
-    std::shared_ptr<rclcpp::Node>& node;
-
-    /**
      * @brief Flag to check if the buzzer is playing
      */
     bool is_playing{false};
@@ -89,7 +86,7 @@ private:
     /**
      * @brief Timer for the buzzer
      */
-    rclcpp::Time playing_timer;
+    hal::Timer playing_timer;
 };
 }  // namespace micras::proxy
 

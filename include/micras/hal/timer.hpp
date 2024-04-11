@@ -26,7 +26,7 @@ public:
     /**
      * @brief Construct a new Timer object
      */
-    Timer() = default;
+    Timer();
 
     /**
      * @brief Construct a new Timer object
