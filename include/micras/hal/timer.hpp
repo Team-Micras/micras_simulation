@@ -9,6 +9,7 @@
 #ifndef MICRAS_HAL_TIMER_HPP
 #define MICRAS_HAL_TIMER_HPP
 
+#include <cstdint>
 #include <rclcpp/rclcpp.hpp>
 
 namespace micras::hal {

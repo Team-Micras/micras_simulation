@@ -9,11 +9,11 @@
 #ifndef MICRAS_PROXY_ARGB_HPP
 #define MICRAS_PROXY_ARGB_HPP
 
+#include <array>
+#include <cstdint>
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/color_rgba.hpp>
 #include <string>
-#include <array>
-#include <cstdint>
 
 namespace micras::proxy {
 /**
@@ -89,6 +89,6 @@ private:
 };
 }  // namespace micras::proxy
 
-#include "../../../src/lib/argb.cpp"  // NOLINT(bugprone-suspicious-include)
+#include "../src/lib/argb.cpp"  // NOLINT(bugprone-suspicious-include)
 
 #endif  // MICRAS_PROXY_ARGB_HPP

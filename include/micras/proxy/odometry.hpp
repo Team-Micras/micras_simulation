@@ -9,8 +9,8 @@
 #ifndef MICRAS_PROXY_ODOMETRY_HPP
 #define MICRAS_PROXY_ODOMETRY_HPP
 
-#include <rclcpp/rclcpp.hpp>
 #include <nav_msgs/msg/odometry.hpp>
+#include <rclcpp/rclcpp.hpp>
 #include <string>
 
 namespace micras::proxy {

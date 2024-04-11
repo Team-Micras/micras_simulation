@@ -9,10 +9,11 @@
 #ifndef MICRAS_PROXY_DISTANCE_SENSORS_HPP
 #define MICRAS_PROXY_DISTANCE_SENSORS_HPP
 
+#include <array>
+#include <cstdint>
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/laser_scan.hpp>
 #include <string>
-#include <array>
 
 namespace micras::proxy {
 /**
@@ -73,6 +74,6 @@ private:
 };
 }  // namespace micras::proxy
 
-#include "../../../src/lib/distance_sensors.cpp"  // NOLINT(bugprone-suspicious-include)
+#include "../src/lib/distance_sensors.cpp"  // NOLINT(bugprone-suspicious-include)
 
 #endif  // MICRAS_PROXY_DISTANCE_SENSORS_HPP

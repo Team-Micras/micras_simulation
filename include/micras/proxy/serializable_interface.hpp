@@ -12,6 +12,7 @@
 #include <cstdint>
 #include <vector>
 
+namespace micras::proxy {
 /**
  * @brief Interface class for serializable classes
  */
@@ -49,5 +50,6 @@ protected:
 
     ISerializable& operator=(ISerializable&&) = default;
 };
+}  // namespace micras::proxy
 
 #endif  // MICRAS_PROXY_SERIALIZABLE_INTERFACE_HPP

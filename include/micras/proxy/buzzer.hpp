@@ -9,10 +9,10 @@
 #ifndef MICRAS_PROXY_BUZZER_HPP
 #define MICRAS_PROXY_BUZZER_HPP
 
+#include <cstdint>
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/u_int32.hpp>
 #include <string>
-#include <cstdint>
 
 namespace micras::proxy {
 /**

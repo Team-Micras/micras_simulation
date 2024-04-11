@@ -19,9 +19,6 @@ void Imu::update_data() { }
 
 float Imu::get_orientation(Axis axis) const {
     switch (axis) {
-        case Axis::W:
-            return this->data.orientation.w;
-
         case Axis::X:
             return this->data.orientation.x;
 

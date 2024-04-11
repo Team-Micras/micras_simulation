@@ -9,6 +9,7 @@
 #ifndef MICRAS_PROXY_IMU_HPP
 #define MICRAS_PROXY_IMU_HPP
 
+#include <cstdint>
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/imu.hpp>
 #include <string>
@@ -34,8 +35,7 @@ public:
      */
     explicit Imu(const Config& config);
 
-    enum Axis {
-        W,
+    enum Axis : uint8_t {
         X,
         Y,
         Z
@@ -48,7 +48,6 @@ public:
 
     /**
      * @brief Get the IMU orientation over an axis
-     * @todo implement function using sensior fusion
      *
      * @param axis Axis to get the orientation from
      *

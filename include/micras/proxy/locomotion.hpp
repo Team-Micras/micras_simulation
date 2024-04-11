@@ -9,8 +9,8 @@
 #ifndef MICRAS_PROXY_LOCOMOTION_HPP
 #define MICRAS_PROXY_LOCOMOTION_HPP
 
-#include <rclcpp/rclcpp.hpp>
 #include <geometry_msgs/msg/twist.hpp>
+#include <rclcpp/rclcpp.hpp>
 #include <string>
 
 namespace micras::proxy {

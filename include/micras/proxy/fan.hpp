@@ -9,9 +9,9 @@
 #ifndef MICRAS_PROXY_FAN_HPP
 #define MICRAS_PROXY_FAN_HPP
 
+#include <cstdint>
 #include <rclcpp/rclcpp.hpp>
 #include <string>
-#include <cstdint>
 
 namespace micras::proxy {
 /**
@@ -30,7 +30,7 @@ public:
     /**
      * @brief Enum for rotation direction
      */
-    enum RotationDirection {
+    enum RotationDirection : uint8_t {
         FORWARD,
         BACKWARD
     };
@@ -75,7 +75,7 @@ private:
     /**
      * @brief Flag to check if the fan is enabled
      */
-    bool enabled = false;
+    bool enabled{false};
 };
 }  // namespace micras::proxy
 

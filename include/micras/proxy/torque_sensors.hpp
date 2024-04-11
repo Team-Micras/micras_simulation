@@ -9,8 +9,9 @@
 #ifndef MICRAS_PROXY_TORQUE_SENSORS_HPP
 #define MICRAS_PROXY_TORQUE_SENSORS_HPP
 
-#include <rclcpp/rclcpp.hpp>
+#include <cstdint>
 #include <geometry_msgs/msg/wrench_stamped.hpp>
+#include <rclcpp/rclcpp.hpp>
 #include <string>
 
 namespace micras::proxy {
@@ -69,6 +70,6 @@ private:
 };
 }  // namespace micras::proxy
 
-#include "../../../src/lib/torque_sensors.cpp"  // NOLINT(bugprone-suspicious-include)
+#include "../src/lib/torque_sensors.cpp"  // NOLINT(bugprone-suspicious-include)
 
 #endif  // MICRAS_PROXY_TORQUE_SENSORS_HPP

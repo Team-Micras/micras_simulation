@@ -9,6 +9,7 @@
 #ifndef MICRAS_PROXY_BUTTON_HPP
 #define MICRAS_PROXY_BUTTON_HPP
 
+#include <cstdint>
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/bool.hpp>
 #include <string>
@@ -22,7 +23,7 @@ public:
     /**
      * @brief Enum for button status
      */
-    enum Status {
+    enum Status : uint8_t {
         NO_PRESS,
         SHORT_PRESS,
         LONG_PRESS,

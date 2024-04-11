@@ -9,11 +9,11 @@
 #ifndef MICRAS_PROXY_DIP_SWITCH_HPP
 #define MICRAS_PROXY_DIP_SWITCH_HPP
 
+#include <array>
+#include <cstdint>
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/bool.hpp>
 #include <string>
-#include <array>
-#include <cstdint>
 
 namespace micras::proxy {
 /**
@@ -65,6 +65,6 @@ private:
 };
 }  // namespace micras::proxy
 
-#include "../../../src/lib/dip_switch.cpp"  // NOLINT(bugprone-suspicious-include)
+#include "../src/lib/dip_switch.cpp"  // NOLINT(bugprone-suspicious-include)
 
 #endif  // MICRAS_PROXY_DIP_SWITCH_HPP
