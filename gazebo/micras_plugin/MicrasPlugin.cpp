@@ -92,4 +92,4 @@ void MicrasPlugin::set_fan_subscriber() {
 /**
  * @brief Register the MicrasPlugin plugin
  */
-IGNITION_ADD_PLUGIN(MicrasPlugin, Plugin);
+IGNITION_ADD_PLUGIN(ignition::gui::MicrasPlugin, ignition::gui::Plugin);
