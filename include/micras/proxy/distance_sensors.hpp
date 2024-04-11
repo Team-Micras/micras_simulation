@@ -17,7 +17,7 @@
 
 namespace micras::proxy {
 /**
- * @brief Class for controlling DistanceSensors
+ * @brief Class for receiving distance sensors data
  */
 template <uint8_t num_of_sensors>
 class DistanceSensors {

@@ -127,7 +127,7 @@ private:
     /**
      * @brief Start symbol to avoid reading garbage from flash
      */
-    static constexpr uint16_t start_symbol = 0xABAB;
+    static constexpr uint16_t start_symbol{0xABAB};
 
     /**
      * @brief Path to the storage file

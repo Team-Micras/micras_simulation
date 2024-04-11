@@ -19,7 +19,7 @@ Button::Button(const Config& config) :
         });
 }
 
-bool Button::is_pressed() {
+bool Button::is_pressed() const {
     return this->state.data;
 }
 
@@ -33,11 +33,13 @@ Button::Status Button::get_status() {
 
         if (elapsed_time > this->extra_long_press_delay) {
             return EXTRA_LONG_PRESS;
-        } else if (elapsed_time > this->long_press_delay) {
-            return LONG_PRESS;
-        } else {
-            return SHORT_PRESS;
         }
+
+        if (elapsed_time > this->long_press_delay) {
+            return LONG_PRESS;
+        }
+
+        return SHORT_PRESS;
     }
 
     return NO_PRESS;

@@ -1,6 +1,6 @@
 #include <gz/msgs.hh>
-#include <iostream>
 #include <ignition/plugin/Register.hh>
+#include <iostream>
 
 #include "MicrasPlugin.hpp"
 
