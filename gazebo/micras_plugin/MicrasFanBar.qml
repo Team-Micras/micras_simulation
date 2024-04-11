@@ -14,8 +14,6 @@ ColumnLayout {
       width: 100
       height: 40
       radius: 0
-      border.width: 1
-      border.color: "white"
       color: "transparent"
 
       ProgressBar {
@@ -80,8 +78,6 @@ ColumnLayout {
       width: 100
       height: 40
       radius: 0
-      border.width: 1
-      border.color: "white"
       color: "transparent"
 
       ProgressBar {
