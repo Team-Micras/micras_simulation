@@ -45,6 +45,11 @@ MicrasPlugin::MicrasPlugin() : Plugin() {
         emit this->led_rgb_1_changed(msg.r(), msg.g(), msg.b());
     };
     this->node.Subscribe("/rgb_1", led_rgb_1_cb);
+
+    std::function<void(const gz::msgs::UInt32&)> buzzer_cb = [this](const gz::msgs::UInt32& msg) {
+        emit this->buzzer_changed(msg.data());
+    };
+    this->node.Subscribe("/buzzer", buzzer_cb);
 }
 
 MicrasPlugin::~MicrasPlugin() { }

@@ -47,6 +47,8 @@ signals:
 
     void led_rgb_1_changed(float r, float g, float b);
 
+    void buzzer_changed(int freq);
+
 protected slots:
     void on_button_click();
 
