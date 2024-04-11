@@ -30,9 +30,9 @@ public:
     /**
      * @brief Constructor for the Odometry class
      *
-     * @param odometry_config Configuration for the odometry
+     * @param config Configuration for the odometry
      */
-    explicit Odometry(const Config& odometry_config);
+    explicit Odometry(const Config& config);
 
     /**
      * @brief Get the odometry x position

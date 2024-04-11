@@ -11,6 +11,7 @@
 
 #include <cstdint>
 #include <rclcpp/rclcpp.hpp>
+#include <std_msgs/msg/float32.hpp>
 #include <string>
 
 namespace micras::proxy {
@@ -66,16 +67,19 @@ public:
 
 private:
     /**
-     * @brief Set the rotation direction of the fan
-     *
-     * @param direction Rotation direction
-     */
-    void set_direction(RotationDirection direction);
-
-    /**
      * @brief Flag to check if the fan is enabled
      */
     bool enabled{false};
+
+    /**
+     * @brief Message for the fan topic
+     */
+    std_msgs::msg::Float32 message;
+
+    /**
+     * @brief Publisher for the velocity command topic
+     */
+    rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr publisher;
 };
 }  // namespace micras::proxy
 

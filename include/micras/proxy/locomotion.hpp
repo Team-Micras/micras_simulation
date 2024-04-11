@@ -65,16 +65,6 @@ public:
      */
     void stop();
 
-    /**
-     * @brief Stop the left motor
-     */
-    void stop_left();
-
-    /**
-     * @brief Stop the right motor
-     */
-    void stop_right();
-
 private:
     /**
      * @brief Flag to enable/disable the locomotion driver
