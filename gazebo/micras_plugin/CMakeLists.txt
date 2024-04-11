@@ -4,12 +4,12 @@ if(POLICY CMP0100)
   cmake_policy(SET CMP0100 NEW)
 endif()
 
-set (CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOMOC ON)
 
 project(micras_plugin)
 
 # Find Qt5
-find_package (Qt5
+find_package(Qt5
   COMPONENTS
     Core
     Quick
@@ -21,11 +21,17 @@ find_package (Qt5
 find_package(ignition-gui6 REQUIRED)
 find_package(ignition-common4 REQUIRED)
 
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${IGNITION-GUI_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${IGNITION-GUI_CXX_FLAGS}")
 
 QT5_ADD_RESOURCES(resources_RCC MicrasPlugin.qrc)
 
-include_directories(SYSTEM
+# Generate examples
+add_library(MicrasPlugin SHARED ${headers_MOC}
+  MicrasPlugin.cpp
+  ${resources_RCC}
+)
+
+target_include_directories(MicrasPlugin SYSTEM PRIVATE
   ${IGNITION-COMMON_INCLUDE_DIRS}
   ${IGNITION-GUI_INCLUDE_DIRS}
   ${Qt5Core_INCLUDE_DIRS}
@@ -34,18 +40,12 @@ include_directories(SYSTEM
   ${Qt5QuickControls2_INCLUDE_DIRS}
 )
 
-link_directories(
+target_link_directories(MicrasPlugin PRIVATE
   ${IGNITION-COMMON_LIBRARY_DIRS}
   ${IGNITION-GUI_LIBRARY_DIRS}
 )
 
-# Generate examples
-add_library(MicrasPlugin SHARED ${headers_MOC}
-  MicrasPlugin.cpp
-  ${resources_RCC}
-)
-
-target_link_libraries(MicrasPlugin
+target_link_libraries(MicrasPlugin PRIVATE
   ${IGNITION-GUI_LIBRARIES}
   ${Qt5Core_LIBRARIES}
   ${Qt5Qml_LIBRARIES}
