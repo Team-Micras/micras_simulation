@@ -62,7 +62,13 @@
   publisher_queue: 1
   direction: GZ_TO_ROS
 
-# @TODO add buzz topic
+- ros_topic_name: "buzzer"
+  gz_topic_name: "/buzzer"
+  ros_type_name: "std_msgs/msg/UInt32"
+  gz_type_name: "gz.msgs.UInt32"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: ROS_TO_GZ
 
 - ros_topic_name: "rotary_sensor_left"
   gz_topic_name: "/joint_state_left"
