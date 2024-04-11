@@ -54,7 +54,7 @@ public:
      *
      * @return bool True if button is pressed, false otherwise
      */
-    bool is_pressed();
+    bool is_pressed() const;
 
     /**
      * @brief Get button status
