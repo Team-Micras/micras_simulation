@@ -52,9 +52,6 @@ ColumnLayout {
                 width: 180
                 height: 80
                 radius: 10
-
-                border.color: "black"
-                border.width: 1
                 color: "lightblue"
 
                 RowLayout {
@@ -138,8 +135,6 @@ ColumnLayout {
                     width: 50
                     height: 50
                     radius: 180
-                    border.color: "black"
-                    border.width: 1
                     color: "lightgrey"
                     anchors.horizontalCenter: parent.horizontalCenter
 
@@ -165,7 +160,7 @@ ColumnLayout {
                     width: 50
                     height: 50
                     radius: 180
-                    border.color: "black"
+                    border.color: "lightgrey"
                     border.width: 1
                     color: "lightgrey"
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -192,7 +187,7 @@ ColumnLayout {
                     width: 50
                     height: 50
                     radius: 180
-                    border.color: "black"
+                    border.color: "lightgrey"
                     border.width: 1
                     color: "lightgrey"
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -207,24 +202,39 @@ ColumnLayout {
                 }
 
                 Text {
-                    text: "ARGB 0"
+                    text: "ARGB 1"
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
             }
 
             Rectangle {
+                id: buzzerRect
                 width: 120
                 height: 70
                 radius: 10
-                border.color: "black"
-                border.width: 1
                 color: "lightgrey"
 
-                Text {
-                    id: buzzerText
-                    text: "Buzzer"
-                    anchors.centerIn: parent
+                Column{
+                    spacing: 5
+                    anchors.horizontalCenter: buzzerRect.horizontalCenter
+                    anchors.verticalCenter: buzzerRect.verticalCenter
+
+                    Text {
+                        text: "Buzzer"
+                        lineHeight: 1.5
+                        anchors.top: parent.top
+                        anchors.topMargin: -20
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
+
+                    Text {
+                        id: buzzerText
+                        text: ""
+                        lineHeight: 1.5
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
                 }
+
 
                 Component.onCompleted: {
                     MicrasPlugin.buzzer_changed.connect(updateBuzzerState);
@@ -233,10 +243,10 @@ ColumnLayout {
                 function updateBuzzerState(freq) {
                     if (freq == 0) {
                         color = "lightgrey";
-                        buzzerText.text = "Buzzer";
+                        buzzerText.text = "\n";
                     } else {
                         color = Qt.rgba(0, 1, 0);
-                        buzzerText.text = "Buzzer: " + freq + "Hz";
+                        buzzerText.text = freq + "Hz";
                     }
                 }
             }
@@ -249,7 +259,6 @@ ColumnLayout {
 
             Slider {
                 id: slider
-                // width: parent.width
                 from: 0.0
                 to: 8.4
                 stepSize: 0.1
