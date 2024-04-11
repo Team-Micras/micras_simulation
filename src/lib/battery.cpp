@@ -20,6 +20,6 @@ float Battery::get_voltage() const {
 }
 
 uint32_t Battery::get_voltage_raw() const {
-    return ((this->reading) / 8.4) * 4095;
+    return ((this->reading) / 9.9) * 4095;
 }
 }  // namespace micras::proxy

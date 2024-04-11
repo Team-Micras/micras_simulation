@@ -9,10 +9,10 @@
 #ifndef MICRAS_PROXY_FAN_HPP
 #define MICRAS_PROXY_FAN_HPP
 
+#include <cstdint>
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/float32.hpp>
 #include <string>
-#include <cstdint>
 
 namespace micras::proxy {
 /**
@@ -61,15 +61,15 @@ private:
     /**
      * @brief Flag to check if the fan is enabled
      */
-    bool enabled = false;
+    bool enabled{false};
 
     /**
-     * @brief Current fan speed
+     * @brief Message for the fan topic
      */
-    std_msgs::msg::Float32 fan_speed;
+    std_msgs::msg::Float32 message;
 
     /**
-     * @brief Publisher for the fan speed topic
+     * @brief Publisher for the velocity command topic
      */
     rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr publisher;
 };

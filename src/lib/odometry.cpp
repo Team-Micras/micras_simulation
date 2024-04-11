@@ -9,9 +9,9 @@
 #include "micras/proxy/odometry.hpp"
 
 namespace micras::proxy {
-Odometry::Odometry(const Config& odometry_config) {
-    this->subscriber = odometry_config.node->create_subscription<nav_msgs::msg::Odometry>(
-        odometry_config.topic, 1, [this](const nav_msgs::msg::Odometry& msg) { this->data = msg; }
+Odometry::Odometry(const Config& config) {
+    this->subscriber = config.node->create_subscription<nav_msgs::msg::Odometry>(
+        config.topic, 1, [this](const nav_msgs::msg::Odometry& msg) { this->data = msg; }
     );
 }
 

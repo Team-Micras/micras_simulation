@@ -9,10 +9,10 @@
 #ifndef MICRAS_PROXY_BATTERY_HPP
 #define MICRAS_PROXY_BATTERY_HPP
 
+#include <cstdint>
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/float32.hpp>
 #include <string>
-#include <cstdint>
 
 namespace micras::proxy {
 /**

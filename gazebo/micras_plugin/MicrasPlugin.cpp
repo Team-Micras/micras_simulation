@@ -1,13 +1,13 @@
-#include <iostream>
-#include <ignition/plugin/Register.hh>
 #include <gz/msgs.hh>
+#include <ignition/plugin/Register.hh>
+#include <iostream>
 
 #include "MicrasPlugin.hpp"
 
 using namespace ignition;
 using namespace gui;
 
-MicrasPlugin::MicrasPlugin() : Plugin() {
+MicrasPlugin::MicrasPlugin() {
     this->title = "Micras Plugin";
     this->set_publishers();
     this->set_led_subscriber();
@@ -16,9 +16,7 @@ MicrasPlugin::MicrasPlugin() : Plugin() {
     this->set_buzzer_subscriber();
 }
 
-MicrasPlugin::~MicrasPlugin() { }
-
-void MicrasPlugin::LoadConfig(const tinyxml2::XMLElement* _pluginElem) { }
+void MicrasPlugin::LoadConfig(const tinyxml2::XMLElement* /*_pluginElem*/) { }
 
 void MicrasPlugin::on_button_click() {
     std::cout << "Button clicked" << std::endl;
@@ -45,14 +43,14 @@ void MicrasPlugin::set_switch_state(int _index, bool _state) {
     std::cout << "Switch " << _index << " state: " << _state << std::endl;
     gz::msgs::Boolean msg;
     msg.set_data(_state);
-    this->switch_pub[_index].Publish(msg);
+    this->switch_pub.at(_index).Publish(msg);
 }
 
 void MicrasPlugin::set_publishers() {
     this->button_pub = this->node.Advertise<gz::msgs::Boolean>(this->button_topic);
     this->battery_pub = this->node.Advertise<gz::msgs::Float>(this->battery_topic);
-    for (int i = 0; i < this->switch_pub.size(); ++i) {
-        this->switch_pub[i] = this->node.Advertise<gz::msgs::Boolean>(this->dip_switch_topic + std::to_string(i));
+    for (uint32_t i = 0; i < this->switch_pub.size(); i++) {
+        this->switch_pub.at(i) = this->node.Advertise<gz::msgs::Boolean>(this->dip_switch_topic + std::to_string(i));
     }
 }
 

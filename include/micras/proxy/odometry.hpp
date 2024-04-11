@@ -9,8 +9,8 @@
 #ifndef MICRAS_PROXY_ODOMETRY_HPP
 #define MICRAS_PROXY_ODOMETRY_HPP
 
-#include <rclcpp/rclcpp.hpp>
 #include <nav_msgs/msg/odometry.hpp>
+#include <rclcpp/rclcpp.hpp>
 #include <string>
 
 namespace micras::proxy {
@@ -30,9 +30,9 @@ public:
     /**
      * @brief Constructor for the Odometry class
      *
-     * @param odometry_config Configuration for the odometry
+     * @param config Configuration for the odometry
      */
-    Odometry(const Config& odometry_config);
+    explicit Odometry(const Config& config);
 
     /**
      * @brief Get the odometry x position

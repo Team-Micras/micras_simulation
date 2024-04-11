@@ -9,13 +9,14 @@
 #ifndef MICRAS_PROXY_TORQUE_SENSORS_HPP
 #define MICRAS_PROXY_TORQUE_SENSORS_HPP
 
-#include <rclcpp/rclcpp.hpp>
+#include <cstdint>
 #include <geometry_msgs/msg/wrench_stamped.hpp>
+#include <rclcpp/rclcpp.hpp>
 #include <string>
 
 namespace micras::proxy {
 /**
- * @brief Class for controlling TorqueSensors
+ * @brief Class for receiving torque sensors data
  */
 template <uint8_t num_of_sensors>
 class TorqueSensors {
@@ -56,8 +57,8 @@ private:
      * @brief Structure for a pair of wheels topics subscribers
      */
     struct WheelPair {
-        float                                                              front_torque;
-        float                                                              rear_torque;
+        float                                                              front_torque{};
+        float                                                              rear_torque{};
         rclcpp::Subscription<geometry_msgs::msg::WrenchStamped>::SharedPtr front_subscriber;
         rclcpp::Subscription<geometry_msgs::msg::WrenchStamped>::SharedPtr rear_subscriber;
     };
@@ -69,6 +70,6 @@ private:
 };
 }  // namespace micras::proxy
 
-#include "../../../src/lib/torque_sensors.cpp"  // NOLINT(bugprone-suspicious-include)
+#include "../src/lib/torque_sensors.cpp"  // NOLINT(bugprone-suspicious-include)
 
 #endif  // MICRAS_PROXY_TORQUE_SENSORS_HPP

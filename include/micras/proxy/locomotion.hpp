@@ -9,8 +9,8 @@
 #ifndef MICRAS_PROXY_LOCOMOTION_HPP
 #define MICRAS_PROXY_LOCOMOTION_HPP
 
-#include <rclcpp/rclcpp.hpp>
 #include <geometry_msgs/msg/twist.hpp>
+#include <rclcpp/rclcpp.hpp>
 #include <string>
 
 namespace micras::proxy {
@@ -65,21 +65,11 @@ public:
      */
     void stop();
 
-    /**
-     * @brief Stop the left motor
-     */
-    void stop_left();
-
-    /**
-     * @brief Stop the right motor
-     */
-    void stop_right();
-
 private:
     /**
      * @brief Flag to enable/disable the locomotion driver
      */
-    bool enabled;
+    bool enabled{};
 
     /**
      * @brief Current velocity command of the robot

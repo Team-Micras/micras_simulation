@@ -27,7 +27,7 @@
 
 // clang-format off
 namespace micras {
-inline std::shared_ptr<rclcpp::Node> micras_node;
+inline std::shared_ptr<rclcpp::Node> micras_node;  // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
 /*****************************************
  * Interface
@@ -104,7 +104,7 @@ const proxy::DistanceSensors<4>::Config distance_sensors_config {
         "distance_sensor_2",
         "distance_sensor_3"
     },    // topic_array
-    0.3f, // max_distance
+    0.3F, // max_distance
 };
 
 const proxy::Imu::Config imu_config {

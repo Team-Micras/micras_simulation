@@ -15,7 +15,7 @@
 
 namespace micras::proxy {
 /**
- * @brief Class to handle rotary sensor
+ * @brief Class to handle a rotary sensor
  */
 class RotarySensor {
 public:

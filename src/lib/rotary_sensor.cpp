@@ -6,11 +6,9 @@
  * @date 04/2024
  */
 
+#include <cstdint>
 #include <numbers>
 #include <vector>
-#include <cstdint>
-
-std::vector<uint8_t> data;
 
 #include "micras/proxy/rotary_sensor.hpp"
 

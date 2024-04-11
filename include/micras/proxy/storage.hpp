@@ -127,7 +127,7 @@ private:
     /**
      * @brief Start symbol to avoid reading garbage from flash
      */
-    static constexpr uint16_t start_symbol = 0xABAB;
+    static constexpr uint16_t start_symbol{0xABAB};
 
     /**
      * @brief Path to the storage file
@@ -158,11 +158,6 @@ private:
      * @brief Start page of the storage in the flash memory
      */
     uint16_t start_page;
-
-    /**
-     * @brief Maximum number of pages used by the storage in the flash memory
-     */
-    uint16_t number_of_pages;
 };
 }  // namespace micras::proxy
 

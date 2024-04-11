@@ -23,6 +23,8 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+add_subdirectory(gazebo/micras_plugin)
+
 find_package(ament_cmake REQUIRED)
 
 set(ROS_CODE_DEPS
@@ -79,7 +81,9 @@ target_link_libraries(micras_node
     ${PROJECT_NAME}_lib
 )
 
-install(DIRECTORY include/
+add_dependencies(micras_node MicrasPlugin)
+
+install(DIRECTORY include
     DESTINATION include
 )
 
@@ -101,6 +105,10 @@ install(TARGETS ${PROJECT_NAME}_lib
 
 install(TARGETS micras_node
     RUNTIME DESTINATION lib/${PROJECT_NAME}
+)
+
+install(TARGETS MicrasPlugin
+    DESTINATION share/${PROJECT_NAME}/micras_plugin
 )
 
 foreach(TEST_FILE ${PROJECT_TESTS_BIN})

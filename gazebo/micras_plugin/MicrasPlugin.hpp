@@ -1,11 +1,11 @@
 #ifndef IGNITION_GUI_MICRAS_PLUGIN_HPP
 #define IGNITION_GUI_MICRAS_PLUGIN_HPP
 
-#include <string>
 #include <array>
 #include <gz/transport.hh>
-#include <ignition/gui/qt.h>
 #include <ignition/gui/Plugin.hh>
+#include <ignition/gui/qt.h>
+#include <string>
 
 namespace ignition {
 namespace gui {
@@ -25,7 +25,7 @@ public:
     /**
      * @brief Destroy the Micras Plugin object
      */
-    virtual ~MicrasPlugin();
+    virtual ~MicrasPlugin() = default;
 
     /**
      * @brief Load the plugin configuration
@@ -143,13 +143,13 @@ private:
     /**
      * @brief Plugin topic names
      */
-    const std::string button_topic = "/button";
-    const std::string battery_topic = "/battery";
-    const std::string dip_switch_topic = "/dip_switch_";
-    const std::string led_topic = "/led";
-    const std::string led_rgb_0_topic = "/rgb_0";
-    const std::string led_rgb_1_topic = "/rgb_1";
-    const std::string buzzer_topic = "/buzzer";
+    const std::string button_topic{"/button"};
+    const std::string battery_topic{"/battery"};
+    const std::string dip_switch_topic{"/dip_switch_"};
+    const std::string led_topic{"/led"};
+    const std::string led_rgb_0_topic{"/rgb_0"};
+    const std::string led_rgb_1_topic{"/rgb_1"};
+    const std::string buzzer_topic{"/buzzer"};
 };
 }  // namespace gui
 }  // namespace ignition

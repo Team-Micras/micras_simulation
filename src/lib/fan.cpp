@@ -17,24 +17,26 @@ Fan::Fan(const Config& config) {
 
 void Fan::enable() {
     this->enabled = true;
+    this->publisher->publish(this->message);
 }
 
 void Fan::disable() {
     this->enabled = false;
+
+    std_msgs::msg::Float32 stopped_message{};
+
+    this->publisher->publish(stopped_message);
 }
 
 void Fan::set_speed(float speed) {
-    if (!this->enabled) {
-        this->stop();
-        return;
-    }
+    this->message.data = speed;
 
-    this->fan_speed.data = speed;
-    this->publisher->publish(this->fan_speed);
+    if (this->enabled) {
+        this->publisher->publish(this->message);
+    }
 }
 
 void Fan::stop() {
-    this->fan_speed.data = 0;
-    this->publisher->publish(this->fan_speed);
+    this->set_speed(0);
 }
 }  // namespace micras::proxy

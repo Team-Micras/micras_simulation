@@ -6,15 +6,15 @@
  * @date 04/2024
  */
 
-#include <iostream>
-#include <fstream>
-#include <filesystem>
 #include <ament_index_cpp/get_package_share_directory.hpp>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
 
 #include "micras/proxy/storage.hpp"
 
 namespace micras::proxy {
-Storage::Storage(const Config& config) : start_page{config.start_page}, number_of_pages{config.number_of_pages} {
+Storage::Storage(const Config& config) : start_page{config.start_page} {
     uint64_t header{};
 
     std::string package_share_directory = ament_index_cpp::get_package_share_directory("micras_simulation");
@@ -41,9 +41,9 @@ Storage::Storage(const Config& config) : start_page{config.start_page}, number_o
     uint16_t num_primitives = header >> 16;
     uint16_t num_serializables = header;
 
-    this->buffer.resize(8 * total_size);
+    this->buffer.resize(8L * total_size);
 
-    file.read(reinterpret_cast<char*>(this->buffer.data()), 8 * total_size);
+    file.read(reinterpret_cast<char*>(this->buffer.data()), 8L * total_size);
     file.close();
 
     this->primitives = deserialize_var_map<PrimitiveVariable>(this->buffer, num_primitives);

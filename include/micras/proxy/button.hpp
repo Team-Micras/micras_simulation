@@ -9,20 +9,23 @@
 #ifndef MICRAS_PROXY_BUTTON_HPP
 #define MICRAS_PROXY_BUTTON_HPP
 
+#include <cstdint>
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/bool.hpp>
 #include <string>
 
+#include "micras/hal/timer.hpp"
+
 namespace micras::proxy {
 /**
- * @brief Class for controlling a button
+ * @brief Class for receiving a button data
  */
 class Button {
 public:
     /**
      * @brief Enum for button status
      */
-    enum Status {
+    enum Status : uint8_t {
         NO_PRESS,
         SHORT_PRESS,
         LONG_PRESS,
@@ -35,8 +38,8 @@ public:
     struct Config {
         std::shared_ptr<rclcpp::Node>& node;
         std::string                    topic;
-        uint16_t                       long_press_delay = 1000;
-        uint16_t                       extra_long_press_delay = 5000;
+        uint16_t                       long_press_delay{500};
+        uint16_t                       extra_long_press_delay{2000};
     };
 
     /**
@@ -97,24 +100,19 @@ private:
     const uint16_t extra_long_press_delay;
 
     /**
-     * @brief Node for the button
-     */
-    std::shared_ptr<rclcpp::Node>& node;
-
-    /**
      * @brief Timer for button press time
      */
-    rclcpp::Time press_time;
+    hal::Timer status_timer{};
 
     /**
      * @brief Flag to know if button was being pressed
      */
-    bool previous_state = false;
+    bool previous_state{false};
 
     /**
      * @brief Flag to know if button is being pressed
      */
-    bool current_state = false;
+    bool current_state{false};
 };
 }  // namespace micras::proxy
 
