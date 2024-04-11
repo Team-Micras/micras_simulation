@@ -87,7 +87,7 @@ private:
     /**
      * @brief Array to store the IMU orientation in euler angles
      */
-    std::array<float, 3> orientation;
+    std::array<float, 3> orientation{};
 };
 }  // namespace micras::proxy
 

@@ -4,9 +4,7 @@
 
 #include "MicrasPlugin.hpp"
 
-using namespace ignition;
-using namespace gui;
-
+namespace ignition::gui {
 MicrasPlugin::MicrasPlugin() {
     this->title = "Micras Plugin";
     this->set_publishers();
@@ -45,10 +43,6 @@ void MicrasPlugin::set_switch_state(int _index, bool _state) {
     gz::msgs::Boolean msg;
     msg.set_data(_state);
     this->switch_pub.at(_index).Publish(msg);
-}
-
-void MicrasPlugin::log() {
-    std::cout << "loooooog" << std::endl;
 }
 
 void MicrasPlugin::set_publishers() {
@@ -93,8 +87,9 @@ void MicrasPlugin::set_fan_subscriber() {
     };
     this->node.Subscribe(this->fan_topic, fan_cb);
 }
+}  // namespace ignition::gui
 
 /**
  * @brief Register the MicrasPlugin plugin
  */
-IGNITION_ADD_PLUGIN(ignition::gui::MicrasPlugin, ignition::gui::Plugin);
+IGNITION_ADD_PLUGIN(MicrasPlugin, Plugin);

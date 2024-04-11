@@ -7,8 +7,7 @@
 #include <ignition/gui/qt.h>
 #include <string>
 
-namespace ignition {
-namespace gui {
+namespace ignition::gui {
 
 /**
  * @brief MicrasPlugin class
@@ -23,16 +22,11 @@ public:
     MicrasPlugin();
 
     /**
-     * @brief Destroy the Micras Plugin object
-     */
-    virtual ~MicrasPlugin() = default;
-
-    /**
      * @brief Load the plugin configuration
      *
      * @param _pluginElem Plugin configuration xml element
      */
-    virtual void LoadConfig(const tinyxml2::XMLElement* _pluginElem) override;
+    void LoadConfig(const tinyxml2::XMLElement* _pluginElem) override;
 
 signals:
     /**
@@ -45,20 +39,20 @@ signals:
     /**
      * @brief Signal emitted when the rgb_0 led color changes
      *
-     * @param r Red color component
-     * @param g Green color component
-     * @param b Blue color component
+     * @param red Red color component
+     * @param green Green color component
+     * @param blue Blue color component
      */
-    void led_rgb_0_changed(float r, float g, float b);
+    void led_rgb_0_changed(float red, float green, float blue);
 
     /**
      * @brief Signal emitted when the rgb_1 led color changes
      *
-     * @param r Red color component
-     * @param g Green color component
-     * @param b Blue color component
+     * @param red Red color component
+     * @param green Green color component
+     * @param blue Blue color component
      */
-    void led_rgb_1_changed(float r, float g, float b);
+    void led_rgb_1_changed(float red, float green, float blue);
 
     /**
      * @brief Signal emitted when the buzzer frequency changes
@@ -100,8 +94,6 @@ protected slots:
      * @param state New switch state
      */
     void set_switch_state(int index, bool state);
-
-    void log();
 
 private:
     /**
@@ -166,7 +158,6 @@ private:
     const std::string buzzer_topic{"/buzzer"};
     const std::string fan_topic{"/fan"};
 };
-}  // namespace gui
-}  // namespace ignition
+}  // namespace ignition::gui
 
 #endif  // IGNITION_GUI_MICRAS_PLUGIN_HPP
