@@ -37,6 +37,7 @@ void Timer::sleep_ms(uint32_t time) {
     rclcpp::sleep_for(std::chrono::milliseconds(time));
 }
 
+// NOLINTNEXTLINE(readability-convert-member-functions-to-static)
 void Timer::sleep_us(uint32_t time) const {
     rclcpp::sleep_for(std::chrono::microseconds(time));
 }
@@ -45,6 +46,7 @@ uint32_t Timer::get_counter_ms() {
     return rclcpp::Clock().now().nanoseconds() * 1e-6;
 }
 
+// NOLINTNEXTLINE(readability-convert-member-functions-to-static)
 uint32_t Timer::get_counter_us() const {
     return rclcpp::Clock().now().nanoseconds() * 1e-3;
 }

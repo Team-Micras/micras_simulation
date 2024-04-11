@@ -5,6 +5,7 @@ Checks:
   -bugprone-easily-swappable-parameters,
   -bugprone-narrowing-conversions,
   clang-*,
+  -clang-analyzer-cplusplus.Move,
   -clang-diagnostic-unused-command-line-argument,
   cppcoreguidelines-*,
   -cppcoreguidelines-avoid-magic-numbers,
@@ -21,10 +22,11 @@ Checks:
   -modernize-use-trailing-return-type,
   performance-*,
   readability-*,
+  -readability-function-cognitive-complexity,
   -readability-duplicate-include,
   -readability-magic-numbers,
 WarningsAsErrors: ''
-HeaderFilterRegex: '(include|config)/.*.hpp'
+HeaderFilterRegex: '(include|config|micras_plugin)/.*.hpp'
 AnalyzeTemporaryDtors: false
 FormatStyle: none
 ...
