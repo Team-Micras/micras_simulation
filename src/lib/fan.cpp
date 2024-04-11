@@ -10,7 +10,7 @@
 
 namespace micras::proxy {
 Fan::Fan(const Config& config) {
-    (void)config;
+    this->publisher = config.node->create_publisher<std_msgs::msg::Float32>(config.topic, 1);
     this->stop();
     this->enable();
 }
@@ -24,12 +24,17 @@ void Fan::disable() {
 }
 
 void Fan::set_speed(float speed) {
-    (void)speed;
+    if (!this->enabled) {
+        this->stop();
+        return;
+    }
+
+    this->fan_speed.data = speed;
+    this->publisher->publish(this->fan_speed);
 }
 
-void Fan::stop() { }
-
-void Fan::set_direction(RotationDirection direction) {
-    (void)direction;
+void Fan::stop() {
+    this->fan_speed.data = 0;
+    this->publisher->publish(this->fan_speed);
 }
 }  // namespace micras::proxy

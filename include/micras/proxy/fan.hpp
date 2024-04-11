@@ -10,6 +10,7 @@
 #define MICRAS_PROXY_FAN_HPP
 
 #include <rclcpp/rclcpp.hpp>
+#include <std_msgs/msg/float32.hpp>
 #include <string>
 #include <cstdint>
 
@@ -25,14 +26,6 @@ public:
     struct Config {
         std::shared_ptr<rclcpp::Node>& node;
         std::string                    topic;
-    };
-
-    /**
-     * @brief Enum for rotation direction
-     */
-    enum RotationDirection {
-        FORWARD,
-        BACKWARD
     };
 
     /**
@@ -66,16 +59,19 @@ public:
 
 private:
     /**
-     * @brief Set the rotation direction of the fan
-     *
-     * @param direction Rotation direction
-     */
-    void set_direction(RotationDirection direction);
-
-    /**
      * @brief Flag to check if the fan is enabled
      */
     bool enabled = false;
+
+    /**
+     * @brief Current fan speed
+     */
+    std_msgs::msg::Float32 fan_speed;
+
+    /**
+     * @brief Publisher for the fan speed topic
+     */
+    rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr publisher;
 };
 }  // namespace micras::proxy
 

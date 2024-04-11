@@ -166,7 +166,13 @@
   publisher_queue: 1
   direction: GZ_TO_ROS
 
-  # @TODO add fan topic
+- ros_topic_name: "fan"
+  gz_topic_name: "/fan"
+  ros_type_name: "std_msgs/msg/Float32"
+  gz_type_name: "gz.msgs.Float"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: ROS_TO_GZ
 
 - ros_topic_name: "cmd_vel"
   gz_topic_name: "/cmd_vel"
