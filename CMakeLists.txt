@@ -41,23 +41,10 @@ endforeach()
 
 file(GLOB_RECURSE PROJECT_TESTS_BIN CONFIGURE_DEPENDS "MicrasFirmware/tests/bin/*.c*")
 file(GLOB_RECURSE PROJECT_TESTS_SOURCES CONFIGURE_DEPENDS "tests/src/*.c*")
+file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "src/lib/*.c*")
 
 add_library(${PROJECT_NAME}_lib
-    src/lib/argb.cpp
-    src/lib/battery.cpp
-    src/lib/button.cpp
-    src/lib/buzzer.cpp
-    src/lib/dip_switch.cpp
-    src/lib/distance_sensors.cpp
-    src/lib/fan.cpp
-    src/lib/imu.cpp
-    src/lib/led.cpp
-    src/lib/locomotion.cpp
-    src/lib/odometry.cpp
-    src/lib/rotary_sensor.cpp
-    src/lib/storage.cpp
-    src/lib/torque_sensors.cpp
-    src/lib/timer.cpp
+    ${PROJECT_SOURCES}
     ${PROJECT_TESTS_SOURCES}
 )
 
