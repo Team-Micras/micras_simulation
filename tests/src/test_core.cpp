@@ -20,9 +20,14 @@ void TestCore::init(int argc, char** argv) {
 }
 
 void TestCore::loop(const std::function<void()>& loop_func) {
-    auto timer = micras::micras_node->create_wall_timer(10ms, [&loop_func]() { loop_func(); });
-    rclcpp::spin(micras::micras_node);
+    rclcpp::Node::SharedPtr test_node = std::make_shared<rclcpp::Node>("test_node");
+    test_node->create_wall_timer(1ms, [&loop_func]() { loop_func(); });
 
+    rclcpp::executors::MultiThreadedExecutor executor;
+    executor.add_node(test_node);
+    executor.add_node(micras::micras_node);
+
+    executor.spin();
     rclcpp::shutdown();
 }
 }  // namespace micras
