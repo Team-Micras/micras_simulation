@@ -98,15 +98,19 @@ void Storage::save() {
     this->buffer.insert(this->buffer.end(), (8 - (this->buffer.size() % 8)) % 8, 0);
     uint16_t total_size = this->buffer.size() / 8;
 
-    this->buffer.emplace_back(this->serializables.size());
-    this->buffer.emplace_back(this->serializables.size() >> 8);
-    this->buffer.emplace_back(this->primitives.size());
-    this->buffer.emplace_back(this->primitives.size() >> 8);
+    std::array<uint8_t, 8> header;
 
-    this->buffer.emplace_back(total_size);
-    this->buffer.emplace_back(total_size >> 8);
-    this->buffer.emplace_back(start_symbol);
-    this->buffer.emplace_back(start_symbol >> 8);
+    header[0] = this->serializables.size();
+    header[1] = this->serializables.size() >> 8;
+    header[2] = this->primitives.size();
+    header[3] = this->primitives.size() >> 8;
+
+    header[4] = total_size;
+    header[5] = total_size >> 8;
+    header[6] = start_symbol;
+    header[7] = start_symbol >> 8;
+
+    this->buffer.insert(this->buffer.begin(), header.begin(), header.end());
 
     std::ofstream file(this->storage_path + this->storage_file, std::ios::binary);
     file.write(reinterpret_cast<char*>(this->buffer.data()), this->buffer.size());
