@@ -33,7 +33,7 @@ Storage::Storage(const Config& config) : start_page{config.start_page} {
 
     file.read(reinterpret_cast<char*>(&header), sizeof(header));
 
-    if (header >> 48 != 0xABAB) {
+    if (header >> 48 != start_symbol) {
         return;
     }
 
