@@ -21,7 +21,8 @@ void TestCore::init(int argc, char** argv) {
 
 void TestCore::loop(const std::function<void()>& loop_func) {
     rclcpp::Node::SharedPtr test_node = std::make_shared<rclcpp::Node>("test_node");
-    test_node->create_wall_timer(1ms, [&loop_func]() { loop_func(); });
+
+    auto timer = test_node->create_wall_timer(1ms, [&loop_func]() { loop_func(); });
 
     rclcpp::executors::MultiThreadedExecutor executor;
     executor.add_node(test_node);
