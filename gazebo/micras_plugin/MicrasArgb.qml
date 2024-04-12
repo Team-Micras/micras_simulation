@@ -14,7 +14,7 @@ Row {
       radius: 180
       border.color: "lightgrey"
       border.width: 1
-      color: "lightgrey"
+      color: Qt.rgba(0, 0, 0);
       anchors.horizontalCenter: parent.horizontalCenter
 
       Component.onCompleted: {
@@ -42,7 +42,7 @@ Row {
       radius: 180
       border.color: "lightgrey"
       border.width: 1
-      color: "lightgrey"
+      color: Qt.rgba(0, 0, 0);
       anchors.horizontalCenter: parent.horizontalCenter
 
       Component.onCompleted: {

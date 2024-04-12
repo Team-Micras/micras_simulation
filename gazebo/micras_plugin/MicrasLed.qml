@@ -9,7 +9,7 @@ Column {
     width: 50
     height: 50
     radius: 180
-    color: "lightgrey"
+    color: Qt.rgba(0.5, 0, 0)
     anchors.horizontalCenter: parent.horizontalCenter
 
     Component.onCompleted: {
@@ -18,7 +18,7 @@ Column {
 
     function updateColor(newState)
     {
-      color = newState ? Qt.rgba(1, 0, 0) : "lightgrey";
+      color = newState ? Qt.rgba(1, 0.2, 0.2) : Qt.rgba(0.5, 0, 0);
     }
   }
 
