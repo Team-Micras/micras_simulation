@@ -70,7 +70,7 @@
 				<geometry>
 					<mesh>
 						<uri>model://meshes/base_link.stl</uri>
-					</mesh> 
+					</mesh>
 				</geometry>
 				<material>
 					<ambient>0.0 0.5 0.0 1</ambient>
@@ -83,7 +83,7 @@
 				<geometry>
 					<mesh>
 						<uri>model://meshes/base_link.stl</uri>
-					</mesh> 
+					</mesh>
 				</geometry>
 			</collision>
 			<sensor name="imu_sensor" type="imu">
