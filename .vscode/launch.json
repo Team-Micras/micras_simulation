@@ -13,7 +13,7 @@
             "name": "ROS: Launch",
             "type": "ros",
             "request": "launch",
-            "target": "${workspaceFolder}/launch/micras.xml",
+            "target": "${workspaceFolder}/launch/micras.launch.xml",
             "arguments": ["test_name:=micras_node"]
         }
     ]
