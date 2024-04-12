@@ -7,6 +7,7 @@
  */
 
 #include <ament_index_cpp/get_package_share_directory.hpp>
+#include <array>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -98,7 +99,7 @@ void Storage::save() {
     this->buffer.insert(this->buffer.end(), (8 - (this->buffer.size() % 8)) % 8, 0);
     uint16_t total_size = this->buffer.size() / 8;
 
-    std::array<uint8_t, 8> header;
+    std::array<uint8_t, 8> header{};
 
     header[0] = this->serializables.size();
     header[1] = this->serializables.size() >> 8;
@@ -107,7 +108,7 @@ void Storage::save() {
 
     header[4] = total_size;
     header[5] = total_size >> 8;
-    header[6] = start_symbol;
+    header[6] = start_symbol & 0xFF;
     header[7] = start_symbol >> 8;
 
     this->buffer.insert(this->buffer.begin(), header.begin(), header.end());
