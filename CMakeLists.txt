@@ -1,7 +1,7 @@
 # Name: CMakeLists.txt
 # Micras Team
 # Brief: CMake configuration file for the project
-# 04/2023
+# 04/2024
 
 cmake_minimum_required(VERSION 3.16.3)
 
@@ -98,25 +98,27 @@ install(TARGETS MicrasPlugin
     DESTINATION share/${PROJECT_NAME}/micras_plugin
 )
 
-foreach(TEST_FILE ${PROJECT_TESTS_BIN})
+if(COMPILE_TESTS)
+    foreach(TEST_FILE ${PROJECT_TESTS_BIN})
 
-    get_filename_component(TEST_NAME ${TEST_FILE} NAME_WLE)
+        get_filename_component(TEST_NAME ${TEST_FILE} NAME_WLE)
 
-    add_executable(${TEST_NAME}
-        ${TEST_FILE}
-    )
+        add_executable(${TEST_NAME}
+            ${TEST_FILE}
+        )
 
-    ament_target_dependencies(${TEST_NAME} ${ROS_CODE_DEPS})
+        ament_target_dependencies(${TEST_NAME} ${ROS_CODE_DEPS})
 
-    target_link_libraries(${TEST_NAME}
-        ${PROJECT_NAME}_lib
-    )
+        target_link_libraries(${TEST_NAME}
+            ${PROJECT_NAME}_lib
+        )
 
-    install(TARGETS ${TEST_NAME}
-        RUNTIME DESTINATION lib/${PROJECT_NAME}
-    )
+        install(TARGETS ${TEST_NAME}
+            RUNTIME DESTINATION lib/${PROJECT_NAME}
+        )
 
-endforeach()
+    endforeach()
+endif()
 
 if(BUILD_TESTING)
     set(ament_cmake_copyright_FOUND TRUE)
