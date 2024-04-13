@@ -39,9 +39,9 @@ foreach(dependency ${ROS_CODE_DEPS})
     find_package(${dependency} REQUIRED)
 endforeach()
 
+file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "src/lib/*.c*")
 file(GLOB_RECURSE PROJECT_TESTS_BIN CONFIGURE_DEPENDS "MicrasFirmware/tests/bin/*.c*")
 file(GLOB_RECURSE PROJECT_TESTS_SOURCES CONFIGURE_DEPENDS "tests/src/*.c*")
-file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "src/lib/*.c*")
 
 add_library(${PROJECT_NAME}_lib
     ${PROJECT_SOURCES}
@@ -50,16 +50,16 @@ add_library(${PROJECT_NAME}_lib
 
 ament_target_dependencies(${PROJECT_NAME}_lib ${ROS_CODE_DEPS})
 
-add_executable(micras_node
-    src/bin/micras_node.cpp
-    MicrasFirmware/src/micras_controller.cpp
-)
-
 target_include_directories(${PROJECT_NAME}_lib PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/config>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/tests/include>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/include>
+)
+
+add_executable(micras_node
+    src/bin/micras_node.cpp
+    MicrasFirmware/src/micras_controller.cpp
 )
 
 ament_target_dependencies(micras_node ${ROS_CODE_DEPS})
@@ -76,6 +76,7 @@ install(DIRECTORY include
 
 install(DIRECTORY gazebo
     DESTINATION share/${PROJECT_NAME}
+    PATTERN gazebo/micras_plugin EXCLUDE
 )
 
 install(DIRECTORY launch
@@ -123,7 +124,6 @@ endif()
 if(BUILD_TESTING)
     set(ament_cmake_copyright_FOUND TRUE)
     set(ament_cmake_cpplint_FOUND TRUE)
-    set(ament_cmake_uncrustify_FOUND TRUE)
     find_package(ament_lint_auto REQUIRED)
     find_package(ament_cmake_gtest REQUIRED)
     ament_lint_auto_find_test_dependencies()
