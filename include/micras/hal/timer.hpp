@@ -14,7 +14,7 @@
 
 namespace micras::hal {
 /**
- * @brief Class to handle timer peripheral on STM32 microcontrollers
+ * @brief Class to handle a ros based timer
  */
 class Timer {
 public:
