@@ -69,7 +69,6 @@ signals:
     void fan_speed_changed(float speed);
 
 protected slots:
-
     /**
      * @brief Slot called when the button is clicked
      */
