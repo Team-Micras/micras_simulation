@@ -13,7 +13,8 @@
 
 namespace micras::proxy {
 template <uint8_t num_of_sensors>
-DistanceSensors<num_of_sensors>::DistanceSensors(const Config& config) {
+DistanceSensors<num_of_sensors>::DistanceSensors(const Config& config) :
+    max_distance{config.max_distance}, max_reading{config.max_reading} {
     for (uint8_t i = 0; i < num_of_sensors; i++) {
         this->subscribers[i] = config.node->template create_subscription<sensor_msgs::msg::LaserScan>(
             config.topic_array[i], 1,
@@ -32,7 +33,7 @@ float DistanceSensors<num_of_sensors>::get_distance(uint8_t sensor_index) const 
 
 template <uint8_t num_of_sensors>
 uint32_t DistanceSensors<num_of_sensors>::get_distance_raw(uint8_t sensor_index) const {
-    return this->distances.at(sensor_index);
+    return this->distances.at(sensor_index) * this->max_reading / this->max_distance;
 }
 }  // namespace micras::proxy
 

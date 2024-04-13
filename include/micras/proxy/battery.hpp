@@ -26,6 +26,8 @@ public:
     struct Config {
         std::shared_ptr<rclcpp::Node>& node;
         std::string                    topic;
+        float                          max_voltage;
+        uint16_t                       max_reading;
     };
 
     /**
@@ -59,6 +61,16 @@ private:
      * @brief Subscriber for the battery topic
      */
     rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr subscriber;
+
+    /**
+     * @brief Max battery voltage for the adc conversion
+     */
+    const float max_voltage;
+
+    /**
+     * @brief Max adc reading for the battery
+     */
+    const float max_reading;
 };
 }  // namespace micras::proxy
 

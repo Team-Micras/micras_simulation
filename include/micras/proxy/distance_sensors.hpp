@@ -29,6 +29,7 @@ public:
         std::shared_ptr<rclcpp::Node>&          node;
         std::array<std::string, num_of_sensors> topic_array;
         float                                   max_distance;
+        uint16_t                                max_reading;
     };
 
     /**
@@ -71,6 +72,16 @@ private:
      * @brief Distance sensor subscribers array
      */
     std::array<rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr, num_of_sensors> subscribers;
+
+    /**
+     * @brief Maximum distance for the distance sensor
+     */
+    const float max_distance;
+
+    /**
+     * @brief Maximum adc reading for the distance sensor
+     */
+    const uint16_t max_reading;
 };
 }  // namespace micras::proxy
 

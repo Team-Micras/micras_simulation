@@ -13,7 +13,8 @@
 
 namespace micras::proxy {
 template <uint8_t num_of_sensors>
-TorqueSensors<num_of_sensors>::TorqueSensors(const Config& config) {
+TorqueSensors<num_of_sensors>::TorqueSensors(const Config& config) :
+    shunt_resistor{config.shunt_resistor}, max_torque{config.max_torque}, reference_voltage{config.reference_voltage} {
     for (uint8_t i = 0; i < num_of_sensors; i++) {
         this->wheel_pairs[i].front_subscriber =
             config.node->template create_subscription<geometry_msgs::msg::WrenchStamped>(
@@ -40,7 +41,7 @@ float TorqueSensors<num_of_sensors>::get_torque(uint8_t sensor_index) const {
 
 template <uint8_t num_of_sensors>
 float TorqueSensors<num_of_sensors>::get_current(uint8_t sensor_index) const {
-    return this->get_torque(sensor_index) * 4095 / 0.5F;
+    return this->get_torque(sensor_index) * this->reference_voltage / (this->max_torque * this->shunt_resistor);
 }
 }  // namespace micras::proxy
 

@@ -27,6 +27,9 @@ public:
     struct Config {
         std::shared_ptr<rclcpp::Node>&                         node;
         std::array<std::array<std::string, 2>, num_of_sensors> wheel_pairs_topics;
+        float                                                  shunt_resistor;
+        float                                                  max_torque;
+        float                                                  reference_voltage;
     };
 
     /**
@@ -67,6 +70,21 @@ private:
      * @brief Array of wheel pairs
      */
     std::array<WheelPair, num_of_sensors> wheel_pairs;
+
+    /**
+     * @brief Value of the shunt resistor in ohms
+     */
+    const float shunt_resistor;
+
+    /**
+     * @brief Maximum torque that can be measured by the sensor
+     */
+    const float max_torque;
+
+    /**
+     * @brief Reference voltage for the ADC conversion
+     */
+    const float reference_voltage;
 };
 }  // namespace micras::proxy
 

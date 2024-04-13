@@ -94,7 +94,10 @@ const proxy::TorqueSensors<2>::Config torque_sensors_config {
                 "torque_rrw"
             }  // front_topic, rear_topic
         }
-    }  // wheel_pairs_topics
+    },  // wheel_pairs_topics
+    0.04F * 20, // shunt_resistor
+    0.5F, // max_torque
+    3.3F  // reference_voltage
 };
 
 const proxy::DistanceSensors<4>::Config distance_sensors_config {
@@ -106,6 +109,7 @@ const proxy::DistanceSensors<4>::Config distance_sensors_config {
         "distance_sensor_3"
     },    // topic_array
     0.3F, // max_distance
+    4095  // max_reading
 };
 
 const proxy::Imu::Config imu_config {
@@ -115,7 +119,9 @@ const proxy::Imu::Config imu_config {
 
 const proxy::Battery::Config battery_config {
     micras_node, // node
-    "battery"    // topic
+    "battery",   // topic
+    9.9F,        // max_voltage
+    4095         // max_reading
 };
 
 /*****************************************
