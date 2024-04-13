@@ -70,7 +70,7 @@ private:
     /**
      * @brief Max adc reading for the battery
      */
-    const float max_reading;
+    const uint16_t max_reading;
 };
 }  // namespace micras::proxy
 
