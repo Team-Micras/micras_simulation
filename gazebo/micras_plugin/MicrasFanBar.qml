@@ -58,9 +58,13 @@ ColumnLayout {
 
       function updateFanSpeed(speed)
       {
-        if (speed <= 0)
+        if (speed < 0)
         {
           pBar.value = -speed;
+        }
+        else
+        {
+          pBar.value = 0;
         }
       }
     }
@@ -122,9 +126,13 @@ ColumnLayout {
 
       function updateFanSpeed(speed)
       {
-        if (speed >= 0)
+        if (speed > 0)
         {
           pBar2.value = speed;
+        }
+        else
+        {
+          pBar2.value = 0;
         }
       }
     }
