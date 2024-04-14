@@ -6,6 +6,7 @@
         "/usr/include/**",
         "${workspaceFolder}/include/**",
         "${workspaceFolder}/config/**",
+        "${workspaceFolder}/tests/include/**",
         "${workspaceFolder}/MicrasFirmware/include/**"
       ],
       "name": "ROS",
