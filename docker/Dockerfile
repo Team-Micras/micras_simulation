@@ -12,13 +12,13 @@ WORKDIR /micras_ws
 
 COPY . src/micras_simulation/
 
-RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
- && colcon build --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCOMPILE_TESTS=OFF
-
 COPY docker/ros_entrypoint.sh /
 RUN echo "source /ros_entrypoint.sh" >> /etc/bash.bashrc
 
 FROM base as sim
+
+RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
+ && colcon build --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCOMPILE_TESTS=OFF
 
 RUN rm -rf src/
 
