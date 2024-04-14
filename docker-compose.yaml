@@ -1,0 +1,27 @@
+services:
+  sim:
+    image: micras:sim
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      args:
+        ROS_DISTRO: humble
+      target: sim
+    stdin_open: true
+    tty: true
+    privileged: True
+    environment:
+      - DISPLAY
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    command: ros2 launch micras_simulation micras.launch.xml
+
+  test:
+    image: micras:test
+    extends: sim
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: test
+    command:
