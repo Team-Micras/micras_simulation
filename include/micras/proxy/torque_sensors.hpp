@@ -88,6 +88,6 @@ private:
 };
 }  // namespace micras::proxy
 
-#include "../src/lib/torque_sensors.cpp"  // NOLINT(bugprone-suspicious-include)
+#include "../src/proxy/torque_sensors.cpp"  // NOLINT(bugprone-suspicious-include)
 
 #endif  // MICRAS_PROXY_TORQUE_SENSORS_HPP

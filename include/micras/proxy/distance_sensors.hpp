@@ -85,6 +85,6 @@ private:
 };
 }  // namespace micras::proxy
 
-#include "../src/lib/distance_sensors.cpp"  // NOLINT(bugprone-suspicious-include)
+#include "../src/proxy/distance_sensors.cpp"  // NOLINT(bugprone-suspicious-include)
 
 #endif  // MICRAS_PROXY_DISTANCE_SENSORS_HPP
