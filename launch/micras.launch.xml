@@ -1,5 +1,5 @@
 <launch>
-    <arg name="test_name" default="micras_node"/>
+    <arg name="name" default="micras_node"/>
 
     <set_env name="GZ_SIM_RESOURCE_PATH" value="$(find-pkg-share micras_simulation)/gazebo"/>
     <set_env name="IGN_GUI_PLUGIN_PATH" value="$(find-pkg-share micras_simulation)/micras_plugin"/>
@@ -16,6 +16,6 @@
             <param name="config_file" value="$(find-pkg-share micras_simulation)/launch/ros_gz_bridge.yaml"/>
         </node>
 
-        <node name="micras_node" pkg="micras_simulation" exec="$(var test_name)" output="screen"/>
+        <node name="micras_node" pkg="micras_simulation" exec="$(var name)" output="screen"/>
     </group>
 </launch>
