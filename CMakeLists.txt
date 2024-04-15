@@ -40,7 +40,7 @@ foreach(dependency ${ROS_CODE_DEPS})
 endforeach()
 
 file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "src/*/*.c*")
-file(GLOB_RECURSE PROJECT_TESTS CONFIGURE_DEPENDS "MicrasFirmware/tests/*/*.c*")
+file(GLOB_RECURSE PROJECT_TESTS CONFIGURE_DEPENDS "MicrasFirmware/tests/src/*/*.c*")
 
 add_library(${PROJECT_NAME}_lib
     ${PROJECT_SOURCES}
