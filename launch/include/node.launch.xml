@@ -1,0 +1,8 @@
+<launch>
+    <arg name="name" default="micras_node"/>
+
+    <group>
+        <push-ros-namespace namespace="micras"/>
+        <node name="micras_node" pkg="micras_simulation" exec="$(var name)" output="screen"/>
+    </group>
+</launch>
