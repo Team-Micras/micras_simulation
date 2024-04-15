@@ -1,0 +1,191 @@
+- ros_topic_name: "led"
+  gz_topic_name: "/led"
+  ros_type_name: "std_msgs/msg/Bool"
+  gz_type_name: "gz.msgs.Boolean"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "rgb_0"
+  gz_topic_name: "/rgb_0"
+  ros_type_name: "std_msgs/msg/ColorRGBA"
+  gz_type_name: "gz.msgs.Color"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "rgb_1"
+  gz_topic_name: "/rgb_1"
+  ros_type_name: "std_msgs/msg/ColorRGBA"
+  gz_type_name: "gz.msgs.Color"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "button"
+  gz_topic_name: "/button"
+  ros_type_name: "std_msgs/msg/Bool"
+  gz_type_name: "gz.msgs.Boolean"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "dip_switch_0"
+  gz_topic_name: "/dip_switch_0"
+  ros_type_name: "std_msgs/msg/Bool"
+  gz_type_name: "gz.msgs.Boolean"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "dip_switch_1"
+  gz_topic_name: "/dip_switch_1"
+  ros_type_name: "std_msgs/msg/Bool"
+  gz_type_name: "gz.msgs.Boolean"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "dip_switch_2"
+  gz_topic_name: "/dip_switch_2"
+  ros_type_name: "std_msgs/msg/Bool"
+  gz_type_name: "gz.msgs.Boolean"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "dip_switch_3"
+  gz_topic_name: "/dip_switch_3"
+  ros_type_name: "std_msgs/msg/Bool"
+  gz_type_name: "gz.msgs.Boolean"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "buzzer"
+  gz_topic_name: "/buzzer"
+  ros_type_name: "std_msgs/msg/UInt32"
+  gz_type_name: "gz.msgs.UInt32"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "rotary_sensor_left"
+  gz_topic_name: "/joint_state_left"
+  ros_type_name: "sensor_msgs/msg/JointState"
+  gz_type_name: "gz.msgs.Model"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "rotary_sensor_right"
+  gz_topic_name: "/joint_state_right"
+  ros_type_name: "sensor_msgs/msg/JointState"
+  gz_type_name: "gz.msgs.Model"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "torque_flw"
+  gz_topic_name: "/torque_flw"
+  ros_type_name: "geometry_msgs/msg/WrenchStamped"
+  gz_type_name: "gz.msgs.Wrench"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "torque_frw"
+  gz_topic_name: "/torque_frw"
+  ros_type_name: "geometry_msgs/msg/WrenchStamped"
+  gz_type_name: "gz.msgs.Wrench"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "torque_rlw"
+  gz_topic_name: "/torque_rlw"
+  ros_type_name: "geometry_msgs/msg/WrenchStamped"
+  gz_type_name: "gz.msgs.Wrench"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "torque_rrw"
+  gz_topic_name: "/torque_rrw"
+  ros_type_name: "geometry_msgs/msg/WrenchStamped"
+  gz_type_name: "gz.msgs.Wrench"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "distance_sensor_0"
+  gz_topic_name: "/lidar_0"
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  gz_type_name: "gz.msgs.LaserScan"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "distance_sensor_1"
+  gz_topic_name: "/lidar_1"
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  gz_type_name: "gz.msgs.LaserScan"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "distance_sensor_2"
+  gz_topic_name: "/lidar_2"
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  gz_type_name: "gz.msgs.LaserScan"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "distance_sensor_3"
+  gz_topic_name: "/lidar_3"
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  gz_type_name: "gz.msgs.LaserScan"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "imu"
+  gz_topic_name: "/imu"
+  ros_type_name: "sensor_msgs/msg/Imu"
+  gz_type_name: "gz.msgs.IMU"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "battery"
+  gz_topic_name: "/battery"
+  ros_type_name: "std_msgs/msg/Float32"
+  gz_type_name: "gz.msgs.Float"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "fan"
+  gz_topic_name: "/fan"
+  ros_type_name: "std_msgs/msg/Float32"
+  gz_type_name: "gz.msgs.Float"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "cmd_vel"
+  gz_topic_name: "/cmd_vel"
+  ros_type_name: "geometry_msgs/msg/Twist"
+  gz_type_name: "gz.msgs.Twist"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "odometry"
+  gz_topic_name: "/odometry"
+  ros_type_name: "nav_msgs/msg/Odometry"
+  gz_type_name: "gz.msgs.Odometry"
+  subscriber_queue: 1
+  publisher_queue: 1
+  direction: GZ_TO_ROS

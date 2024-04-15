@@ -1,0 +1,9 @@
+<launch>
+    <arg name="name" default="micras_node"/>
+
+    <include file="$(find-pkg-share micras_simulation)/launch/include/world.launch.xml"/>
+
+    <include file="$(find-pkg-share micras_simulation)/launch/include/node.launch.xml">
+        <arg name="name" value="$(var name)"/>
+    </include>
+</launch>

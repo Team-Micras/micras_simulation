@@ -1,0 +1,5 @@
+<launch>
+    <arg name="name" default="micras_node"/>
+
+    <node name="micras_node" pkg="micras_simulation" exec="$(var name)" output="screen" namespace="micras"/>
+</launch>

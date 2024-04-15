@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.8">
-    <world name="car_world">
+    <world name="maze">
         <gravity>0 0 -58.8</gravity>
         <physics name="1ms" type="ode">
             <max_step_size>0.001</max_step_size>

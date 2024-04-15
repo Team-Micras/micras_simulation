@@ -9,8 +9,12 @@
 		</plugin>
 		<plugin filename="libignition-gazebo-joint-state-publisher-system"
   				name="gz::sim::systems::JointStatePublisher">
-			<topic>joint_states</topic>
+			<topic>joint_state_left</topic>
 			<joint_name>RLW_joint</joint_name>
+		</plugin>
+		<plugin filename="libignition-gazebo-joint-state-publisher-system"
+  				name="gz::sim::systems::JointStatePublisher">
+			<topic>joint_state_right</topic>
 			<joint_name>RRW_joint</joint_name>
 		</plugin>
 		<plugin filename="libignition-gazebo-sensors-system.so"
@@ -23,10 +27,10 @@
 			<left_joint>RLW_joint</left_joint>
 			<right_joint>FRW_joint</right_joint>
 			<right_joint>RRW_joint</right_joint>
-			<wheel_separation>0.05</wheel_separation>
-			<wheel_radius>0.021</wheel_radius>
+			<wheel_separation>0.0585</wheel_separation>
+			<wheel_radius>0.0105</wheel_radius>
 			<topic>cmd_vel</topic>
-			<odometry_topic>odometry</odometry_topic>
+			<odom_topic>odometry</odom_topic>
 			<odom_publish_frequency>100</odom_publish_frequency>
 			<min_linear_velocity>-10.0</min_linear_velocity>
 			<max_linear_velocity>10.0</max_linear_velocity>
@@ -38,16 +42,16 @@
 			<max_angular_acceleration>3000.0</max_angular_acceleration>
 		</plugin>
 		<frame name="lidar0_frame" attached_to="base_link">
-			<pose relative_to="base_link">-0.0285 0.02 0.005 0 0 1.57079632679489</pose>
+			<pose relative_to="base_link">-0.0285 0.03 0.005 0 0 1.57079632679489</pose>
 		</frame>
 		<frame name="lidar1_frame" attached_to="base_link">
-			<pose relative_to="base_link">-0.017 0.052 0.005 0 0 2.35619449019234</pose>
+			<pose relative_to="base_link">-0.017 0.062 0.005 0 0 2.35619449019234</pose>
 		</frame>
 		<frame name="lidar2_frame" attached_to="base_link">
-			<pose relative_to="base_link">0.017 0.052 0.005 0 0 0.78539816339744</pose>
+			<pose relative_to="base_link">0.017 0.062 0.005 0 0 0.78539816339744</pose>
 		</frame>
 		<frame name="lidar3_frame" attached_to="base_link">
-			<pose relative_to="base_link">0.0285 0.02 0.005 0 0 1.57079632679489</pose>
+			<pose relative_to="base_link">0.0285 0.03 0.005 0 0 1.57079632679489</pose>
 		</frame>
 		<link name="base_link">
 			<inertial>
@@ -62,11 +66,11 @@
 				</inertia>
 			</inertial>
 			<visual name="base_vis">
-				<pose relative_to="base_link">0 0.07 0.017 0 0 0</pose>
+				<pose relative_to="base_link">0 0.08 0.017 0 0 0</pose>
 				<geometry>
 					<mesh>
 						<uri>model://meshes/base_link.stl</uri>
-					</mesh> 
+					</mesh>
 				</geometry>
 				<material>
 					<ambient>0.0 0.5 0.0 1</ambient>
@@ -75,11 +79,11 @@
 				</material>
 			</visual>
 			<collision name="base_coll">
-				<pose relative_to="base_link">0 0.07 0.017 0 0 0</pose>
+				<pose relative_to="base_link">0 0.08 0.017 0 0 0</pose>
 				<geometry>
 					<mesh>
 						<uri>model://meshes/base_link.stl</uri>
-					</mesh> 
+					</mesh>
 				</geometry>
 			</collision>
 			<sensor name="imu_sensor" type="imu">
@@ -202,7 +206,7 @@
 			</sensor>
 		</link>
 		<link name="FLW_link">
-			<pose relative_to="base_link">-0.02925 -0.002 0.008 0 0 3.14159265359</pose>
+			<pose relative_to="base_link">-0.02925 0.008 0.008 0 0 3.14159265359</pose>
 			<inertial>
 				<mass>0.00135156970824209</mass>
 				<inertia>
@@ -258,6 +262,7 @@
 				<limit>
 					<lower>-1.79769e+308</lower>
 					<upper>1.79769e+308</upper>
+					<effort>0.01</effort>
 				</limit>
 			</axis>
 			<sensor name="FLW_torque" type="force_torque">
@@ -272,7 +277,7 @@
 			</sensor>
 		</joint>
 		<link name="RLW_link">
-			<pose relative_to="base_link">-0.02925 -0.025 0.008 0 0 3.14159265359</pose>
+			<pose relative_to="base_link">-0.02925 -0.015 0.008 0 0 3.14159265359</pose>
 			<inertial>
 				<mass>0.00135156970824209</mass>
 				<inertia>
@@ -328,6 +333,7 @@
 				<limit>
 					<lower>-1.79769e+308</lower>
 					<upper>1.79769e+308</upper>
+					<effort>0.01</effort>
 				</limit>
 			</axis>
 			<sensor name="RLW_torque" type="force_torque">
@@ -342,7 +348,7 @@
 			</sensor>
 		</joint>
 		<link name="FRW_link">
-			<pose relative_to="base_link">0.02925 -0.002 0.008 0 0 3.14159265359</pose>
+			<pose relative_to="base_link">0.02925 0.008 0.008 0 0 3.14159265359</pose>
 			<inertial>
 				<mass>0.00135156970824209</mass>
 				<inertia>
@@ -398,6 +404,7 @@
 				<limit>
 					<lower>-1.79769e+308</lower>
 					<upper>1.79769e+308</upper>
+					<effort>0.01</effort>
 				</limit>
 			</axis>
 			<sensor name="FRW_torque" type="force_torque">
@@ -412,7 +419,7 @@
 			</sensor>
 		</joint>
 		<link name="RRW_link">
-			<pose relative_to="base_link">0.02925 -0.025 0.008 0 0 3.14159265359</pose>
+			<pose relative_to="base_link">0.02925 -0.015 0.008 0 0 3.14159265359</pose>
 			<inertial>
 				<mass>0.00135156970824209</mass>
 				<inertia>
@@ -468,6 +475,7 @@
 				<limit>
 					<lower>-1.79769e+308</lower>
 					<upper>1.79769e+308</upper>
+					<effort>0.01</effort>
 				</limit>
 			</axis>
 			<sensor name="RRW_torque" type="force_torque">

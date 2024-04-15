@@ -1,0 +1,22 @@
+<!DOCTYPE RCC><RCC version="1.0">
+
+  <qresource prefix="MicrasPlugin/">
+    <file>MicrasPlugin.qml</file>
+  </qresource>
+
+  <qresource prefix="MicrasPlugin_qml">
+    <file>MicrasArgb.qml</file>
+    <file>MicrasBattery.qml</file>
+    <file>MicrasButton.qml</file>
+    <file>MicrasBuzzer.qml</file>
+    <file>MicrasDipSwitch.qml</file>
+    <file>MicrasFan.qml</file>
+    <file>MicrasFanBar.qml</file>
+    <file>MicrasLed.qml</file>
+  </qresource>
+
+  <qresource prefix="assets">
+    <file>fan.png</file>
+  </qresource>
+
+</RCC>

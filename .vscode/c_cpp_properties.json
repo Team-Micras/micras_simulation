@@ -1,0 +1,19 @@
+{
+  "configurations": [
+    {
+      "name": "ROS",
+      "includePath": [
+        "/opt/ros/${env:ROS_DISTRO}/include/**",
+        "/usr/include/**",
+        "${workspaceFolder}/include/**",
+        "${workspaceFolder}/config/**",
+        "${workspaceFolder}/tests/include/**",
+        "${workspaceFolder}/MicrasFirmware/include/**"
+      ],
+      "compileCommands": "${env:COLCON_PREFIX_PATH}/../build/compile_commands.json",
+      "cStandard": "c17",
+      "cppStandard": "c++20"
+    }
+  ],
+  "version": 4
+}
