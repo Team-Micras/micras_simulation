@@ -14,7 +14,15 @@
             "type": "ros",
             "request": "launch",
             "target": "${workspaceFolder}/launch/micras.launch.xml",
-            "arguments": ["test_name:=micras_node"]
+            "arguments": ["test_name:=${input:args}"]
+        }
+    ],
+    "inputs": [
+        {
+            "id": "args",
+            "type":"promptString",
+            "description": "Node Name",
+            "default": "micras_node"
         }
     ]
 }
