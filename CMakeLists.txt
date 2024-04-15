@@ -39,13 +39,12 @@ foreach(dependency ${ROS_CODE_DEPS})
     find_package(${dependency} REQUIRED)
 endforeach()
 
-file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "src/lib/*.c*")
-file(GLOB_RECURSE PROJECT_TESTS_BIN CONFIGURE_DEPENDS "MicrasFirmware/tests/bin/*.c*")
-file(GLOB_RECURSE PROJECT_TESTS_SOURCES CONFIGURE_DEPENDS "tests/src/*.c*")
+file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "src/*/*.c*")
+file(GLOB_RECURSE PROJECT_TESTS CONFIGURE_DEPENDS "MicrasFirmware/tests/*/*.c*")
 
 add_library(${PROJECT_NAME}_lib
     ${PROJECT_SOURCES}
-    ${PROJECT_TESTS_SOURCES}
+    tests/src/test_core.cpp
 )
 
 ament_target_dependencies(${PROJECT_NAME}_lib ${ROS_CODE_DEPS})
@@ -58,7 +57,7 @@ target_include_directories(${PROJECT_NAME}_lib PUBLIC
 )
 
 add_executable(micras_node
-    src/bin/micras_node.cpp
+    src/micras_node.cpp
     MicrasFirmware/src/micras_controller.cpp
 )
 
@@ -100,7 +99,7 @@ install(TARGETS MicrasPlugin
 )
 
 if(COMPILE_TESTS)
-    foreach(TEST_FILE ${PROJECT_TESTS_BIN})
+    foreach(TEST_FILE ${PROJECT_TESTS})
 
         get_filename_component(TEST_NAME ${TEST_FILE} NAME_WLE)
 
