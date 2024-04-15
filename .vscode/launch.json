@@ -13,7 +13,8 @@
             "name": "ROS: Launch",
             "type": "ros",
             "request": "launch",
-            "target": "${workspaceFolder}/launch/micras.launch.xml",
+            "target": "${workspaceFolder}/launch/include/node.launch.xml",
+            "preLaunchTask": "ROS Launch World",
             "arguments": ["name:=${input:args}"]
         }
     ],
