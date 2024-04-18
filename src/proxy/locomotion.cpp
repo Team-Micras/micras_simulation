@@ -23,16 +23,16 @@ void Locomotion::disable() {
     this->enabled = false;
 }
 
-void Locomotion::set_wheel_speed(float left_speed, float right_speed) {
-    this->twist.linear.x = (left_speed + right_speed) / 2;
-    this->twist.angular.z = (right_speed - left_speed) / 2;
+void Locomotion::set_wheel_command(float left_command, float right_command) {
+    this->twist.linear.x = (left_command + right_command) / 2;
+    this->twist.angular.z = (right_command - left_command) / 2;
 
     if (this->enabled) {
         this->publisher->publish(this->twist);
     }
 }
 
-void Locomotion::set_speed(float linear, float angular) {
+void Locomotion::set_command(float linear, float angular) {
     this->twist.linear.x = linear;
     this->twist.angular.z = angular;
 
