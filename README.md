@@ -1,6 +1,6 @@
 <div align="center">
 
-![micras_logo_white_shadow](https://github.com/Team-Micras/MicrasFirmware/assets/62271285/30260684-a934-40e7-8b72-8fc2d799b1a8)
+![micras_simulation_blue](https://github.com/Team-Micras/micras_simulation/assets/62271285/655d90d7-ae21-47df-b6ab-64d46ef4a559)
 
 NTF Classic Micromouse simulation environment
 
