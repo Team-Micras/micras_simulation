@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 <div align="center">
 
 ![micras_simulation_blue](https://github.com/Team-Micras/micras_simulation/assets/62271285/655d90d7-ae21-47df-b6ab-64d46ef4a559)
@@ -7,11 +8,14 @@ NTF Classic Micromouse simulation environment
 </div>
 
 <p align="center">
-<a href="https://cplusplus.com/"><img alt="Made with C++" src="https://img.shields.io/badge/made_with-c%2B%2B-blue?style=for-the-badge&labelColor=ef4041&color=c1282d" height="30"></a>
 <a href="https://docs.ros.org/en/humble/index.html"><img alt="ROS Humble" src="https://img.shields.io/badge/ROS_version-humble-informational?style=for-the-badge" height="30"></a>
 <a href="http://gazebosim.org/"><img alt="Gazebo Fortress" src="https://img.shields.io/badge/gazebo_version-fortress-important?style=for-the-badge" height="30"></a>
+</p>
+<p align="center">
+<a href="https://cplusplus.com/"><img alt="Made with C++" src="https://img.shields.io/badge/made_with-c%2B%2B-blue?style=for-the-badge&labelColor=ef4041&color=c1282d" height="30"></a>
 <a href="https://www.docker.com/"><img alt="Docker" src="https://img.shields.io/badge/docker-container-blue?style=for-the-badge&labelColor=00c5f4&color=0096d6" height="30"></a>
 </p>
+<!-- markdownlint-restore -->
 
 ## 📑 Summary
 
@@ -21,6 +25,7 @@ NTF Classic Micromouse simulation environment
 - [🚀 Running](#-running)
 - [🧪 Testing](#-testing)
 - [🐛 Debugging](#-debugging)
+- [🐋 Docker](#-docker)
 - [💄 Code style](#-code-style)
   - [🎨 Format](#-format)
   - [🚨 Linter](#-linter)
@@ -33,14 +38,17 @@ NTF Classic Micromouse simulation environment
 - **.vscode** - Visual Studio Code configuration files
 - **cmake/** - Functions to include in the main CMake
 - **config/** - Target and constants configuration values
-- **cube/** - STM32CubeMX configuration and build files
+- **docker/** - Dockerfiles and scripts to build and run the project
+- **gazebo/** - Gazebo world, models and plugin files
 - **include/** - Header files for class definitions
-- **src/** - Source file for class implementations and executables
-- **tests/** - Executable test files
+- **launch/** - ROS2 launch files
+- **MicrasFirmware/** - Micras firmware source code
+- **src/** - Source file for HAL and Proxy mocks
+- **tests/** - Executable test files mocks
 
 ## 🔨 Building
 
-To build the project, you need to run the following command in the current colcon workspace root:
+To build the project, you need to run the following command in the current [colcon workspace](https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Colcon-Tutorial.html) root:
 
 ```bash
 colcon build
@@ -88,6 +96,26 @@ To be able to debug the project, it is necessary run the `colcon build` command 
 colcon build --cmake-args -DBUILD_TYPE=Debug
 ```
 
+## 🐋 Docker
+
+To build the Docker image and run the simulation, use the following command:
+
+```bash
+docker compose run sim
+```
+
+For building the Docker image for running the tests, use the following command:
+
+```bash
+docker compose run test
+```
+
+After runnint the command above, a terminal will be opened, and you can run the tests using the following command:
+
+```bash
+ros2 launch micras_simulation micras.launch.xml name:=[test_name]
+```
+
 ## 💄 Code style
 
 ### 🎨 Format
@@ -112,22 +140,22 @@ The project uses a linter in order to follow the best code practices. The linter
 sudo apt install clang-tidy
 ```
 
-The linting process is done when compiling the project using a special config variable, the `ENABLE_LINTER` cmake variable. So to lint the code, do as follows using catkin tools:
+The linting process is done when compiling the project using a special config variable, the `LINTER_MODE` cmake variable. You can enable the linter by running:
 
 ```bash
-colcon build --cmake-args -DCMAKE_LINTER=ON
+colcon build --cmake-args -DLINTER_MODE=ON
 ```
 
 To disable the linter while compiling, do as follows:
 
 ```bash
-colcon build --cmake-args -DCMAKE_LINTER=OFF
+colcon build --cmake-args -DLINTER_MODE=OFF
 ```
 
 It is also possible to lint the project and let the linter fix it using its suggestions:
 
 ```bash
-colcon build --cmake-args -DCMAKE_LINTER=FIX
+colcon build --cmake-args -DLINTER_MODE=FIX
 ```
 
 ### 💬 Git commit messages
