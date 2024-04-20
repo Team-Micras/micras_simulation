@@ -1,5 +1,5 @@
 #!/bin/bash
-# Name: CMakeLists.txt
+# Name: format.sh
 # Micras Team
 # Brief: Format the code using clang-format
 # 04/2023
