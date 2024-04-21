@@ -43,7 +43,7 @@ NTF Classic Micromouse simulation environment
 - **docker/** - Dockerfiles and scripts to build and run the project
 - **gazebo/** - Gazebo world, models and plugin files
 - **include/** - Header files for class definitions
-- **launch/** - ROS2 launch files
+- **launch/** - ROS 2 launch files
 - **MicrasFirmware/** - Micras firmware source code
 - **src/** - Source file for HAL and Proxy mocks
 - **tests/** - Executable test files mocks
@@ -72,10 +72,10 @@ ros2 launch micras_simulation micras.launch.xml
 
 ## 🧪 Testing
 
-To run the tests, it is necessary to compile the project with the `COMPILE_TESTS` flag set to `1`:
+To run the tests, it is necessary to compile the project with the `COMPILE_TESTS` flag set to `ON`:
 
 ```bash
-colcon build --cmake-args -DCOMPILE_TESTS=1
+colcon build --cmake-args -DCOMPILE_TESTS=ON
 ```
 
 After compiling the project, run the following command to execute the tests, replacing `[test_name]` with the desired test name without the file extension at the end:
@@ -102,8 +102,8 @@ colcon build --cmake-args -DBUILD_TYPE=Debug
 
 Finally, for debugging the project, the [ROS extension](https://marketplace.visualstudio.com/items?itemName=ms-iot.vscode-ros) for Visual Studio Code must be installed. After installing the extension you can press `Ctrl + Shift + D` to open the debug panel and select between the available configurations:
 
-- `ROS2: Attach` - Attach the debugger to a running ROS2 node
-- `ROS2: Launch` - Opens a dialog box to input the executable name (defaults to `micras_node`) to debug, and launches it with the debugger attached
+- `ROS: Attach` - Attach the debugger to a running ROS 2 node
+- `ROS: Launch` - Opens a dialog box to input the executable name (defaults to `micras_node`) to debug, and launches it with the debugger attached
 
 ## 🐋 Docker
 
