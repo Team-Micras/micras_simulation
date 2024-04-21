@@ -119,7 +119,7 @@ For building the Docker image for running the tests, use the following command:
 docker compose run test
 ```
 
-After runnint the command above, a terminal will be opened, and you can run the tests using the following command:
+After running the command above, a terminal will be opened, and you can run the tests using the following command:
 
 ```bash
 ros2 launch micras_simulation micras.launch.xml name:=[test_name]
