@@ -9,7 +9,7 @@ NTF Classic Micromouse simulation environment
 
 <p align="center">
 <a href="https://docs.ros.org/en/humble/index.html"><img alt="ROS Humble" src="https://img.shields.io/badge/ROS_version-humble-informational?style=for-the-badge" height="30"></a>
-<a href="http://gazebosim.org/"><img alt="Gazebo Fortress" src="https://img.shields.io/badge/gazebo_version-fortress-important?style=for-the-badge" height="30"></a><br>
+<a href="https://gazebosim.org/docs/fortress"><img alt="Gazebo Fortress" src="https://img.shields.io/badge/gazebo_version-fortress-important?style=for-the-badge" height="30"></a><br>
 <a href="https://cplusplus.com/"><img alt="Made with C++" src="https://img.shields.io/badge/made_with-c%2B%2B-blue?style=for-the-badge&labelColor=ef4041&color=c1282d" height="30"></a>
 <a href="https://www.docker.com/"><img alt="Docker" src="https://img.shields.io/badge/docker-container-blue?style=for-the-badge&labelColor=00c5f4&color=0096d6" height="30"></a>
 </p>
