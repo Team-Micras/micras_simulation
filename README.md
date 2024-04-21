@@ -80,6 +80,8 @@ After compiling the project, run the following command to execute the tests, rep
 ros2 launch micras_simulation micras.launch.xml name:=[test_name]
 ```
 
+The test name must be the same as the test file name, at the [MicrasFirmware tests directory](./MicrasFirmware/tests/src/), without the file extension at the end.
+
 ## 🐛 Debugging
 
 It is possible to debug the project using [`gdb`](https://www.gnu.org/software/gdb/). To do that, first install `gdb-multiarch`, on Ubuntu, just run:
@@ -93,6 +95,11 @@ To be able to debug the project, it is necessary run the `colcon build` command 
 ```bash
 colcon build --cmake-args -DBUILD_TYPE=Debug
 ```
+
+Finally, for debugging the project, the [ROS extension](https://marketplace.visualstudio.com/items?itemName=ms-iot.vscode-ros) for Visual Studio Code must be installed. After installing the extension you can press `Ctrl + Shift + D` to open the debug panel and select between the available configurations:
+
+- `ROS2: Attach` - Attach the debugger to a running ROS2 node
+- `ROS2: Launch` - Opens a dialog box to input the executable name (defaults to `micras_node`) to debug, and launches it with the debugger attached
 
 ## 🐋 Docker
 
