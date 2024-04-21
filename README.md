@@ -30,9 +30,10 @@ NTF Classic Micromouse simulation environment
 - [💄 Code style](#-code-style)
   - [🎨 Format](#-format)
   - [🚨 Linter](#-linter)
+- [👥 Contributing](#-contributing)
   - [💬 Git commit messages](#-git-commit-messages)
   - [🔀 Git workflow](#-git-workflow)
-- [👥 Contributors](#-contributors)
+- [✨ Contributors](#-contributors)
 
 ## 📁 Folder structure
 
@@ -206,6 +207,10 @@ It is also possible to lint the project and let the linter fix it using its sugg
 colcon build --cmake-args -DLINTER_MODE=FIX
 ```
 
+## 👥 Contributing
+
+To learn how to contribute to the project, see the following contribution guidelines.
+
 ### 💬 Git commit messages
 
 - Use the present tense ("Add feature" not "Added feature")
@@ -223,7 +228,7 @@ colcon build --cmake-args -DLINTER_MODE=FIX
 
 The project workflow is based on [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/).
 
-## 👥 Contributors
+## ✨ Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
