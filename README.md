@@ -24,6 +24,9 @@ NTF Classic Micromouse simulation environment
 - [🧪 Testing](#-testing)
 - [🐛 Debugging](#-debugging)
 - [🐋 Docker](#-docker)
+- [✉️ Messages](#️-messages)
+  - [➡️ Topics subscribed](#️-topics-subscribed)
+  - [⬅️ Topics published](#️-topics-published)
 - [💄 Code style](#-code-style)
   - [🎨 Format](#-format)
   - [🚨 Linter](#-linter)
@@ -120,6 +123,46 @@ After runnint the command above, a terminal will be opened, and you can run the 
 ```bash
 ros2 launch micras_simulation micras.launch.xml name:=[test_name]
 ```
+
+## ✉️ Messages
+
+The current topic message flow is the following:
+
+### ➡️ Topics subscribed
+
+The Proxy mock subscribes to the following topics:
+
+- Gazebo Simulation
+  - **/micras/battery** - `std_msgs/msg/Float32` - Battery voltage level
+  - **/micras/button** - `std_msgs/msg/Bool` - Button state
+  - **/micras/dip_switch_0** - `std_msgs/msg/Bool` - Dip switch 0 state
+  - **/micras/dip_switch_1** - `std_msgs/msg/Bool` - Dip switch 1 state
+  - **/micras/dip_switch_2** - `std_msgs/msg/Bool` - Dip switch 2 state
+  - **/micras/dip_switch_3** - `std_msgs/msg/Bool` - Dip switch 3 state
+  - **/micras/distance_sensor_0** - `sensor_msgs/msg/LaserScan` - Distance sensor 0 data
+  - **/micras/distance_sensor_1** - `sensor_msgs/msg/LaserScan` - Distance sensor 1 data
+  - **/micras/distance_sensor_2** - `sensor_msgs/msg/LaserScan` - Distance sensor 2 data
+  - **/micras/distance_sensor_3** - `sensor_msgs/msg/LaserScan` - Distance sensor 3 data
+  - **/micras/imu** - `sensor_msgs/msg/Imu` - IMU data
+  - **/micras/odometry** - `nav_msgs/msg/Odometry` - Odometry data
+  - **/micras/rotary_sensor_left** - `sensor_msgs/msg/JointState` - Left rotary sensor data
+  - **/micras/rotary_sensor_right** - `sensor_msgs/msg/JointState` - Right rotary sensor data
+  - **/micras/torque_flw** - `geometry_msgs/msg/WrenchStamped` - Front left wheel torque
+  - **/micras/torque_frw** - `geometry_msgs/msg/WrenchStamped` - Front right wheel torque
+  - **/micras/torque_rlw** - `geometry_msgs/msg/WrenchStamped` - Rear left wheel torque
+  - **/micras/torque_rrw** - `geometry_msgs/msg/WrenchStamped` - Rear right wheel torque
+
+### ⬅️ Topics published
+
+The Proxy mock publishes to the following topics:
+
+- Gazebo Simulation
+  - **/micras/rgb_0** - `std_msgs/msg/ColorRGBA` - RGB LED 0 color
+  - **/micras/rgb_1** - `std_msgs/msg/ColorRGBA` - RGB LED 1 color
+  - **/micras/led** - `std_msgs/msg/Bool` - LED state
+  - **/micras/buzzer** - `std_msgs/msg/UInt32` - Buzzer frequency
+  - **/micras/fan** - `std_msgs/msg/Float32` - Fan speed
+  - **/micras/cmd_vel** - `geometry_msgs/msg/Twist` - Robot velocity
 
 ## 💄 Code style
 
