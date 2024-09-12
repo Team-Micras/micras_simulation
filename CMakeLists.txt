@@ -34,13 +34,14 @@ set(ROS_CODE_DEPS
     sensor_msgs
     geometry_msgs
     nav_msgs
+    ament_index_cpp
 )
 
 foreach(dependency ${ROS_CODE_DEPS})
     find_package(${dependency} REQUIRED)
 endforeach()
 
-file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "src/*/*.c*")
+file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "src/*/*.c*" "MicrasFirmware/micras_nav/src/*.c*")
 file(GLOB_RECURSE PROJECT_TESTS CONFIGURE_DEPENDS "MicrasFirmware/tests/src/*/*.c*")
 
 add_library(${PROJECT_NAME}_lib
@@ -55,6 +56,7 @@ target_include_directories(${PROJECT_NAME}_lib PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/config>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/tests/include>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/micras_nav/include>
 )
 
 add_executable(micras_node

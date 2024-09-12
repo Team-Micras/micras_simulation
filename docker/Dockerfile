@@ -1,6 +1,6 @@
-ARG ROS_DISTRO
+ARG ROS_DISTRO="jazzy"
 
-FROM osrf/ros:${ROS_DISTRO}-desktop as base
+FROM osrf/ros:${ROS_DISTRO}-desktop AS base
 
 SHELL ["/bin/bash", "-c"]
 
@@ -15,14 +15,14 @@ COPY . src/micras_simulation/
 COPY docker/ros_entrypoint.sh /
 RUN echo "source /ros_entrypoint.sh" >> /etc/bash.bashrc
 
-FROM base as sim
+FROM base AS sim
 
 RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
  && colcon build --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCOMPILE_TESTS=OFF
 
 RUN rm -rf src/
 
-FROM base as test
+FROM base AS test
 
 RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
  && colcon build --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCOMPILE_TESTS=ON

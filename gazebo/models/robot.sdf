@@ -1,28 +1,28 @@
 <?xml version="1.0" ?>
-<sdf version="1.8">
+<sdf version="1.11">
 	<model name="robot" canonical_link="base_link">
-		<plugin filename="libignition-gazebo-imu-system.so"
-				name="ignition::gazebo::systems::Imu">
+		<plugin filename="gz-sim-imu-system"
+				name="gz::sim::systems::Imu">
 		</plugin>
-		<plugin filename="libignition-gazebo-forcetorque-system.so"
-				name="ignition::gazebo::systems::ForceTorque">
+		<plugin filename="gz-sim-forcetorque-system"
+				name="gz::sim::systems::ForceTorque">
 		</plugin>
-		<plugin filename="libignition-gazebo-joint-state-publisher-system"
+		<plugin filename="gz-sim-joint-state-publisher-system"
   				name="gz::sim::systems::JointStatePublisher">
 			<topic>joint_state_left</topic>
 			<joint_name>RLW_joint</joint_name>
 		</plugin>
-		<plugin filename="libignition-gazebo-joint-state-publisher-system"
+		<plugin filename="gz-sim-joint-state-publisher-system"
   				name="gz::sim::systems::JointStatePublisher">
 			<topic>joint_state_right</topic>
 			<joint_name>RRW_joint</joint_name>
 		</plugin>
-		<plugin filename="libignition-gazebo-sensors-system.so"
-				name="ignition::gazebo::systems::Sensors">
+		<plugin filename="gz-sim-sensors-system"
+				name="gz::sim::systems::Sensors">
 			<render_engine>ogre2</render_engine>
 		</plugin>
-		<plugin filename="libignition-gazebo-diff-drive-system.so"
-				name="ignition::gazebo::systems::DiffDrive">
+		<plugin filename="gz-sim-diff-drive-system"
+				name="gz::sim::systems::DiffDrive">
 			<left_joint>FLW_joint</left_joint>
 			<left_joint>RLW_joint</left_joint>
 			<right_joint>FRW_joint</right_joint>
@@ -36,10 +36,10 @@
 			<max_linear_velocity>10.0</max_linear_velocity>
 			<min_angular_velocity>-250.0</min_angular_velocity>
 			<max_angular_velocity>250.0</max_angular_velocity>
-			<min_linear_acceleration>-50.0</min_linear_acceleration>
-			<max_linear_acceleration>50.0</max_linear_acceleration>
-			<min_angular_acceleration>-3000.0</min_angular_acceleration>
-			<max_angular_acceleration>3000.0</max_angular_acceleration>
+			<min_linear_acceleration>-5.0</min_linear_acceleration>
+			<max_linear_acceleration>5.0</max_linear_acceleration>
+			<min_angular_acceleration>-100.0</min_angular_acceleration>
+			<max_angular_acceleration>100.0</max_angular_acceleration>
 		</plugin>
 		<frame name="lidar0_frame" attached_to="base_link">
 			<pose relative_to="base_link">-0.0285 0.03 0.005 0 0 1.57079632679489</pose>
@@ -241,13 +241,12 @@
 				<surface>
 					<friction>
 						<ode>
-							<mu>0.95</mu>
-							<mu2>0.95</mu2>
+							<mu>0.9</mu>
+							<mu2>0.9</mu2>
 						</ode>
 						<bullet>
-							<friction>0.95</friction>
-							<friction2>0.95</friction2>
-							<rolling_friction>0.1</rolling_friction>
+							<friction>0.9</friction>
+							<friction2>0.9</friction2>
 						</bullet>
 					</friction>
 				</surface>
@@ -312,13 +311,12 @@
 				<surface>
 					<friction>
 						<ode>
-							<mu>0.95</mu>
-							<mu2>0.95</mu2>
+							<mu>0.9</mu>
+							<mu2>0.9</mu2>
 						</ode>
 						<bullet>
-							<friction>0.95</friction>
-							<friction2>0.95</friction2>
-							<rolling_friction>0.1</rolling_friction>
+							<friction>0.9</friction>
+							<friction2>0.9</friction2>
 						</bullet>
 					</friction>
 				</surface>
@@ -335,6 +333,9 @@
 					<upper>1.79769e+308</upper>
 					<effort>0.01</effort>
 				</limit>
+				<!-- <mimic joint="FLW_joint" axis="axis">
+					<multiplier>1</multiplier>
+				</mimic> -->
 			</axis>
 			<sensor name="RLW_torque" type="force_torque">
 				<always_on>1</always_on>
@@ -383,13 +384,12 @@
 				<surface>
 					<friction>
 						<ode>
-							<mu>0.95</mu>
-							<mu2>0.95</mu2>
+							<mu>0.9</mu>
+							<mu2>0.9</mu2>
 						</ode>
 						<bullet>
-							<friction>0.95</friction>
-							<friction2>0.95</friction2>
-							<rolling_friction>0.1</rolling_friction>
+							<friction>0.9</friction>
+							<friction2>0.9</friction2>
 						</bullet>
 					</friction>
 				</surface>
@@ -454,13 +454,12 @@
 				<surface>
 					<friction>
 						<ode>
-							<mu>0.95</mu>
-							<mu2>0.95</mu2>
+							<mu>0.9</mu>
+							<mu2>0.9</mu2>
 						</ode>
 						<bullet>
-							<friction>0.95</friction>
-							<friction2>0.95</friction2>
-							<rolling_friction>0.1</rolling_friction>
+							<friction>0.9</friction>
+							<friction2>0.9</friction2>
 						</bullet>
 					</friction>
 				</surface>
@@ -477,6 +476,9 @@
 					<upper>1.79769e+308</upper>
 					<effort>0.01</effort>
 				</limit>
+				<!-- <mimic joint="FRW_joint" axis="axis">
+					<multiplier>1</multiplier>
+				</mimic> -->
 			</axis>
 			<sensor name="RRW_torque" type="force_torque">
 				<always_on>1</always_on>

@@ -8,8 +8,8 @@ NTF Classic Micromouse simulation environment
 </div>
 
 <p align="center">
-<a href="https://docs.ros.org/en/humble/index.html"><img alt="ROS Humble" src="https://img.shields.io/badge/ROS_version-humble-informational?style=for-the-badge" height="30"></a>
-<a href="https://gazebosim.org/docs/fortress"><img alt="Gazebo Fortress" src="https://img.shields.io/badge/gazebo_version-fortress-important?style=for-the-badge" height="30"></a><br>
+<a href="https://docs.ros.org/en/jazzy/index.html"><img alt="ROS Jazzy" src="https://img.shields.io/badge/ROS_version-jazzy-informational?style=for-the-badge" height="30"></a>
+<a href="https://gazebosim.org/docs/harmonic"><img alt="Gazebo Harmonic" src="https://img.shields.io/badge/gazebo_version-harmonic-important?style=for-the-badge" height="30"></a><br>
 <a href="https://cplusplus.com/"><img alt="Made with C++" src="https://img.shields.io/badge/made_with-c%2B%2B-blue?style=for-the-badge&labelColor=ef4041&color=c1282d" height="30"></a>
 <a href="https://www.docker.com/"><img alt="Docker" src="https://img.shields.io/badge/docker-container-blue?style=for-the-badge&labelColor=00c5f4&color=0096d6" height="30"></a>
 </p>
@@ -50,7 +50,7 @@ NTF Classic Micromouse simulation environment
 
 ## 🔨 Building
 
-To build the project, you need to run the following command in the current [colcon workspace](https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Colcon-Tutorial.html) root:
+To build the project, you need to run the following command in the current [colcon workspace](https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Colcon-Tutorial.html) root:
 
 ```bash
 colcon build

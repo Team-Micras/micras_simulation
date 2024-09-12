@@ -124,6 +124,10 @@ const proxy::Battery::Config battery_config {
     4095         // max_reading
 };
 
+const hal::Timer::Config timer_config {
+
+};
+
 /*****************************************
  * Actuators
  *****************************************/
@@ -137,7 +141,6 @@ const proxy::Locomotion::Config locomotion_config {
     micras_node, // node
     "cmd_vel"    // topic
 };
-
 }  // namespace micras
 
 // clang-format on
