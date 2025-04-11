@@ -1,9 +1,5 @@
 /**
- * @file fan.hpp
- *
- * @brief Proxy Fan class declaration
- *
- * @date 03/2024
+ * @file
  */
 
 #ifndef MICRAS_PROXY_FAN_HPP
@@ -12,16 +8,17 @@
 #include <cstdint>
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/float32.hpp>
-#include <string>
+
+#include "micras/proxy/stopwatch.hpp"
 
 namespace micras::proxy {
 /**
- * @brief Class for controlling the fan driver
+ * @brief Class for controlling the fan driver.
  */
 class Fan {
 public:
     /**
-     * @brief Configuration structure for the fan
+     * @brief Configuration struct for the fan.
      */
     struct Config {
         std::shared_ptr<rclcpp::Node>& node;
@@ -29,49 +26,56 @@ public:
     };
 
     /**
-     * @brief Construct a new fan object
+     * @brief Construct a new fan object.
      *
-     * @param config Configuration for the fan driver
+     * @param config Configuration for the fan driver.
      */
     explicit Fan(const Config& config);
 
     /**
-     * @brief Enable the fan
+     * @brief Enable the fan.
      */
     void enable();
 
     /**
-     * @brief Disable the fan
+     * @brief Disable the fan.
      */
     void disable();
 
     /**
-     * @brief Set the speed of the fans
+     * @brief Set the speed of the fans.
      *
-     * @param speed Speed percentage of the fan
+     * @param speed Speed percentage of the fan.
      */
     void set_speed(float speed);
 
     /**
-     * @brief Stop the fan
+     * @brief Update the speed of the fan.
+     *
+     * @return Current speed value
+     */
+    float update();
+
+    /**
+     * @brief Stop the fan.
      */
     void stop();
 
 private:
     /**
-     * @brief Flag to check if the fan is enabled
+     * @brief Publisher para controlar a velocidade do ventilador.
      */
-    bool enabled{false};
+    rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr publisher;
 
     /**
-     * @brief Message for the fan topic
+     * @brief Mensagem contendo a velocidade do ventilador.
      */
     std_msgs::msg::Float32 message;
 
     /**
-     * @brief Publisher for the velocity command topic
+     * @brief Flag para verificar se o ventilador está habilitado.
      */
-    rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr publisher;
+    bool enabled{false};
 };
 }  // namespace micras::proxy
 

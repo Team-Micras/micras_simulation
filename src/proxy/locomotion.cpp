@@ -1,9 +1,5 @@
 /**
- * @file locomotion.cpp
- *
- * @brief Proxy Locomotion class source
- *
- * @date 03/2024
+ * @file
  */
 
 #include "micras/proxy/locomotion.hpp"
@@ -42,8 +38,8 @@ void Locomotion::set_command(float linear, float angular) {
 }
 
 void Locomotion::stop() {
-    this->twist.linear.x = 0;
-    this->twist.angular.z = 0;
+    this->twist.linear.x = 0.0;
+    this->twist.angular.z = 0.0;
     this->publisher->publish(this->twist);
 }
 }  // namespace micras::proxy

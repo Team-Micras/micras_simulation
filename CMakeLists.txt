@@ -41,11 +41,13 @@ foreach(dependency ${ROS_CODE_DEPS})
     find_package(${dependency} REQUIRED)
 endforeach()
 
-file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "src/*/*.c*" "MicrasFirmware/micras_nav/src/*.c*")
+file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "src/**/*.c*" "MicrasFirmware/src/*.c*")
+file(GLOB_RECURSE LIB_SOURCES CONFIGURE_DEPENDS "MicrasFirmware/micras_nav/src/*.c*" "MicrasFirmware/micras_core/src/*.c*")
 file(GLOB_RECURSE PROJECT_TESTS CONFIGURE_DEPENDS "MicrasFirmware/tests/src/*/*.c*")
+list(REMOVE_ITEM PROJECT_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/src/main.cpp")
 
 add_library(${PROJECT_NAME}_lib
-    ${PROJECT_SOURCES}
+    ${LIB_SOURCES}
     tests/src/test_core.cpp
 )
 
@@ -57,11 +59,12 @@ target_include_directories(${PROJECT_NAME}_lib PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/tests/include>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/include>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/micras_nav/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/micras_core/include>
 )
 
 add_executable(micras_node
     src/micras_node.cpp
-    MicrasFirmware/src/micras_controller.cpp
+    ${PROJECT_SOURCES}
 )
 
 ament_target_dependencies(micras_node ${ROS_CODE_DEPS})

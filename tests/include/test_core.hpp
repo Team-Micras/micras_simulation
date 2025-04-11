@@ -11,7 +11,6 @@
 
 #include <functional>
 
-#include "micras/hal/timer.hpp"
 #include "target.hpp"
 
 namespace micras {

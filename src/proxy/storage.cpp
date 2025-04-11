@@ -1,9 +1,5 @@
 /**
- * @file storage.cpp
- *
- * @brief Proxy Storage class source
- *
- * @date 04/2024
+ * @file
  */
 
 #include <ament_index_cpp/get_package_share_directory.hpp>

@@ -1,9 +1,5 @@
 /**
- * @file battery.hpp
- *
- * @brief Proxy Battery class declaration
- *
- * @date 04/2024
+ * @file
  */
 
 #ifndef MICRAS_PROXY_BATTERY_HPP
@@ -12,16 +8,15 @@
 #include <cstdint>
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/float32.hpp>
-#include <string>
 
 namespace micras::proxy {
 /**
- * @brief Class for getting the battery voltage
+ * @brief Class for getting the battery voltage.
  */
 class Battery {
 public:
     /**
-     * @brief Configuration structure for the battery
+     * @brief Configuration struct for the battery.
      */
     struct Config {
         std::shared_ptr<rclcpp::Node>& node;
@@ -31,31 +26,43 @@ public:
     };
 
     /**
-     * @brief Constructor for the Battery class
+     * @brief Construct a new Battery object.
      *
-     * @param config Configuration for the battery
+     * @param config Configuration for the battery.
      */
     explicit Battery(const Config& config);
 
     /**
-     * @brief Get the battery voltage
+     * @brief Update the battery reading.
+     */
+    void update();
+
+    /**
+     * @brief Get the battery voltage.
      *
-     * @return float Battery voltage in volts
+     * @return Battery voltage in volts.
      */
     float get_voltage() const;
 
     /**
-     * @brief Get the raw reading from the battery
+     * @brief Get the battery voltage in volts without the filter applied.
      *
-     * @return uint32_t Raw reading from the battery
+     * @return Battery voltage in volts.
      */
-    uint32_t get_voltage_raw() const;
+    float get_voltage_raw() const;
+
+    /**
+     * @brief Get the battery reading from the ADC.
+     *
+     * @return Battery reading from 0 to 1.
+     */
+    float get_adc_reading() const;
 
 private:
     /**
      * @brief Reading from the battery
      */
-    uint32_t reading{};
+    float reading{};
 
     /**
      * @brief Subscriber for the battery topic

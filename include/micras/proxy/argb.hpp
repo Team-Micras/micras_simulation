@@ -1,9 +1,5 @@
 /**
- * @file argb.hpp
- *
- * @brief Proxy Argb class declaration
- *
- * @date 03/2024
+ * @file
  */
 
 #ifndef MICRAS_PROXY_ARGB_HPP
@@ -13,17 +9,16 @@
 #include <cstdint>
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/color_rgba.hpp>
-#include <string>
 
 namespace micras::proxy {
 /**
- * @brief Class for controlling an addressable RGB LED
+ * @brief Class for controlling an addressable RGB LED.
  */
 template <uint8_t num_of_leds>
-class Argb {
+class TArgb {
 public:
     /**
-     * @brief Configuration structure for the addressable RGB LED
+     * @brief Configuration struct for the addressable RGB LED.
      */
     struct Config {
         std::shared_ptr<rclcpp::Node>&       node;
@@ -31,47 +26,84 @@ public:
     };
 
     /**
-     * @brief Structure for storing color information
+     * @brief Struct for storing color information.
      */
     struct Color {
         uint8_t red;
         uint8_t green;
         uint8_t blue;
+
+        Color operator*(float brightness) const {
+            return {
+                static_cast<uint8_t>(this->red * brightness),
+                static_cast<uint8_t>(this->green * brightness),
+                static_cast<uint8_t>(this->blue * brightness),
+            };
+        }
     };
 
     /**
-     * @brief Constructor for the Argb class
-     *
-     * @param config Configuration for the addressable RGB LED
+     * @brief Predefined colors.
      */
-    explicit Argb(const Config& config);
+    struct Colors {
+        Colors() = delete;
+
+        static constexpr Color red{255, 0, 0};
+        static constexpr Color green{0, 255, 0};
+        static constexpr Color blue{0, 0, 255};
+        static constexpr Color yellow{255, 255, 0};
+        static constexpr Color cyan{0, 255, 255};
+        static constexpr Color magenta{255, 0, 255};
+        static constexpr Color white{255, 255, 255};
+    };
 
     /**
-     * @brief Set the color of the ARGB at the specified index
+     * @brief Construct a new Argb object.
      *
-     * @param index The index of the ARGB to set the color of
-     * @param color The color to set the ARGB to
+     * @param config Configuration for the addressable RGB LED.
+     */
+    explicit TArgb(const Config& config);
+
+    /**
+     * @brief Set the color of the ARGB at the specified index.
+     *
+     * @param index The index of the ARGB to set the color of.
+     * @param color The color to set the ARGB to.
      */
     void set_color(const Color& color, uint8_t index);
 
     /**
-     * @brief Set the color of all ARGBs
+     * @brief Set the color of all ARGBs.
      *
-     * @param color The color to set all ARGBs to
+     * @param color The color to set all ARGBs to.
      */
     void set_color(const Color& color);
 
     /**
-     * @brief Turn off the ARGB at the specified index
+     * @brief Set the colors of all ARGBs.
      *
-     * @param index The index of the ARGB to turn off
+     * @param colors The colors to set the ARGBs to.
+     */
+    void set_colors(const std::array<Color, num_of_leds>& colors);
+
+    /**
+     * @brief Turn off the ARGB at the specified index.
+     *
+     * @param index The index of the ARGB to turn off.
      */
     void turn_off(uint8_t index);
 
     /**
-     * @brief Turn off all ARGBs
+     * @brief Turn off all ARGBs.
      */
     void turn_off();
+
+    /**
+     * @brief Send the colors to the addressable RGB LED.
+     *
+     * This function is called automatically when the colors are set.
+     */
+    void update();
 
 private:
     /**
@@ -85,10 +117,10 @@ private:
     /**
      * @brief Array of publishers for the ARGBs
      */
-    std::array<std::shared_ptr<rclcpp::Publisher<std_msgs::msg::ColorRGBA>>, num_of_leds> publishers;
+    std::array<rclcpp::Publisher<std_msgs::msg::ColorRGBA>::SharedPtr, num_of_leds> publishers;
 };
 }  // namespace micras::proxy
 
-#include "../src/proxy/argb.cpp"  // NOLINT(bugprone-suspicious-include)
+#include "../src/proxy/argb.cpp"  // NOLINT(bugprone-suspicious-include, misc-header-include-cycle)
 
 #endif  // MICRAS_PROXY_ARGB_HPP

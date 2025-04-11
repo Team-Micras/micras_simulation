@@ -1,9 +1,5 @@
 /**
- * @file buzzer.hpp
- *
- * @brief Proxy Buzzer class declaration
- *
- * @date 03/2024
+ * @file
  */
 
 #ifndef MICRAS_PROXY_BUZZER_HPP
@@ -12,18 +8,17 @@
 #include <cstdint>
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/u_int32.hpp>
-#include <string>
 
-#include "micras/hal/timer.hpp"
+#include "micras/proxy/stopwatch.hpp"
 
 namespace micras::proxy {
 /**
- * @brief Class for controlling a buzzer
+ * @brief Class for controlling a buzzer.
  */
 class Buzzer {
 public:
     /**
-     * @brief Configuration structure for the buzzer
+     * @brief Configuration struct for the buzzer.
      */
     struct Config {
         std::shared_ptr<rclcpp::Node>& node;
@@ -31,62 +26,62 @@ public:
     };
 
     /**
-     * @brief Constructor for the Buzzer class
+     * @brief Construct a new Buzzer object.
      *
-     * @param config Configuration for the buzzer
+     * @param config Configuration for the buzzer.
      */
     explicit Buzzer(const Config& config);
 
     /**
-     * @brief Play a tone for a duration
+     * @brief Play a tone for a duration.
      *
-     * @param frequency Buzzer sound frequency in Hz
-     * @param duration Duration of the sound in ms
+     * @param frequency Buzzer sound frequency in Hz.
+     * @param duration Duration of the sound in ms.
      */
     void play(uint32_t frequency, uint32_t duration = 0);
 
     /**
-     * @brief Update the buzzer state
+     * @brief Update the buzzer state.
      */
     void update();
 
     /**
-     * @brief Stop the buzzer sound
+     * @brief Stop the buzzer sound.
      */
     void stop();
 
     /**
-     * @brief Wait for a duration updating the buzzer
+     * @brief Wait for a time interval updating the buzzer.
      *
-     * @param duration Duration to wait in ms
+     * @param interval Time to wait in ms.
      */
-    void wait(uint32_t duration);
+    void wait(uint32_t interval);
 
 private:
     /**
-     * @brief Publisher for the buzzer topic
+     * @brief Publisher para controlar o buzzer.
      */
     rclcpp::Publisher<std_msgs::msg::UInt32>::SharedPtr publisher;
 
     /**
-     * @brief Message for the buzzer topic
+     * @brief Mensagem para enviar ao buzzer.
      */
     std_msgs::msg::UInt32 message;
 
     /**
-     * @brief Flag to check if the buzzer is playing
+     * @brief Stopwatch to play the sound.
      */
-    bool is_playing{false};
+    proxy::Stopwatch stopwatch;
 
     /**
-     * @brief Duration of the sound
+     * @brief Flag to check if the buzzer is playing.
      */
-    uint32_t duration{0};
+    bool is_playing{};
 
     /**
-     * @brief Timer for the buzzer
+     * @brief Duration of the sound.
      */
-    hal::Timer playing_timer;
+    uint32_t duration{};
 };
 }  // namespace micras::proxy
 

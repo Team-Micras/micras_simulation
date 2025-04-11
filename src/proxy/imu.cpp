@@ -1,21 +1,28 @@
 /**
- * @file imu.cpp
- *
- * @brief Proxy Imu class source
- *
- * @date 03/2024
+ * @file
  */
 
 #include "micras/proxy/imu.hpp"
 
+#include <cmath>
+
 namespace micras::proxy {
 Imu::Imu(const Config& config) {
     this->subscriber = config.node->create_subscription<sensor_msgs::msg::Imu>(
-        config.topic, 1, [this](const sensor_msgs::msg::Imu& msg) { this->data = msg; }
+        config.topic, 1,
+        [this](const sensor_msgs::msg::Imu& msg) {
+            this->data = msg;
+            this->update();
+        }
     );
 }
 
-void Imu::update_data() {
+bool Imu::check_whoami() {
+    // Na implementação para ROS, o dispositivo é sempre válido
+    return true;
+}
+
+void Imu::update() {
     const auto& quat = this->data.orientation;
 
     // roll (x-axis rotation)
@@ -80,5 +87,9 @@ float Imu::get_linear_acceleration(Axis axis) const {
         default:
             return 0.0F;
     }
+}
+
+void Imu::calibrate() {
+    // Na implementação para ROS, a calibração é feita externamente
 }
 }  // namespace micras::proxy

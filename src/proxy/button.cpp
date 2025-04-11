@@ -1,9 +1,5 @@
 /**
- * @file button.cpp
- *
- * @brief Proxy Button class source
- *
- * @date 03/2024
+ * @file
  */
 
 #include "micras/proxy/button.hpp"
@@ -47,10 +43,10 @@ void Button::update_state() {
 }
 
 bool Button::is_rising_edge() const {
-    return this->current_state and not this->previous_state;
+    return this->current_state && !this->previous_state;
 }
 
 bool Button::is_falling_edge() const {
-    return not this->current_state and this->previous_state;
+    return !this->current_state && this->previous_state;
 }
 }  // namespace micras::proxy

@@ -17,7 +17,7 @@
 #include "micras/proxy/button.hpp"
 #include "micras/proxy/buzzer.hpp"
 #include "micras/proxy/dip_switch.hpp"
-#include "micras/proxy/distance_sensors.hpp"
+#include "micras/proxy/wall_sensors.hpp"
 #include "micras/proxy/fan.hpp"
 #include "micras/proxy/imu.hpp"
 #include "micras/proxy/led.hpp"
@@ -28,7 +28,26 @@
 
 // clang-format off
 namespace micras {
+/*****************************************
+ * Template Instantiations
+ *****************************************/
+
+namespace proxy {
+    using Argb = proxy::TArgb<2>;
+    using DipSwitch = TDipSwitch<4>;
+    using TorqueSensors = TTorqueSensors<2>;
+    using WallSensors = TWallSensors<4>;
+}  // namespace proxy
+
+
 inline std::shared_ptr<rclcpp::Node> micras_node;  // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+
+const proxy::Stopwatch::Config stopwatch_config {
+};
+
+const proxy::Storage::Config maze_storage_config{
+    .start_page = 2,
+};
 
 /*****************************************
  * Interface
@@ -39,7 +58,7 @@ const proxy::Led::Config led_config {
     "led"        // topic
 };
 
-const proxy::Argb<2>::Config argb_config {
+const proxy::Argb::Config argb_config {
     micras_node,  // node
     {
         "rgb_0",
@@ -52,7 +71,7 @@ const proxy::Button::Config button_config {
     "button"     // topic
 };
 
-const proxy::DipSwitch<4>::Config dip_switch_config {
+const proxy::DipSwitch::Config dip_switch_config {
     micras_node,  // node
     {
         "dip_switch_0",
@@ -81,7 +100,7 @@ const proxy::RotarySensor::Config rotary_sensor_right_config {
     "rotary_sensor_right" // topic
 };
 
-const proxy::TorqueSensors<2>::Config torque_sensors_config {
+const proxy::TorqueSensors::Config torque_sensors_config {
     micras_node,  // node
     {
         {
@@ -100,13 +119,13 @@ const proxy::TorqueSensors<2>::Config torque_sensors_config {
     3.3F  // reference_voltage
 };
 
-const proxy::DistanceSensors<4>::Config distance_sensors_config {
+const proxy::WallSensors::Config wall_sensors_config {
     micras_node,  // node
     {
-        "distance_sensor_0",
-        "distance_sensor_1",
-        "distance_sensor_2",
-        "distance_sensor_3"
+        "wall_sensor_0",
+        "wall_sensor_1",
+        "wall_sensor_2",
+        "wall_sensor_3"
     },    // topic_array
     0.3F, // max_distance
     4095  // max_reading
@@ -124,9 +143,6 @@ const proxy::Battery::Config battery_config {
     4095         // max_reading
 };
 
-const hal::Timer::Config timer_config {
-
-};
 
 /*****************************************
  * Actuators
