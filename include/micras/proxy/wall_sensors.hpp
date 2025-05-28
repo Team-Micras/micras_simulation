@@ -10,8 +10,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/laser_scan.hpp>
 
-#include "micras/core/utils.hpp"
-#include "micras/core/types.hpp"
+#include "micras/core/butterworth_filter.hpp"
 
 namespace micras::proxy {
 /**
@@ -28,6 +27,9 @@ public:
         std::array<std::string, num_of_sensors> topic_array;
         float                                   max_distance;
         uint16_t                                max_reading;
+        float                                   filter_cutoff;
+        std::array<float, num_of_sensors>       base_readings;
+        float                                   uncertainty;
     };
 
     /**
@@ -56,9 +58,10 @@ public:
      * @brief Get the observation from a sensor.
      *
      * @param sensor_index Index of the sensor.
-     * @return Observation from the sensor.
+     * @param disturbed Whether or not there is another wall perpendicular to the one being measured.
+     * @return True if the sensor detects a wall, false otherwise.
      */
-    core::Observation get_observation(uint8_t sensor_index) const;
+    bool get_wall(uint8_t sensor_index, bool disturbed = false) const;
 
     /**
      * @brief Get the reading from a sensor.
@@ -77,70 +80,48 @@ public:
     float get_adc_reading(uint8_t sensor_index) const;
 
     /**
-     * @brief Calibrate the wall sensors for a wall at the front.
+     * @brief Get the deviation of a wall sensor reading from its calibrated baseline.
+     *
+     * @param sensor_index Index of the sensor.
+     * @return The reading error relative to the baseline; positive if above baseline.
      */
-    void calibrate_front_wall();
+    float get_sensor_error(uint8_t sensor_index) const;
 
     /**
-     * @brief Calibrate the wall sensors for a wall at the left.
+     * @brief Calibrate a wall sensor base reading.
      */
-    void calibrate_left_wall();
-
-    /**
-     * @brief Calibrate the wall sensors for a wall at the right.
-     */
-    void calibrate_right_wall();
-
-    /**
-     * @brief Calibrate the wall sensors for free space at the front.
-     */
-    void calibrate_front_free_space();
-
-    /**
-     * @brief Calibrate the wall sensors for free space at the left.
-     */
-    void calibrate_left_free_space();
-
-    /**
-     * @brief Calibrate the wall sensors for free space at the right.
-     */
-    void calibrate_right_free_space();
-
-    /**
-     * @brief Update the wall sensors thresholds.
-     */
-    void update_thresholds();
+    void calibrate_sensor(uint8_t sensor_index);
 
 private:
     /**
-     * @brief Array de subscribers para os sensores de distância.
+     * @brief Array of subscribers for distance sensors.
      */
     std::array<rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr, num_of_sensors> subscribers;
 
     /**
-     * @brief Array de distâncias medidas pelos sensores.
+     * @brief Array of distances measured by the sensors.
      */
-    std::array<float, num_of_sensors> distances;
+    std::array<float, num_of_sensors> readings;
 
     /**
-     * @brief Distância máxima detectável pelo sensor.
+     * @brief Maximum distance detectable by the sensor.
      */
     const float max_distance;
 
     /**
-     * @brief Leitura máxima do ADC.
+     * @brief Maximum ADC reading.
      */
     const uint16_t max_reading;
 
     /**
-     * @brief Estado dos LEDs.
+     * @brief LED state.
      */
     bool leds_on{true};
 
-    /**
-     * @brief Uncertainty of the wall sensors.
-     */
-    float uncertainty{0.1f};
+    // /**
+    //  * @brief Uncertainty of the wall sensors.
+    //  */
+    // float uncertainty{0.1f};
 
     /**
      * @brief Measured wall value during calibration.
@@ -161,6 +142,30 @@ private:
      * @brief Maximum reading value to identify a free space.
      */
     std::array<float, num_of_sensors> free_space_threshold{};
+
+    /**
+     * @brief Buffer to store the ADC values.
+     *
+     *
+     *
+     *
+     */
+    std::array<uint16_t, 2 * num_of_sensors> buffer;
+
+    /**
+     * @brief Butterworth filter for the ADC readings.
+     */
+    std::array<core::ButterworthFilter, num_of_sensors> filters;
+
+    /**
+     * @brief Measured wall values during calibration.
+     */
+    std::array<float, num_of_sensors> base_readings;
+
+    /**
+     * @brief Ratio of the base reading to still consider as seeing a wall.
+     */
+    float uncertainty;
 };
 }  // namespace micras::proxy
 
