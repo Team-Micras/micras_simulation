@@ -9,64 +9,29 @@
 namespace micras::proxy {
 Imu::Imu(const Config& config) {
     this->subscriber = config.node->create_subscription<sensor_msgs::msg::Imu>(
-        config.topic, 1,
-        [this](const sensor_msgs::msg::Imu& msg) {
-            this->data = msg;
-            this->update();
-        }
+        config.topic, 1, [this](const sensor_msgs::msg::Imu& msg) { this->data = msg; }
     );
 }
 
-bool Imu::check_whoami() {
-    // Na implementação para ROS, o dispositivo é sempre válido
-    return true;
-}
-
 void Imu::update() {
-    const auto& quat = this->data.orientation;
-
-    // roll (x-axis rotation)
-    float sinp = 2 * (quat.w * quat.x + quat.y * quat.z);
-    float cosp = 1 - 2 * (quat.x * quat.x + quat.y * quat.y);
-    this->orientation[0] = std::atan2(sinp, cosp);
-
-    // pitch (y-axis rotation)
-    sinp = std::sqrt(1 + 2 * (quat.w * quat.y - quat.x * quat.z));
-    cosp = std::sqrt(1 - 2 * (quat.w * quat.y - quat.x * quat.z));
-    this->orientation[1] = 2 * std::atan2(sinp, cosp) - M_PI / 2;
-
-    // yaw (z-axis rotation)
-    sinp = 2 * (quat.w * quat.z + quat.x * quat.y);
-    cosp = 1 - 2 * (quat.y * quat.y + quat.z * quat.z);
-    this->orientation[2] = std::atan2(sinp, cosp);
-}
-
-float Imu::get_orientation(Axis axis) const {
-    switch (axis) {
-        case Axis::X:
-            return this->orientation[0];
-
-        case Axis::Y:
-            return this->orientation[1];
-
-        case Axis::Z:
-            return this->orientation[2];
-
-        default:
-            return 0.0F;
-    }
+    this->angular_velocity[0] = this->data.angular_velocity.x;
+    this->angular_velocity[1] = this->data.angular_velocity.y;
+    this->angular_velocity[2] = this->data.angular_velocity.z;
+    this->linear_acceleration[0] = this->data.linear_acceleration.x;
+    this->linear_acceleration[1] = this->data.linear_acceleration.y;
+    this->linear_acceleration[2] = this->data.linear_acceleration.z;
 }
 
 float Imu::get_angular_velocity(Axis axis) const {
     switch (axis) {
         case Axis::X:
-            return this->data.angular_velocity.x;
+            return this->angular_velocity[0];
 
         case Axis::Y:
-            return this->data.angular_velocity.y;
+            return this->angular_velocity[1];
 
         case Axis::Z:
-            return this->data.angular_velocity.z;
+            return this->angular_velocity[2];
 
         default:
             return 0.0F;
@@ -76,13 +41,13 @@ float Imu::get_angular_velocity(Axis axis) const {
 float Imu::get_linear_acceleration(Axis axis) const {
     switch (axis) {
         case Axis::X:
-            return this->data.linear_acceleration.x;
+            return this->linear_acceleration[0];
 
         case Axis::Y:
-            return this->data.linear_acceleration.y;
+            return this->linear_acceleration[1];
 
         case Axis::Z:
-            return this->data.linear_acceleration.z;
+            return this->linear_acceleration[2];
 
         default:
             return 0.0F;
@@ -91,5 +56,10 @@ float Imu::get_linear_acceleration(Axis axis) const {
 
 void Imu::calibrate() {
     // Na implementação para ROS, a calibração é feita externamente
+}
+
+bool Imu::was_initialized() const {
+    // Na implementação para ROS, o IMU é sempre inicializado
+    return true;
 }
 }  // namespace micras::proxy

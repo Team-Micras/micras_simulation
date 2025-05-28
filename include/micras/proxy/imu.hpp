@@ -29,9 +29,9 @@ public:
      * @brief Enum to select the axis of the IMU.
      */
     enum Axis : uint8_t {
-        X,
-        Y,
-        Z
+        X = 0,
+        Y = 1,
+        Z = 2
     };
 
     /**
@@ -42,24 +42,9 @@ public:
     explicit Imu(const Config& config);
 
     /**
-     * @brief Check the IMU device.
-     *
-     * @return True if the device is correct, false otherwise.
-     */
-    bool check_whoami();
-
-    /**
      * @brief Update the IMU data.
      */
     void update();
-
-    /**
-     * @brief Get orientation in radians for the specified axis.
-     *
-     * @param axis Axis to get the orientation from.
-     * @return Orientation in radians.
-     */
-    float get_orientation(Axis axis) const;
 
     /**
      * @brief Get the IMU angular velocity over an axis.
@@ -82,6 +67,13 @@ public:
      */
     void calibrate();
 
+    /**
+     * @brief Check if IMU was initialized.
+     *
+     * @return True if the device was successfully initialized, false otherwise.
+     */
+    bool was_initialized() const;
+
 private:
     /**
      * @brief Subscriber para os dados do IMU.
@@ -94,9 +86,14 @@ private:
     sensor_msgs::msg::Imu data;
 
     /**
-     * @brief Orientação calculada a partir do quaternion.
+     * @brief Current angular velocity on each axis.
      */
-    std::array<float, 3> orientation{};
+    std::array<float, 3> angular_velocity{};
+
+    /**
+     * @brief Current linear acceleration on each axis.
+     */
+    std::array<float, 3> linear_acceleration{};
 };
 }  // namespace micras::proxy
 
