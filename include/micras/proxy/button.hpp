@@ -21,22 +21,22 @@ public:
      * @brief Enum for button status.
      */
     enum Status : uint8_t {
-        NO_PRESS,
-        SHORT_PRESS,
-        LONG_PRESS,
-        EXTRA_LONG_PRESS
+        NO_PRESS = 0,
+        SHORT_PRESS = 1,
+        LONG_PRESS = 2,
+        EXTRA_LONG_PRESS = 3
     };
 
     /**
      * @brief Enum for button pull resistor.
      */
     enum PullResistor : uint8_t {
-        PULL_UP,
-        PULL_DOWN,
+        PULL_UP = 0,
+        PULL_DOWN = 1,
     };
 
     /**
-     * @brief Configuration structure for button
+     * @brief Configuration structure for button.
      */
     struct Config {
         std::shared_ptr<rclcpp::Node>& node;
@@ -64,7 +64,12 @@ public:
      *
      * @return Current button status.
      */
-    Status get_status();
+    Status get_status() const;
+
+    /**
+     * @brief Update the status of the button.
+     */
+    void update();
 
 private:
     /**
@@ -107,7 +112,7 @@ private:
     /**
      * @brief Stopwatch to determine type of button press.
      */
-    proxy::Stopwatch status_timer;
+    proxy::Stopwatch status_stopwatch;
 
     /**
      * @brief Flag to know if button was being pressed.
@@ -118,6 +123,11 @@ private:
      * @brief Flag to know if button is being pressed.
      */
     bool current_state{false};
+
+    /**
+     * @brief Current status of the button.
+     */
+    Status current_status{NO_PRESS};
 };
 }  // namespace micras::proxy
 
