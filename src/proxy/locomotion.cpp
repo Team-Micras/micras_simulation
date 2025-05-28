@@ -8,7 +8,7 @@ namespace micras::proxy {
 Locomotion::Locomotion(const Config& config) {
     this->publisher = config.node->create_publisher<geometry_msgs::msg::Twist>(config.topic, 1);
     this->stop();
-    this->enable();
+    this->disable();
 }
 
 void Locomotion::enable() {
