@@ -92,7 +92,7 @@
 				<visualize>true</visualize>
 				<topic>imu</topic>
 			</sensor>
-			<sensor name="gpu_lidar0" type="gpu_lidar">"
+			<sensor name="gpu_lidar0" type="gpu_lidar">
 				<pose relative_to="lidar0_frame">0 0 0 0 0 0</pose>
 				<topic>lidar_0</topic>
 				<update_rate>100</update_rate>
@@ -120,7 +120,7 @@
 				<always_on>1</always_on>
 				<visualize>true</visualize>
 			</sensor>
-			<sensor name="gpu_lidar1" type="gpu_lidar">"
+			<sensor name="gpu_lidar1" type="gpu_lidar">
 				<pose relative_to="lidar1_frame">0 0 0 0 0 0</pose>
 				<topic>lidar_1</topic>
 				<update_rate>100</update_rate>
@@ -148,7 +148,7 @@
 				<always_on>1</always_on>
 				<visualize>true</visualize>
 			</sensor>
-			<sensor name="gpu_lidar2" type="gpu_lidar">"
+			<sensor name="gpu_lidar2" type="gpu_lidar">
 				<pose relative_to="lidar2_frame">0 0 0 0 0 0</pose>
 				<topic>lidar_2</topic>
 				<update_rate>100</update_rate>
@@ -176,7 +176,7 @@
 				<always_on>1</always_on>
 				<visualize>true</visualize>
 			</sensor>
-			<sensor name="gpu_lidar3" type="gpu_lidar">"
+			<sensor name="gpu_lidar3" type="gpu_lidar">
 				<pose relative_to="lidar3_frame">0 0 0 0 0 0</pose>
 				<topic>lidar_3</topic>
 				<update_rate>100</update_rate>
