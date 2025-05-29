@@ -43,11 +43,13 @@ endforeach()
 
 file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "src/**/*.c*" "MicrasFirmware/src/*.c*")
 file(GLOB_RECURSE LIB_SOURCES CONFIGURE_DEPENDS "MicrasFirmware/micras_nav/src/*.c*" "MicrasFirmware/micras_core/src/*.c*")
+file(GLOB_RECURSE SIMULATION_PROXY_SOURCES CONFIGURE_DEPENDS "src/proxy/*.c*")
 file(GLOB_RECURSE PROJECT_TESTS CONFIGURE_DEPENDS "MicrasFirmware/tests/src/*/*.c*")
 list(REMOVE_ITEM PROJECT_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/src/main.cpp")
 
 add_library(${PROJECT_NAME}_lib
     ${LIB_SOURCES}
+    ${SIMULATION_PROXY_SOURCES}
     tests/src/test_core.cpp
 )
 
@@ -114,6 +116,15 @@ if(COMPILE_TESTS)
         )
 
         ament_target_dependencies(${TEST_NAME} ${ROS_CODE_DEPS})
+
+        target_include_directories(${TEST_NAME} PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/include
+            ${CMAKE_CURRENT_SOURCE_DIR}/config
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/include
+            ${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/include
+            ${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/micras_nav/include
+            ${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/micras_core/include
+        )
 
         target_link_libraries(${TEST_NAME}
             ${PROJECT_NAME}_lib
