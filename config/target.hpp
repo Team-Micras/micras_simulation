@@ -45,8 +45,9 @@ inline std::shared_ptr<rclcpp::Node> micras_node;  // NOLINT(cppcoreguidelines-a
 const proxy::Stopwatch::Config stopwatch_config {
 };
 
-const proxy::Storage::Config maze_storage_config{
+const proxy::Storage::Config maze_storage_config {
     .start_page = 2,
+    .number_of_pages = 1 //unused
 };
 
 /*****************************************
@@ -128,7 +129,15 @@ const proxy::WallSensors::Config wall_sensors_config {
         "wall_sensor_3"
     },    // topic_array
     0.3F, // max_distance
-    4095  // max_reading
+    4095,  // max_reading
+    5.0F,  // filter_cutoff
+    {
+        0.413F,
+        0.161F,
+        0.177F,
+        0.230F,
+    },  // base_readings
+    0.5F   // uncertainty
 };
 
 const proxy::Imu::Config imu_config {
