@@ -4,7 +4,7 @@
         {
             "label": "ROS Launch Micras Simulation",
             "type": "ros",
-            "command": "ros2 launch micras_simulation micras.launch.xml",
+            "command": "bash -c 'source /opt/ros/jazzy/setup.bash && source ${workspaceFolder}/../../install/setup.bash && ros2 launch micras_simulation micras.launch.xml'",
             "isBackground": true,
             "problemMatcher": [
                 {
@@ -19,7 +19,7 @@
                     "background": {
                         "activeOnStart": true,
                         "beginsPattern": "\\[INFO\\] \\[launch\\]",
-                        "endsPattern": "\\[gdbserver-\\d+\\] Listening on port"
+                        "endsPattern": "Listening on port"
                     }
                 }
             ]
