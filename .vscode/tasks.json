@@ -2,15 +2,15 @@
 	"version": "2.0.0",
 	"tasks": [
         {
-            "label": "ROS Launch World",
+            "label": "ROS Launch Micras Simulation",
             "type": "ros",
-            "command": "ros2 launch micras_simulation world.launch.xml",
+            "command": "ros2 launch micras_simulation micras.launch.xml",
             "isBackground": true,
             "problemMatcher": [
                 {
                     "pattern": [
                         {
-                            "regexp": ".",
+                            "regexp": "",
                             "file": 1,
                             "location": 2,
                             "message": 3
@@ -18,11 +18,11 @@
                     ],
                     "background": {
                         "activeOnStart": true,
-                        "beginsPattern": ".",
-                        "endsPattern": ".",
+                        "beginsPattern": "\\[INFO\\] \\[launch\\]",
+                        "endsPattern": "\\[gdbserver-\\d+\\] Listening on port"
                     }
                 }
             ]
-        },
+        }
     ]
 }
