@@ -1,21 +1,23 @@
 {
-    // For information on how to use the debug with ROS see
-    // https://github.com/ms-iot/vscode-ros/blob/master/doc/debug-support.md
     "version": "0.2.0",
     "configurations": [
         {
-            // Note: Install GDB to use this configuration
-            "name": "ROS: Attach",
-            "type": "ros",
-            "request": "attach"
+            "name": "ROS Launch",
+            "request": "launch",
+            "type": "cppdbg",
+            "preLaunchTask": "ROS Launch Micras Simulation",
+            "serverLaunchTimeout": 10000,
+            "miDebuggerServerAddress": "localhost:3000",
+            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/../../install/micras_simulation/lib/micras_simulation/${input:args}",
         },
         {
-            "name": "ROS: Launch",
-            "type": "ros",
+            "name": "ROS Attach",
             "request": "launch",
-            "target": "${workspaceFolder}/launch/include/node.launch.xml",
-            "preLaunchTask": "ROS Launch World",
-            "arguments": ["name:=${input:args}"]
+            "type": "cppdbg",
+            "miDebuggerServerAddress": "localhost:3000",
+            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/../../install/micras_simulation/lib/micras_simulation/${input:args}",
         }
     ],
     "inputs": [
