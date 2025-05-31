@@ -74,7 +74,7 @@ class MazeParser:
                 x = col * self.cell_size
                 y = row * self.cell_size
                 xml.append(
-                    f'  <geom name="post_{row}_{col}" type="box" '
+                    f'  <geom class="post" name="post_{row}_{col}" '
                     f'pos="{x:.6f} {y:.6f} {self.wall_height / 2:.6f}"/>'
                 )
 
@@ -91,7 +91,7 @@ class MazeParser:
                     x = col * self.cell_size + self.cell_size / 2
                     y = row * self.cell_size
                     xml.append(
-                        f'  <geom name="horizontal_wall_{row}_{col}" type="box" '
+                        f'  <geom class="hwall" name="hwall_{row}_{col}" '
                         f'pos="{x:.6f} {y:.6f} {self.wall_height / 2:.6f}"/>'
                     )
 
@@ -110,7 +110,7 @@ class MazeParser:
                     y = row * self.cell_size + self.cell_size / 2
 
                     xml.append(
-                        f'  <geom class="vwall" name="vwall_{row}_{col}" type="box" '
+                        f'  <geom class="vwall" name="vwall_{row}_{col}" '
                         f'pos="{x:.6f} {y:.6f} {self.wall_height / 2:.6f}"/>'
                     )
         return xml
@@ -125,17 +125,17 @@ class MazeParser:
     def generate_default_class(self) -> str:
         xml = []
 
-        xml.append('<default>')
-        xml.append('  <default class="post">')
-        xml.append(f'    <geom type="box" size="{self.wall_thickness / 2} {self.wall_thickness / 2} {self.wall_height / 2}" rgba="1 1 1 1" contype="1" conaffinity="1"/>')
+        xml.append('  <default>')
+        xml.append('    <default class="post">')
+        xml.append(f'      <geom type="box" size="{self.wall_thickness / 2} {self.wall_thickness / 2} {self.wall_height / 2}" rgba="1 1 1 1" contype="1" conaffinity="1"/>')
+        xml.append('    </default>')
+        xml.append('    <default class="hwall">')
+        xml.append(f'      <geom type="box" size="{self.cell_size / 2} {self.wall_thickness / 2} {self.wall_height / 2}" rgba="1 1 1 1" contype="1" conaffinity="1"/>')
+        xml.append('    </default>')
+        xml.append('    <default class="vwall">')
+        xml.append(f'      <geom type="box" size="{self.wall_thickness / 2} {self.cell_size / 2} {self.wall_height / 2}" rgba="1 1 1 1" contype="1" conaffinity="1"/>')
+        xml.append('    </default>')
         xml.append('  </default>')
-        xml.append('  <default class="hwall">')
-        xml.append(f'    <geom type="box" size="{self.cell_size / 2} {self.wall_thickness / 2} {self.wall_height / 2}" rgba="1 1 1 1" contype="1" conaffinity="1"/>')
-        xml.append('  </default>')
-        xml.append('  <default class="vwall">')
-        xml.append(f'    <geom type="box" size="{self.wall_thickness / 2} {self.cell_size / 2} {self.wall_height / 2}" rgba="1 1 1 1" contype="1" conaffinity="1"/>')
-        xml.append('  </default>')
-        xml.append('</default>')
 
         return '\n'.join(xml)
 
@@ -147,9 +147,11 @@ class MazeParser:
 
         xml_lines.append('<mujoco>')
         xml_lines.append(self.generate_default_class())
+        xml_lines.append('  <worldbody>')
         xml_lines.extend(self.generate_posts_xml())
         xml_lines.extend(self.generate_horizontal_walls_xml(horizontal_walls))
         xml_lines.extend(self.generate_vertical_walls_xml(vertical_walls))
+        xml_lines.append('  </worldbody>')
         xml_lines.append('</mujoco>')
 
         return '\n'.join(xml_lines)
