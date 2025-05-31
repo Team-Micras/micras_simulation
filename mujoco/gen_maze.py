@@ -74,7 +74,7 @@ class MazeParser:
                 x = col * self.cell_size
                 y = row * self.cell_size
                 xml.append(
-                    f'  <geom class="post" name="post_{row}_{col}" '
+                    f'    <geom class="post" name="post_{row}_{col}" '
                     f'pos="{x:.6f} {y:.6f} {self.wall_height / 2:.6f}"/>'
                 )
 
@@ -91,7 +91,7 @@ class MazeParser:
                     x = col * self.cell_size + self.cell_size / 2
                     y = row * self.cell_size
                     xml.append(
-                        f'  <geom class="hwall" name="hwall_{row}_{col}" '
+                        f'    <geom class="hwall" name="hwall_{row}_{col}" '
                         f'pos="{x:.6f} {y:.6f} {self.wall_height / 2:.6f}"/>'
                     )
 
@@ -110,7 +110,7 @@ class MazeParser:
                     y = row * self.cell_size + self.cell_size / 2
 
                     xml.append(
-                        f'  <geom class="vwall" name="vwall_{row}_{col}" '
+                        f'    <geom class="vwall" name="vwall_{row}_{col}" '
                         f'pos="{x:.6f} {y:.6f} {self.wall_height / 2:.6f}"/>'
                     )
         return xml
@@ -122,20 +122,31 @@ class MazeParser:
         xml.append(f'<!-- Cell size: {self.cell_size:.2f} m, Wall thickness: {self.wall_thickness:.4f} m, Wall height: {self.wall_height:.2f} m -->')
         return '\n'.join(xml)
 
+    def generate_assets(self) -> str:
+        xml = []
+        xml.append('  <asset>')
+        xml.append('    <texture name="walls" type="cube" builtin="flat" width="512" height="512" rgb1="1 1 1" rgb2="1 0 0"/>')
+        xml.append('    <material name="walls" texture="walls"/>')
+        xml.append('  </asset>\n')
+        return '\n'.join(xml)
+
     def generate_default_class(self) -> str:
         xml = []
 
+        wall_parameters = 'type="box" material="walls" zaxis="0 1 0"'
+        wall_size = self.cell_size - self.wall_thickness
+
         xml.append('  <default>')
         xml.append('    <default class="post">')
-        xml.append(f'      <geom type="box" size="{self.wall_thickness / 2} {self.wall_thickness / 2} {self.wall_height / 2}" rgba="1 1 1 1" contype="1" conaffinity="1"/>')
+        xml.append(f'      <geom {wall_parameters} size="{self.wall_thickness / 2} {self.wall_height / 2} {self.wall_thickness / 2}"/>')
         xml.append('    </default>')
         xml.append('    <default class="hwall">')
-        xml.append(f'      <geom type="box" size="{self.cell_size / 2} {self.wall_thickness / 2} {self.wall_height / 2}" rgba="1 1 1 1" contype="1" conaffinity="1"/>')
+        xml.append(f'      <geom {wall_parameters} size="{wall_size / 2} {self.wall_height / 2} {self.wall_thickness / 2}"/>')
         xml.append('    </default>')
         xml.append('    <default class="vwall">')
-        xml.append(f'      <geom type="box" size="{self.wall_thickness / 2} {self.cell_size / 2} {self.wall_height / 2}" rgba="1 1 1 1" contype="1" conaffinity="1"/>')
+        xml.append(f'      <geom {wall_parameters} size="{self.wall_thickness / 2} {self.wall_height / 2} {wall_size / 2}"/>')
         xml.append('    </default>')
-        xml.append('  </default>')
+        xml.append('  </default>\n')
 
         return '\n'.join(xml)
 
@@ -146,6 +157,7 @@ class MazeParser:
         xml_lines.append(self.add_header())
 
         xml_lines.append('<mujoco>')
+        xml_lines.append(self.generate_assets())
         xml_lines.append(self.generate_default_class())
         xml_lines.append('  <worldbody>')
         xml_lines.extend(self.generate_posts_xml())
@@ -173,38 +185,11 @@ def main():
 
     try:
         maze_parser = MazeParser(args.cell_size, args.wall_thickness)
-
-        # Parse the maze file
         lines = maze_parser.parse_maze_file(args.maze_file)
-        print(f"Parsed maze with {len(lines)} lines.")
-
-        # Extract walls
         horizontal_walls = maze_parser.extract_horizontal_walls(lines)
-        print(f"Found {len(horizontal_walls)} horizontal wall rows.")
         vertical_walls = maze_parser.extract_vertical_walls(lines)
-        print(f"Found {len(vertical_walls)} vertical wall rows.")
-
-
-
-        for i in range(len(horizontal_walls)):
-            for j in range(len(horizontal_walls[i])):
-                print("0", end="")
-                if horizontal_walls[i][j]:
-                    print(MazeSymbol.WALL_HORIZONTAL, end="")
-                else:
-                    print(MazeSymbol.WALL_HORIZONTAL_EMPTY, end="")
-            print()
-
-            if i < len(vertical_walls):
-                for j in range(len(vertical_walls[i])):
-                    if vertical_walls[i][j]:
-                        print(MazeSymbol.WALL_VERTICAL, end="   ")
-                    else:
-                        print(MazeSymbol.WALL_HORIZONTAL_EMPTY, end=" ")
-                print()
-
-        # Generate XML
         xml_content = maze_parser.generate_xml(horizontal_walls, vertical_walls)
+
         with open(output_file, 'w') as f:
             f.write(xml_content)
 
