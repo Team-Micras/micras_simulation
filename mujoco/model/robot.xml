@@ -3,7 +3,7 @@
 
   <asset>
     <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1=".1 .2 .3" rgb2=".2 .3 .4"/>
-    <material name="grid" texture="grid" texrepeat="1 1" texuniform="true" reflectance=".0"/>
+    <material name="grid" texture="grid" texrepeat="6 6" texuniform="true" reflectance=".2"/>
 
     <texture name="pcb_texture" type="2d" builtin="flat" width="256" height="256" rgb1="0.0 0.4 0.2"/>
     <material name="pcb_green" texture="pcb_texture" rgba="0.0 0.6 0.2 1" reflectance=".1" shininess="0.3"/>
@@ -43,26 +43,26 @@
   <worldbody>
     <geom type="plane" size="3 3 .01" material="grid"/>
     <light name="ambient_light" pos="0 0 3" dir="0 0 -1" directional="true" castshadow="false"/>
-    <!-- <geom name="maze" type="mesh" mesh="maze" pos="0 0 0.0" xyaxes="0 1 0 0 0 1"/> -->
+    <geom name="maze" type="mesh" mesh="maze" pos="-0.3 0.3 0.0" xyaxes="0 1 0 0 0 1"/>
 
     <body name="car" pos="0.09 0.09 .03">
       <freejoint/>
 
       <site name="imu"/>
-      <site name="lidar_0" pos="-0.026 0.041 0.0003" zaxis=" 0 1 0"/>
-      <site name="lidar_1" pos="-0.01  0.061 0.0003" zaxis="-1 1 0"/>
-      <site name="lidar_2" pos=" 0.01  0.061 0.0003" zaxis=" 1 1 0"/>
-      <site name="lidar_3" pos=" 0.026 0.041 0.0003" zaxis=" 0 1 0"/>
+      <site name="lidar_0" pos="-0.026 0.041 0.02" zaxis=" 0 1 0"/>
+      <site name="lidar_1" pos="-0.01  0.061 0.02" zaxis="-1 1 0"/>
+      <site name="lidar_2" pos=" 0.01  0.061 0.02" zaxis=" 1 1 0"/>
+      <site name="lidar_3" pos=" 0.026 0.041 0.02" zaxis=" 0 1 0"/>
 
       <geom name="chasis" type="mesh" mesh="chasis" mass="0.1" material="pcb_green" contype="1" conaffinity="1"/>
       <geom name="front wheel" pos="0.0 0.06 -0.0003" type="sphere" size=".001" condim="1" priority="1"/>
 
-      <body name="left wheel" pos="0.031 0.0 0.01" zaxis="1 0 0">
+      <body name="left wheel" pos="-0.031 0.0 0.01" zaxis="-1 0 0">
         <joint name="left"/>
         <geom class="wheel"/>
         <site class="decor" size="0.01 0.001 0.0041"/>
       </body>
-      <body name="right wheel" pos="-0.031 0.0 0.01" zaxis="1 0 0">
+      <body name="right wheel" pos="0.031 0.0 0.01" zaxis="-1 0 0">
         <joint name="right"/>
         <geom class="wheel"/>
         <site class="decor" size="0.01 0.001 0.0041"/>
@@ -82,8 +82,8 @@
   </tendon>
 
   <actuator>
-    <motor name="forward" tendon="forward" ctrlrange="-0.1 0.1"/>
-    <motor name="turn"    tendon="turn"    ctrlrange="-0.1 0.1"/>
+    <motor name="left_motor"  joint="left"  ctrlrange="-0.1 0.1" gear="1"/>
+    <motor name="right_motor" joint="right" ctrlrange="-0.1 0.1" gear="1"/>
   </actuator>
 
   <sensor>
