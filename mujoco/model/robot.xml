@@ -5,7 +5,7 @@
     <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1=".1 .1 .1" rgb2=".2 .2 .2"/>
     <material name="grid" texture="grid" texrepeat="5.5555555555 5.5555555555" texuniform="true" reflectance=".2"/>
 
-    <model name="maze" file="../maze.xml"/>
+    <model name="maze" file="maze.xml"/>
 
     <mesh name="base" scale="0.001 0.001 0.001"
         vertex=" 31.0 -33.0 -0.5
