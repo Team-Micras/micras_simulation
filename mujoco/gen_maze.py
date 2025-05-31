@@ -5,18 +5,6 @@ import argparse
 from enum import StrEnum
 from pathlib import Path
 
-# Example maze format:
-# o---o---o---o---o
-# | G |           |
-# o   o   o   o---o
-# |       |       |
-# o---o---o---o   o
-# |               |
-# o   o---o---o   o
-# | S |           |
-# o---o---o---o---o
-
-
 CELL_CHAR_WIDTH = 4
 CELL_CHAR_HEIGHT = 2
 
@@ -26,13 +14,6 @@ class MazeSymbol(StrEnum):
     WALL_HORIZONTAL_EMPTY = '   '
     WALL_VERTICAL = '|'
     WALL_VERTICAL_EMPTY = ''
-
-# order:
-# Read Horizantal walls
-# Read Vertical walls
-# and so on
-
-# array<Array<array<horizontal, vertical>>>
 
 class MazeParser:
     def __init__(self, cell_size: float = 0.18, wall_thickness: float = 0.012, wall_height: float = 0.05):
@@ -94,9 +75,7 @@ class MazeParser:
                 y = row * self.cell_size
                 xml.append(
                     f'  <geom name="post_{row}_{col}" type="box" '
-                    f'size="{self.wall_thickness / 2} {self.wall_thickness / 2} {self.wall_height / 2}" '
-                    f'pos="{x:.6f} {y:.6f} {self.wall_height / 2:.6f}" '
-                    f'contype="1" conaffinity="1"/>'
+                    f'pos="{x:.6f} {y:.6f} {self.wall_height / 2:.6f}"/>'
                 )
 
         return xml
@@ -113,9 +92,7 @@ class MazeParser:
                     y = row * self.cell_size
                     xml.append(
                         f'  <geom name="horizontal_wall_{row}_{col}" type="box" '
-                        f'size="{self.cell_size / 2} {self.wall_thickness / 2} {self.wall_height / 2}" '
-                        f'pos="{x:.6f} {y:.6f} {self.wall_height / 2:.6f}" '
-                        f'contype="1" conaffinity="1"/>'
+                        f'pos="{x:.6f} {y:.6f} {self.wall_height / 2:.6f}"/>'
                     )
 
         return xml
@@ -131,25 +108,48 @@ class MazeParser:
                 if inverted_vertical_walls[row][col]:
                     x = col * self.cell_size
                     y = row * self.cell_size + self.cell_size / 2
-                    xml.append(
-                        f'  <geom name="vertical_wall_{row}_{col}" type="box" '
-                        f'size="{self.wall_thickness / 2} {self.cell_size / 2} {self.wall_height / 2}" '
-                        f'pos="{x:.6f} {y:.6f} {self.wall_height / 2:.6f}" '
-                        f'contype="1" conaffinity="1"/>'
-                    )
 
+                    xml.append(
+                        f'  <geom class="vwall" name="vwall_{row}_{col}" type="box" '
+                        f'pos="{x:.6f} {y:.6f} {self.wall_height / 2:.6f}"/>'
+                    )
         return xml
+
+    def add_header(self) -> str:
+        xml = []
+        xml.append('<!-- Generated maze for MuJoCo -->')
+        xml.append(f'<!-- Maze dimensions: {self.maze_width}x{self.maze_height} -->')
+        xml.append(f'<!-- Cell size: {self.cell_size:.2f} m, Wall thickness: {self.wall_thickness:.4f} m, Wall height: {self.wall_height:.2f} m -->')
+        return '\n'.join(xml)
+
+    def generate_default_class(self) -> str:
+        xml = []
+
+        xml.append('<default>')
+        xml.append('  <default class="post">')
+        xml.append(f'    <geom type="box" size="{self.wall_thickness / 2} {self.wall_thickness / 2} {self.wall_height / 2}" rgba="1 1 1 1" contype="1" conaffinity="1"/>')
+        xml.append('  </default>')
+        xml.append('  <default class="hwall">')
+        xml.append(f'    <geom type="box" size="{self.cell_size / 2} {self.wall_thickness / 2} {self.wall_height / 2}" rgba="1 1 1 1" contype="1" conaffinity="1"/>')
+        xml.append('  </default>')
+        xml.append('  <default class="vwall">')
+        xml.append(f'    <geom type="box" size="{self.wall_thickness / 2} {self.cell_size / 2} {self.wall_height / 2}" rgba="1 1 1 1" contype="1" conaffinity="1"/>')
+        xml.append('  </default>')
+        xml.append('</default>')
+
+        return '\n'.join(xml)
 
     def generate_xml(self, horizontal_walls: list[list[bool]], vertical_walls: list[list[bool]]) -> str:
         """Generate the MuJoCo XML for the maze walls."""
         xml_lines = []
 
-        xml_lines.append('<mujoco>')
+        xml_lines.append(self.add_header())
 
+        xml_lines.append('<mujoco>')
+        xml_lines.append(self.generate_default_class())
         xml_lines.extend(self.generate_posts_xml())
         xml_lines.extend(self.generate_horizontal_walls_xml(horizontal_walls))
         xml_lines.extend(self.generate_vertical_walls_xml(vertical_walls))
-
         xml_lines.append('</mujoco>')
 
         return '\n'.join(xml_lines)
