@@ -14,6 +14,8 @@ class MazeSymbol(StrEnum):
     WALL_HORIZONTAL_EMPTY = '   '
     WALL_VERTICAL = '|'
     WALL_VERTICAL_EMPTY = ''
+    START = 'S'
+    GOAL = 'G'
 
 class MazeParser:
     def __init__(self, cell_size: float = 0.18, wall_thickness: float = 0.012, wall_height: float = 0.05):
@@ -22,6 +24,8 @@ class MazeParser:
         self.wall_height = wall_height
         self.width = 0
         self.height = 0
+        self.start = None
+        self.goals = []
 
     def parse_maze_file(self, maze_file: str) -> list[str]:
         with open(maze_file, 'r') as f:
@@ -61,6 +65,62 @@ class MazeParser:
             vertical_walls.append(row)
         return vertical_walls
 
+    def find_start_and_goals(self, lines: list[str]) -> tuple[tuple[int, int], list[tuple[int, int]]]:
+        start = None
+        goals = []
+
+        row = 0
+        col = 0
+
+        inverted_lines = lines[::-1]
+
+        for i in range(1, len(inverted_lines), 2):
+            for j in range(2, len(inverted_lines[i]), 4):
+                if inverted_lines[i][j] == MazeSymbol.START:
+                    if start is not None:
+                        raise ValueError("Multiple start points found")
+                    start = (row, col)
+                elif inverted_lines[i][j] == MazeSymbol.GOAL:
+                    goals.append((row, col))
+                col += 1
+            row += 1
+            col = 0
+
+        self.start = start
+        self.goals = goals
+
+        return start, goals
+
+    def is_start_or_goal(self, row: int, col: int) -> bool:
+        if (row, col) == self.start:
+            return True
+        if (row, col) in self.goals:
+            return True
+        return False
+
+    def is_post_on_start_cell(self, row: int, col: int) -> bool:
+        if self.is_start_or_goal(row, col) or \
+           self.is_start_or_goal(row - 1, col) or \
+           self.is_start_or_goal(row, col - 1) or \
+           self.is_start_or_goal(row - 1, col - 1):
+            return True
+
+        return False
+
+    def is_horizontal_wall_on_start_cell(self, row: int, col: int) -> bool:
+        if self.is_start_or_goal(row  - 1, col) or \
+           self.is_start_or_goal(row, col):
+            return True
+
+        return False
+
+    def is_vertical_wall_on_start_cell(self, row: int, col: int) -> bool:
+        if self.is_start_or_goal(row, col) or \
+           self.is_start_or_goal(row, col - 1):
+            return True
+
+        return False
+
     def generate_posts_xml(self) -> list[str]:
         xml = []
 
@@ -68,8 +128,10 @@ class MazeParser:
             for col in range(self.maze_width + 1):
                 x = col * self.cell_size
                 y = row * self.cell_size
+
+                class_name = 'post_w' if self.is_post_on_start_cell(row, col) else 'post'
                 xml.append(
-                    f'    <geom class="post" name="post_{row}_{col}" '
+                    f'    <geom class="{class_name}" name="post_{row}_{col}" '
                     f'pos="{x:.6f} {y:.6f} {self.wall_height / 2:.6f}"/>'
                 )
         return xml
@@ -83,8 +145,10 @@ class MazeParser:
                 if inverted_horizontal_walls[row][col]:
                     x = col * self.cell_size + self.cell_size / 2
                     y = row * self.cell_size
+
+                    class_name = 'hwall_w' if self.is_horizontal_wall_on_start_cell(row, col) else 'hwall'
                     xml.append(
-                        f'    <geom class="hwall" name="hwall_{row}_{col}" '
+                        f'    <geom class="{class_name}" name="hwall_{row}_{col}" '
                         f'pos="{x:.6f} {y:.6f} {self.wall_height / 2:.6f}"/>'
                     )
         return xml
@@ -98,8 +162,10 @@ class MazeParser:
                 if inverted_vertical_walls[row][col]:
                     x = col * self.cell_size
                     y = row * self.cell_size + self.cell_size / 2
+
+                    class_name = 'vwall_w' if self.is_vertical_wall_on_start_cell(row, col) else 'vwall'
                     xml.append(
-                        f'    <geom class="vwall" name="vwall_{row}_{col}" '
+                        f'    <geom class="{class_name}" name="vwall_{row}_{col}" '
                         f'pos="{x:.6f} {y:.6f} {self.wall_height / 2:.6f}"/>'
                     )
         return xml
@@ -121,18 +187,30 @@ class MazeParser:
 
     def generate_default_class(self) -> str:
         xml = []
-        wall_parameters = 'type="box" material="walls" zaxis="0 1 0"'
-        wall_size = self.cell_size - self.wall_thickness
+        red_wall_parameters = 'type="box" zaxis="0 1 0" material="walls"'
+        white_wall_parameters = 'type="box" zaxis="0 1 0" rgba="1 1 1 1"'
+        length = (self.cell_size - self.wall_thickness) / 2
+        height = self.wall_height / 2
+        width = self.wall_thickness / 2
 
         xml.append('  <default>')
         xml.append('    <default class="post">')
-        xml.append(f'      <geom {wall_parameters} size="{self.wall_thickness / 2} {self.wall_height / 2} {self.wall_thickness / 2}"/>')
+        xml.append(f'      <geom {red_wall_parameters} size="{width:.6f} {height:.6f} {width:.6f}"/>')
+        xml.append('    </default>')
+        xml.append('    <default class="post_w">')
+        xml.append(f'      <geom {white_wall_parameters} size="{width:.6f} {height:.6f} {width:.6f}"/>')
         xml.append('    </default>')
         xml.append('    <default class="hwall">')
-        xml.append(f'      <geom {wall_parameters} size="{wall_size / 2} {self.wall_height / 2} {self.wall_thickness / 2}"/>')
+        xml.append(f'      <geom {red_wall_parameters} size="{length:.6f} {height:.6f} {width:.6f}"/>')
+        xml.append('    </default>')
+        xml.append('    <default class="hwall_w">')
+        xml.append(f'      <geom {white_wall_parameters} size="{length:.6f} {height:.6f} {width:.6f}"/>')
         xml.append('    </default>')
         xml.append('    <default class="vwall">')
-        xml.append(f'      <geom {wall_parameters} size="{self.wall_thickness / 2} {self.wall_height / 2} {wall_size / 2}"/>')
+        xml.append(f'      <geom {red_wall_parameters} size="{width:.6f} {height:.6f} {length:.6f}"/>')
+        xml.append('    </default>')
+        xml.append('    <default class="vwall_w">')
+        xml.append(f'      <geom {white_wall_parameters} size="{width:.6f} {height:.6f} {length:.6f}"/>')
         xml.append('    </default>')
         xml.append('  </default>\n')
         return '\n'.join(xml)
@@ -172,6 +250,8 @@ def main():
         lines = maze_parser.parse_maze_file(args.maze_file)
         horizontal_walls = maze_parser.extract_horizontal_walls(lines)
         vertical_walls = maze_parser.extract_vertical_walls(lines)
+        start, goals = maze_parser.find_start_and_goals(lines)
+        print(f"Start point: {start}, Goals: {goals}")
         xml_content = maze_parser.generate_xml(horizontal_walls, vertical_walls)
 
         with open(output_file, 'w') as f:
