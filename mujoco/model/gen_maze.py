@@ -119,7 +119,7 @@ class MazeParser:
         xml = []
         xml.append('<!-- Generated maze for MuJoCo -->')
         xml.append(f'<!-- Maze dimensions: {self.maze_width}x{self.maze_height} -->')
-        xml.append(f'<!-- Cell size: {self.cell_size:.2f} m, Wall thickness: {self.wall_thickness:.4f} m, Wall height: {self.wall_height:.2f} m -->')
+        xml.append(f'<!-- Cell size: {self.cell_size:.2f} m, Wall thickness: {self.wall_thickness:.4f} m, Wall height: {self.wall_height:.2f} m -->\n')
         return '\n'.join(xml)
 
     def generate_assets(self) -> str:
