@@ -24,8 +24,6 @@ class MazeParser:
         self.height = 0
 
     def parse_maze_file(self, maze_file: str) -> list[str]:
-        """Parse the maze file and return lines."""
-
         with open(maze_file, 'r') as f:
             lines = [line.rstrip() for line in f.readlines()]
 
@@ -36,11 +34,9 @@ class MazeParser:
         self.maze_height = (len(lines) - 1) // CELL_CHAR_HEIGHT
 
         print(f"Detected maze dimensions: {self.maze_width}x{self.maze_height}")
-
         return lines
 
     def extract_horizontal_walls(self, lines: list[str]) -> list[list[bool]]:
-        """Extract horizontal wall information from the maze lines."""
         horizontal_walls = []
         for i in range(0, len(lines), 2):
             row = []
@@ -54,7 +50,6 @@ class MazeParser:
 
 
     def extract_vertical_walls(self, lines: list[str]) -> list[list[bool]]:
-        """Extract vertical wall information from the maze lines."""
         vertical_walls = []
         for i in range(1, len(lines), 2):
             row = []
@@ -77,13 +72,11 @@ class MazeParser:
                     f'    <geom class="post" name="post_{row}_{col}" '
                     f'pos="{x:.6f} {y:.6f} {self.wall_height / 2:.6f}"/>'
                 )
-
         return xml
 
     def generate_horizontal_walls_xml(self, horizontal_walls: list[list[bool]]) -> list[str]:
         xml = []
-
-        inverted_horizontal_walls = horizontal_walls[::-1]  # Invert the order for MuJoCo
+        inverted_horizontal_walls = horizontal_walls[::-1]
 
         for row in range(len(inverted_horizontal_walls)):
             for col in range(len(inverted_horizontal_walls[row])):
@@ -94,21 +87,17 @@ class MazeParser:
                         f'    <geom class="hwall" name="hwall_{row}_{col}" '
                         f'pos="{x:.6f} {y:.6f} {self.wall_height / 2:.6f}"/>'
                     )
-
         return xml
 
     def generate_vertical_walls_xml(self, vertical_walls: list[list[bool]]) -> list[str]:
         xml = []
-
-        # Invert the vertical walls to match MuJoCo's coordinate system
-        inverted_vertical_walls = vertical_walls[::-1]  # Invert the order for MuJoCo
+        inverted_vertical_walls = vertical_walls[::-1]
 
         for row in range(len(inverted_vertical_walls)):
             for col in range(len(inverted_vertical_walls[row])):
                 if inverted_vertical_walls[row][col]:
                     x = col * self.cell_size
                     y = row * self.cell_size + self.cell_size / 2
-
                     xml.append(
                         f'    <geom class="vwall" name="vwall_{row}_{col}" '
                         f'pos="{x:.6f} {y:.6f} {self.wall_height / 2:.6f}"/>'
@@ -132,7 +121,6 @@ class MazeParser:
 
     def generate_default_class(self) -> str:
         xml = []
-
         wall_parameters = 'type="box" material="walls" zaxis="0 1 0"'
         wall_size = self.cell_size - self.wall_thickness
 
@@ -147,15 +135,11 @@ class MazeParser:
         xml.append(f'      <geom {wall_parameters} size="{self.wall_thickness / 2} {self.wall_height / 2} {wall_size / 2}"/>')
         xml.append('    </default>')
         xml.append('  </default>\n')
-
         return '\n'.join(xml)
 
     def generate_xml(self, horizontal_walls: list[list[bool]], vertical_walls: list[list[bool]]) -> str:
-        """Generate the MuJoCo XML for the maze walls."""
         xml_lines = []
-
         xml_lines.append(self.add_header())
-
         xml_lines.append('<mujoco>')
         xml_lines.append(self.generate_assets())
         xml_lines.append(self.generate_default_class())
@@ -165,7 +149,6 @@ class MazeParser:
         xml_lines.extend(self.generate_vertical_walls_xml(vertical_walls))
         xml_lines.append('  </worldbody>')
         xml_lines.append('</mujoco>')
-
         return '\n'.join(xml_lines)
 
 def main():
