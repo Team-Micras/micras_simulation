@@ -34,6 +34,9 @@
     <default class="decor">
       <site type="box" rgba=".5 1 .5 1"/>
     </default>
+    <default class="dc_motor">
+        <general dyntype="filter" biastype="affine" gainprm="0.01 0 0" biasprm="0 0 -0.07" ctrlrange="-100 100"/>
+    </default>
   </default>
 
   <worldbody>
@@ -67,20 +70,9 @@
     </body>
   </worldbody>
 
-  <tendon>
-    <fixed name="forward">
-      <joint joint="left"  coef=".5"/>
-      <joint joint="right" coef=".5"/>
-    </fixed>
-    <fixed name="turn">
-      <joint joint="left"  coef="-.5"/>
-      <joint joint="right" coef=".5"/>
-    </fixed>
-  </tendon>
-
   <actuator>
-    <motor name="left_motor"  joint="left"  ctrlrange="-0.1 0.1" gear="1"/>
-    <motor name="right_motor" joint="right" ctrlrange="-0.1 0.1" gear="1"/>
+    <general name="left_motor" class="dc_motor" joint="left"/>
+    <general name="right_motor" class="dc_motor" joint="right"/>
   </actuator>
 
   <sensor>
