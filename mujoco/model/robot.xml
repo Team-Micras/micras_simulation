@@ -35,7 +35,7 @@
       <site type="box" rgba=".5 1 .5 1"/>
     </default>
     <default class="dc_motor">
-        <general dyntype="filter" biastype="affine" gainprm="0.01 0 0" biasprm="0 0 -0.07" ctrlrange="-100 100"/>
+        <general dyntype="filter" biastype="affine" gainprm="0.01 0 0" biasprm="0 0 -0.00001" gear="10"/>
     </default>
   </default>
 
