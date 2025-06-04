@@ -1,6 +1,15 @@
 <mujoco>
   <compiler autolimits="true"/>
 
+  <extension>
+    <plugin plugin="mujoco.ros2">
+      <instance name="micras">
+        <config key="ros_namespace" value="micras/"/>
+        <config key="topic_queue_size" value="10"/>
+      </instance>
+    </plugin>
+  </extension>
+
   <asset>
     <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1=".1 .1 .1" rgb2=".2 .2 .2"/>
     <material name="grid" texture="grid" texrepeat="5.5555555555 5.5555555555" texuniform="true" reflectance=".2"/>
@@ -35,7 +44,7 @@
       <site type="box" rgba=".5 1 .5 1"/>
     </default>
     <default class="dc_motor">
-        <general dyntype="filter" biastype="affine" gainprm="0.01 0 0" biasprm="0 0 -0.00001" gear="10"/>
+        <general biastype="affine" gainprm="0.01 0 0" biasprm="0 0 -0.00001" gear="10"/>
     </default>
   </default>
 
