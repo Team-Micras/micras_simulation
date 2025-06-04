@@ -94,13 +94,13 @@ const proxy::Buzzer::Config buzzer_config {
  *****************************************/
 
 const proxy::RotarySensor::Config rotary_sensor_left_config {
-    micras_node,         // node
-    "left_encoder" // topic
+    .node = micras_node,
+    .topic = "left_encoder"
 };
 
 const proxy::RotarySensor::Config rotary_sensor_right_config {
-    micras_node,          // node
-    "right_encoder" // topic
+    .node = micras_node,
+    .topic = "right_encoder"
 };
 
 const proxy::TorqueSensors::Config torque_sensors_config {

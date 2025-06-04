@@ -7,7 +7,7 @@
 
 #include <cstdint>
 #include <rclcpp/rclcpp.hpp>
-#include <sensor_msgs/msg/joint_state.hpp>
+#include <example_interfaces/msg/float64.hpp>
 
 namespace micras::proxy {
 /**
@@ -39,14 +39,14 @@ public:
 
 private:
     /**
-     * @brief Subscriber para os dados do sensor rotativo.
+     * @brief Subscription to the rotary sensor topic.
      */
-    rclcpp::Subscription<sensor_msgs::msg::JointState>::SharedPtr subscriber;
+    rclcpp::Subscription<example_interfaces::msg::Float64>::SharedPtr subscriber;
 
     /**
-     * @brief Dados do sensor rotativo recebidos.
+     * @brief Received data from the rotary sensor.
      */
-    sensor_msgs::msg::JointState data;
+    double data{0.0};
 };
 }  // namespace micras::proxy
 
