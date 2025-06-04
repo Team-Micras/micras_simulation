@@ -86,6 +86,10 @@ install(DIRECTORY gazebo
     PATTERN gazebo/micras_plugin EXCLUDE
 )
 
+install(DIRECTORY mujoco
+    DESTINATION share/${PROJECT_NAME}
+)
+
 install(DIRECTORY launch
     DESTINATION share/${PROJECT_NAME}
 )
