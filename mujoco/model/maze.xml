@@ -1,6 +1,7 @@
 <!-- Generated maze for MuJoCo -->
 <!-- Maze dimensions: 16x16 -->
 <!-- Cell size: 0.18 m, Wall thickness: 0.0126 m, Wall height: 0.05 m -->
+
 <mujoco>
   <asset>
     <texture name="walls" type="cube" builtin="flat" width="512" height="512" rgb1="1 1 1" rgb2="1 0 0"/>
@@ -9,19 +10,28 @@
 
   <default>
     <default class="post">
-      <geom type="box" material="walls" zaxis="0 1 0" size="0.0063 0.025 0.0063"/>
+      <geom type="box" zaxis="0 1 0" material="walls" size="0.006300 0.025000 0.006300"/>
+    </default>
+    <default class="post_w">
+      <geom type="box" zaxis="0 1 0" rgba="1 1 1 1" size="0.006300 0.025000 0.006300"/>
     </default>
     <default class="hwall">
-      <geom type="box" material="walls" zaxis="0 1 0" size="0.0837 0.025 0.0063"/>
+      <geom type="box" zaxis="0 1 0" material="walls" size="0.083700 0.025000 0.006300"/>
+    </default>
+    <default class="hwall_w">
+      <geom type="box" zaxis="0 1 0" rgba="1 1 1 1" size="0.083700 0.025000 0.006300"/>
     </default>
     <default class="vwall">
-      <geom type="box" material="walls" zaxis="0 1 0" size="0.0063 0.025 0.0837"/>
+      <geom type="box" zaxis="0 1 0" material="walls" size="0.006300 0.025000 0.083700"/>
+    </default>
+    <default class="vwall_w">
+      <geom type="box" zaxis="0 1 0" rgba="1 1 1 1" size="0.006300 0.025000 0.083700"/>
     </default>
   </default>
 
   <worldbody>
-    <geom class="post" name="post_0_0" pos="0.000000 0.000000 0.025000"/>
-    <geom class="post" name="post_0_1" pos="0.180000 0.000000 0.025000"/>
+    <geom class="post_w" name="post_0_0" pos="0.000000 0.000000 0.025000"/>
+    <geom class="post_w" name="post_0_1" pos="0.180000 0.000000 0.025000"/>
     <geom class="post" name="post_0_2" pos="0.360000 0.000000 0.025000"/>
     <geom class="post" name="post_0_3" pos="0.540000 0.000000 0.025000"/>
     <geom class="post" name="post_0_4" pos="0.720000 0.000000 0.025000"/>
@@ -37,8 +47,8 @@
     <geom class="post" name="post_0_14" pos="2.520000 0.000000 0.025000"/>
     <geom class="post" name="post_0_15" pos="2.700000 0.000000 0.025000"/>
     <geom class="post" name="post_0_16" pos="2.880000 0.000000 0.025000"/>
-    <geom class="post" name="post_1_0" pos="0.000000 0.180000 0.025000"/>
-    <geom class="post" name="post_1_1" pos="0.180000 0.180000 0.025000"/>
+    <geom class="post_w" name="post_1_0" pos="0.000000 0.180000 0.025000"/>
+    <geom class="post_w" name="post_1_1" pos="0.180000 0.180000 0.025000"/>
     <geom class="post" name="post_1_2" pos="0.360000 0.180000 0.025000"/>
     <geom class="post" name="post_1_3" pos="0.540000 0.180000 0.025000"/>
     <geom class="post" name="post_1_4" pos="0.720000 0.180000 0.025000"/>
@@ -146,9 +156,9 @@
     <geom class="post" name="post_7_4" pos="0.720000 1.260000 0.025000"/>
     <geom class="post" name="post_7_5" pos="0.900000 1.260000 0.025000"/>
     <geom class="post" name="post_7_6" pos="1.080000 1.260000 0.025000"/>
-    <geom class="post" name="post_7_7" pos="1.260000 1.260000 0.025000"/>
-    <geom class="post" name="post_7_8" pos="1.440000 1.260000 0.025000"/>
-    <geom class="post" name="post_7_9" pos="1.620000 1.260000 0.025000"/>
+    <geom class="post_w" name="post_7_7" pos="1.260000 1.260000 0.025000"/>
+    <geom class="post_w" name="post_7_8" pos="1.440000 1.260000 0.025000"/>
+    <geom class="post_w" name="post_7_9" pos="1.620000 1.260000 0.025000"/>
     <geom class="post" name="post_7_10" pos="1.800000 1.260000 0.025000"/>
     <geom class="post" name="post_7_11" pos="1.980000 1.260000 0.025000"/>
     <geom class="post" name="post_7_12" pos="2.160000 1.260000 0.025000"/>
@@ -163,9 +173,9 @@
     <geom class="post" name="post_8_4" pos="0.720000 1.440000 0.025000"/>
     <geom class="post" name="post_8_5" pos="0.900000 1.440000 0.025000"/>
     <geom class="post" name="post_8_6" pos="1.080000 1.440000 0.025000"/>
-    <geom class="post" name="post_8_7" pos="1.260000 1.440000 0.025000"/>
-    <geom class="post" name="post_8_8" pos="1.440000 1.440000 0.025000"/>
-    <geom class="post" name="post_8_9" pos="1.620000 1.440000 0.025000"/>
+    <geom class="post_w" name="post_8_7" pos="1.260000 1.440000 0.025000"/>
+    <geom class="post_w" name="post_8_8" pos="1.440000 1.440000 0.025000"/>
+    <geom class="post_w" name="post_8_9" pos="1.620000 1.440000 0.025000"/>
     <geom class="post" name="post_8_10" pos="1.800000 1.440000 0.025000"/>
     <geom class="post" name="post_8_11" pos="1.980000 1.440000 0.025000"/>
     <geom class="post" name="post_8_12" pos="2.160000 1.440000 0.025000"/>
@@ -180,9 +190,9 @@
     <geom class="post" name="post_9_4" pos="0.720000 1.620000 0.025000"/>
     <geom class="post" name="post_9_5" pos="0.900000 1.620000 0.025000"/>
     <geom class="post" name="post_9_6" pos="1.080000 1.620000 0.025000"/>
-    <geom class="post" name="post_9_7" pos="1.260000 1.620000 0.025000"/>
-    <geom class="post" name="post_9_8" pos="1.440000 1.620000 0.025000"/>
-    <geom class="post" name="post_9_9" pos="1.620000 1.620000 0.025000"/>
+    <geom class="post_w" name="post_9_7" pos="1.260000 1.620000 0.025000"/>
+    <geom class="post_w" name="post_9_8" pos="1.440000 1.620000 0.025000"/>
+    <geom class="post_w" name="post_9_9" pos="1.620000 1.620000 0.025000"/>
     <geom class="post" name="post_9_10" pos="1.800000 1.620000 0.025000"/>
     <geom class="post" name="post_9_11" pos="1.980000 1.620000 0.025000"/>
     <geom class="post" name="post_9_12" pos="2.160000 1.620000 0.025000"/>
@@ -309,7 +319,7 @@
     <geom class="post" name="post_16_14" pos="2.520000 2.880000 0.025000"/>
     <geom class="post" name="post_16_15" pos="2.700000 2.880000 0.025000"/>
     <geom class="post" name="post_16_16" pos="2.880000 2.880000 0.025000"/>
-    <geom class="hwall" name="hwall_0_0" pos="0.090000 0.000000 0.025000"/>
+    <geom class="hwall_w" name="hwall_0_0" pos="0.090000 0.000000 0.025000"/>
     <geom class="hwall" name="hwall_0_1" pos="0.270000 0.000000 0.025000"/>
     <geom class="hwall" name="hwall_0_2" pos="0.450000 0.000000 0.025000"/>
     <geom class="hwall" name="hwall_0_3" pos="0.630000 0.000000 0.025000"/>
@@ -363,8 +373,8 @@
     <geom class="hwall" name="hwall_7_3" pos="0.630000 1.260000 0.025000"/>
     <geom class="hwall" name="hwall_7_4" pos="0.810000 1.260000 0.025000"/>
     <geom class="hwall" name="hwall_7_5" pos="0.990000 1.260000 0.025000"/>
-    <geom class="hwall" name="hwall_7_7" pos="1.350000 1.260000 0.025000"/>
-    <geom class="hwall" name="hwall_7_8" pos="1.530000 1.260000 0.025000"/>
+    <geom class="hwall_w" name="hwall_7_7" pos="1.350000 1.260000 0.025000"/>
+    <geom class="hwall_w" name="hwall_7_8" pos="1.530000 1.260000 0.025000"/>
     <geom class="hwall" name="hwall_7_12" pos="2.250000 1.260000 0.025000"/>
     <geom class="hwall" name="hwall_7_14" pos="2.610000 1.260000 0.025000"/>
     <geom class="hwall" name="hwall_8_2" pos="0.450000 1.440000 0.025000"/>
@@ -375,8 +385,8 @@
     <geom class="hwall" name="hwall_9_3" pos="0.630000 1.620000 0.025000"/>
     <geom class="hwall" name="hwall_9_4" pos="0.810000 1.620000 0.025000"/>
     <geom class="hwall" name="hwall_9_5" pos="0.990000 1.620000 0.025000"/>
-    <geom class="hwall" name="hwall_9_7" pos="1.350000 1.620000 0.025000"/>
-    <geom class="hwall" name="hwall_9_8" pos="1.530000 1.620000 0.025000"/>
+    <geom class="hwall_w" name="hwall_9_7" pos="1.350000 1.620000 0.025000"/>
+    <geom class="hwall_w" name="hwall_9_8" pos="1.530000 1.620000 0.025000"/>
     <geom class="hwall" name="hwall_9_9" pos="1.710000 1.620000 0.025000"/>
     <geom class="hwall" name="hwall_9_13" pos="2.430000 1.620000 0.025000"/>
     <geom class="hwall" name="hwall_10_2" pos="0.450000 1.800000 0.025000"/>
@@ -446,8 +456,8 @@
     <geom class="hwall" name="hwall_16_13" pos="2.430000 2.880000 0.025000"/>
     <geom class="hwall" name="hwall_16_14" pos="2.610000 2.880000 0.025000"/>
     <geom class="hwall" name="hwall_16_15" pos="2.790000 2.880000 0.025000"/>
-    <geom class="vwall" name="vwall_0_0" pos="0.000000 0.090000 0.025000"/>
-    <geom class="vwall" name="vwall_0_1" pos="0.180000 0.090000 0.025000"/>
+    <geom class="vwall_w" name="vwall_0_0" pos="0.000000 0.090000 0.025000"/>
+    <geom class="vwall_w" name="vwall_0_1" pos="0.180000 0.090000 0.025000"/>
     <geom class="vwall" name="vwall_0_7" pos="1.260000 0.090000 0.025000"/>
     <geom class="vwall" name="vwall_0_16" pos="2.880000 0.090000 0.025000"/>
     <geom class="vwall" name="vwall_1_0" pos="0.000000 0.270000 0.025000"/>
@@ -507,7 +517,7 @@
     <geom class="vwall" name="vwall_7_0" pos="0.000000 1.350000 0.025000"/>
     <geom class="vwall" name="vwall_7_1" pos="0.180000 1.350000 0.025000"/>
     <geom class="vwall" name="vwall_7_6" pos="1.080000 1.350000 0.025000"/>
-    <geom class="vwall" name="vwall_7_7" pos="1.260000 1.350000 0.025000"/>
+    <geom class="vwall_w" name="vwall_7_7" pos="1.260000 1.350000 0.025000"/>
     <geom class="vwall" name="vwall_7_10" pos="1.800000 1.350000 0.025000"/>
     <geom class="vwall" name="vwall_7_11" pos="1.980000 1.350000 0.025000"/>
     <geom class="vwall" name="vwall_7_12" pos="2.160000 1.350000 0.025000"/>
@@ -516,8 +526,8 @@
     <geom class="vwall" name="vwall_8_1" pos="0.180000 1.530000 0.025000"/>
     <geom class="vwall" name="vwall_8_2" pos="0.360000 1.530000 0.025000"/>
     <geom class="vwall" name="vwall_8_6" pos="1.080000 1.530000 0.025000"/>
-    <geom class="vwall" name="vwall_8_7" pos="1.260000 1.530000 0.025000"/>
-    <geom class="vwall" name="vwall_8_9" pos="1.620000 1.530000 0.025000"/>
+    <geom class="vwall_w" name="vwall_8_7" pos="1.260000 1.530000 0.025000"/>
+    <geom class="vwall_w" name="vwall_8_9" pos="1.620000 1.530000 0.025000"/>
     <geom class="vwall" name="vwall_8_10" pos="1.800000 1.530000 0.025000"/>
     <geom class="vwall" name="vwall_8_11" pos="1.980000 1.530000 0.025000"/>
     <geom class="vwall" name="vwall_8_12" pos="2.160000 1.530000 0.025000"/>
