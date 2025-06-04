@@ -218,7 +218,7 @@ class MazeParser:
     def generate_top_camera_view(self) -> str:
         xml = []
         maze_center = (self.maze_width * self.cell_size / 2, self.maze_height * self.cell_size / 2)
-        xml.append(f'    <camera orthographic="true" fovy="3.5" pos="{maze_center[0]:.6f} {maze_center[1]:.6f} 4.5" xyaxes="1.0 0.0 0.0 0.0 1.0 0.0"/>')
+        xml.append(f'    <camera name="top_view" orthographic="true" fovy="3.5" pos="{maze_center[0]:.6f} {maze_center[1]:.6f} 4.5" xyaxes="1.0 0.0 0.0 0.0 1.0 0.0"/>')
         return '\n'.join(xml)
 
     def generate_xml(self, horizontal_walls: list[list[bool]], vertical_walls: list[list[bool]]) -> str:
