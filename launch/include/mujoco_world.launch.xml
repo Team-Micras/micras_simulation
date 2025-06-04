@@ -1,0 +1,3 @@
+<launch>
+    <executable cmd="simulate $(find-pkg-share micras_simulation)/mujoco/models/robot.xml" output="screen" on_exit="shutdown" name="mujoco_simulation"/>
+</launch>
