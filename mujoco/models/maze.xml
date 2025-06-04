@@ -30,7 +30,7 @@
   </default>
 
   <worldbody>
-    <camera name="top view" orthographic="true" fovy="3.5" pos="1.440000 1.440000 4.5" xyaxes="1.0 0.0 0.0 0.0 1.0 0.0"/>
+    <camera name="top_view" orthographic="true" fovy="3.5" pos="1.440000 1.440000 4.5" xyaxes="1.0 0.0 0.0 0.0 1.0 0.0"/>
     <geom class="post_w" name="post_0_0" pos="0.000000 0.000000 0.025000"/>
     <geom class="post_w" name="post_0_1" pos="0.180000 0.000000 0.025000"/>
     <geom class="post" name="post_0_2" pos="0.360000 0.000000 0.025000"/>

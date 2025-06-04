@@ -250,7 +250,8 @@ def main():
         print(f"Error: Maze file '{args.maze_file}' not found")
         sys.exit(1)
 
-    output_file = args.output or "maze.xml"
+    maze_file_path = Path(args.maze_file)
+    output_file = args.output or (maze_file_path.parent / "maze.xml")
 
     try:
         maze_parser = MazeParser(args.cell_size, args.wall_thickness)
