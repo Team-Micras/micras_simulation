@@ -1,13 +1,13 @@
-#ifndef IGNITION_GUI_MICRAS_PLUGIN_HPP
-#define IGNITION_GUI_MICRAS_PLUGIN_HPP
+#ifndef GZ_GUI_MICRAS_PLUGIN_HPP
+#define GZ_GUI_MICRAS_PLUGIN_HPP
 
 #include <array>
 #include <gz/transport.hh>
-#include <ignition/gui/Plugin.hh>
-#include <ignition/gui/qt.h>
+#include <gz/gui/Plugin.hh>
+#include <gz/gui/qt.h>
 #include <string>
 
-namespace ignition::gui {
+namespace gz::gui {
 
 /**
  * @brief MicrasPlugin class
@@ -96,54 +96,54 @@ protected slots:
 
 private:
     /**
-     * @brief Set the ignition transport publishers
+     * @brief Set the gazebo transport publishers
      */
     void set_publishers();
 
     /**
-     * @brief Set the ignition transport subscriber for the led topic
+     * @brief Set the gazebo transport subscriber for the led topic
      */
     void set_led_subscriber();
 
     /**
-     * @brief Set the ignition transport subscriber for the rgb_0 topic
+     * @brief Set the gazebo transport subscriber for the rgb_0 topic
      */
     void set_rgb_0_subscriber();
 
     /**
-     * @brief Set the ignition transport subscriber for the rgb_1 topic
+     * @brief Set the gazebo transport subscriber for the rgb_1 topic
      */
     void set_rgb_1_subscriber();
 
     /**
-     * @brief Set the ignition transport subscriber for the buzzer topic
+     * @brief Set the gazebo transport subscriber for the buzzer topic
      */
     void set_buzzer_subscriber();
 
     /**
-     * @brief Set the ignition transport subscriber for the fan topic
+     * @brief Set the gazebo transport subscriber for the fan topic
      */
     void set_fan_subscriber();
 
     /**
-     * @brief Ignition transport node
+     * @brief Gazebo transport node
      */
     gz::transport::Node node;
 
     /**
-     * @brief Ignition transport publishers
+     * @brief Gazebo transport publishers
      */
-    std::array<ignition::transport::v11::Node::Publisher, 4> switch_pub;
+    std::array<gz::transport::v13::Node::Publisher, 4> switch_pub;
 
     /**
-     * @brief Ignition transport publisher for the button topic
+     * @brief Gazebo transport publisher for the button topic
      */
-    ignition::transport::v11::Node::Publisher button_pub;
+    gz::transport::v13::Node::Publisher button_pub;
 
     /**
-     * @brief Ignition transport publisher for the battery topic
+     * @brief Gazebo transport publisher for the battery topic
      */
-    ignition::transport::v11::Node::Publisher battery_pub;
+    gz::transport::v13::Node::Publisher battery_pub;
 
     /**
      * @brief Plugin topic names
@@ -157,6 +157,6 @@ private:
     const std::string buzzer_topic{"/buzzer"};
     const std::string fan_topic{"/fan"};
 };
-}  // namespace ignition::gui
+}  // namespace gz::gui
 
-#endif  // IGNITION_GUI_MICRAS_PLUGIN_HPP
+#endif  // GZ_GUI_MICRAS_PLUGIN_HPP

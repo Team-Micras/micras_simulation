@@ -45,7 +45,7 @@ private:
     /**
      * @brief Current data of the encoder
      */
-    sensor_msgs::msg::JointState data;
+    sensor_msgs::msg::JointState data{};
 
     /**
      * @brief Subscriber for the encoder topic

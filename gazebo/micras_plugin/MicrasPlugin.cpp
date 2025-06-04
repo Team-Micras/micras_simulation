@@ -1,10 +1,10 @@
 #include <gz/msgs.hh>
-#include <ignition/plugin/Register.hh>
+#include <gz/plugin/Register.hh>
 #include <iostream>
 
 #include "MicrasPlugin.hpp"
 
-namespace ignition::gui {
+namespace gz::gui {
 MicrasPlugin::MicrasPlugin() {
     this->title = "Micras Plugin";
     this->set_publishers();
@@ -93,9 +93,9 @@ void MicrasPlugin::set_fan_subscriber() {
 
     this->node.Subscribe(this->fan_topic, fan_cb);
 }
-}  // namespace ignition::gui
+}  // namespace gz::gui
 
 /**
  * @brief Register the MicrasPlugin plugin
  */
-IGNITION_ADD_PLUGIN(ignition::gui::MicrasPlugin, ignition::gui::Plugin);
+GZ_ADD_PLUGIN(gz::gui::MicrasPlugin, gz::gui::Plugin);

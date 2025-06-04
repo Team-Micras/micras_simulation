@@ -15,8 +15,15 @@
 namespace micras::proxy {
 RotarySensor::RotarySensor(const Config& config) {
     this->subscriber = config.node->create_subscription<sensor_msgs::msg::JointState>(
-        config.topic, 1, [this](const sensor_msgs::msg::JointState& msg) { this->data = msg; }
+        config.topic, 1,
+        [this](const sensor_msgs::msg::JointState& msg) {
+            if (msg.header.stamp.sec != 0 and msg.header.stamp.nanosec != 0) {
+                this->data = msg;
+            }
+        }
     );
+
+    this->data.position.resize(2);
 }
 
 float RotarySensor::get_position() const {

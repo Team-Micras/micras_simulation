@@ -1,20 +1,22 @@
 <?xml version="1.0" ?>
-<sdf version="1.8">
+<sdf version="1.11">
     <world name="maze">
         <gravity>0 0 -58.8</gravity>
-        <physics name="1ms" type="ode">
+        <physics name="1ms" type="ignored">
             <max_step_size>0.001</max_step_size>
             <real_time_factor>1.0</real_time_factor>
-            <real_time_update_rate>1000.0</real_time_update_rate>
+            <!-- <real_time_update_rate>1000.0</real_time_update_rate> -->
         </physics>
-        <plugin filename="libignition-gazebo-physics-system.so"
-                name="ignition::gazebo::systems::Physics">
+        <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics">
+            <!-- <engine>
+                <filename>gz-physics-bullet-featherstone-plugin</filename>
+            </engine> -->
         </plugin>
-        <plugin filename="libignition-gazebo-user-commands-system.so"
-                name="ignition::gazebo::systems::UserCommands">
+        <plugin filename="gz-sim-user-commands-system"
+                name="gz::sim::systems::UserCommands">
         </plugin>
-        <plugin filename="libignition-gazebo-scene-broadcaster-system.so"
-                name="ignition::gazebo::systems::SceneBroadcaster">
+        <plugin filename="gz-sim-scene-broadcaster-system"
+                name="gz::sim::systems::SceneBroadcaster">
         </plugin>
 
         <light type="directional" name="sun">
