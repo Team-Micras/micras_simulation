@@ -215,6 +215,12 @@ class MazeParser:
         xml.append('  </default>\n')
         return '\n'.join(xml)
 
+    def generate_top_camera_view(self) -> str:
+        xml = []
+        maze_center = (self.maze_width * self.cell_size / 2, self.maze_height * self.cell_size / 2)
+        xml.append(f'    <camera orthographic="true" fovy="3.5" pos="{maze_center[0]:.6f} {maze_center[1]:.6f} 4.5" xyaxes="1.0 0.0 0.0 0.0 1.0 0.0"/>')
+        return '\n'.join(xml)
+
     def generate_xml(self, horizontal_walls: list[list[bool]], vertical_walls: list[list[bool]]) -> str:
         xml_lines = []
         xml_lines.append(self.add_header())
@@ -222,6 +228,7 @@ class MazeParser:
         xml_lines.append(self.generate_assets())
         xml_lines.append(self.generate_default_class())
         xml_lines.append('  <worldbody>')
+        xml_lines.append(self.generate_top_camera_view())
         xml_lines.extend(self.generate_posts_xml())
         xml_lines.extend(self.generate_horizontal_walls_xml(horizontal_walls))
         xml_lines.extend(self.generate_vertical_walls_xml(vertical_walls))
