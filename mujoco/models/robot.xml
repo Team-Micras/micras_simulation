@@ -55,6 +55,10 @@
     <body name="micras" pos="0.09 0.09 .03">
       <freejoint/>
 
+      <camera name="overhead_camera" mode="track" pos="0 0 0.5" euler="0 0 0" fovy="60"/>
+      <camera name="side_tracking_camera" pos="-0.4 -0.4 0.643" mode="track" xyaxes="0.70 -0.70 -0.000 0.471 0.481 0.739"/>
+      <camera name="robot_pov" mode="fixed" pos="0 0.04 0.03" euler="90 0 0" fovy="80"/>
+
       <site name="imu"/>
       <site name="lidar_0" pos="-0.026 0.041 0.02" zaxis=" 0 1 0"/>
       <site name="lidar_1" pos="-0.01  0.061 0.02" zaxis="-1 1 0"/>
