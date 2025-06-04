@@ -9,7 +9,7 @@
 #include <cstdint>
 #include <numbers>
 #include <rclcpp/rclcpp.hpp>
-#include <sensor_msgs/msg/imu.hpp>
+#include <example_interfaces/msg/Float64MultiArray.hpp>
 
 namespace micras::proxy {
 /**
@@ -22,7 +22,8 @@ public:
      */
     struct Config {
         std::shared_ptr<rclcpp::Node>& node;
-        std::string                    topic;
+        std::string                    gyro_topic;
+        std::string                    accelerometer_topic;
     };
 
     /**
@@ -78,12 +79,14 @@ private:
     /**
      * @brief Subscriber para os dados do IMU.
      */
-    rclcpp::Subscription<sensor_msgs::msg::Imu>::SharedPtr subscriber;
+    rclcpp::Subscription<example_interfaces::msg::Float64MultiArray>::SharedPtr gyro_subscriber;
+    rclcpp::Subscription<example_interfaces::msg::Float64MultiArray>::SharedPtr accelerometer_subscriber;
 
     /**
      * @brief Dados do IMU recebidos.
      */
-    sensor_msgs::msg::Imu data;
+    example_interfaces::msg::Float64MultiArray gyro_data;
+    example_interfaces::msg::Float64MultiArray accelerometer_data;
 
     /**
      * @brief Current angular velocity on each axis.

@@ -8,18 +8,23 @@
 
 namespace micras::proxy {
 Imu::Imu(const Config& config) {
-    this->subscriber = config.node->create_subscription<sensor_msgs::msg::Imu>(
-        config.topic, 1, [this](const sensor_msgs::msg::Imu& msg) { this->data = msg; }
+    this->gyro_subscriber = config.node->create_subscription<example_interfaces::msg::Float64MultiArray>(
+        config.gyro_topic, 1, [this](const example_interfaces::msg::Float64MultiArray& msg) { this->gyro_data = msg; }
+    );
+
+    this->accelerometer_subscriber = config.node->create_subscription<example_interfaces::msg::Float64MultiArray>(
+        config.accelerometer_topic, 1,
+        [this](const example_interfaces::msg::Float64MultiArray& msg) { this->accelerometer_data = msg; }
     );
 }
 
 void Imu::update() {
-    this->angular_velocity[0] = this->data.angular_velocity.x;
-    this->angular_velocity[1] = this->data.angular_velocity.y;
-    this->angular_velocity[2] = this->data.angular_velocity.z;
-    this->linear_acceleration[0] = this->data.linear_acceleration.x;
-    this->linear_acceleration[1] = this->data.linear_acceleration.y;
-    this->linear_acceleration[2] = this->data.linear_acceleration.z;
+    this->angular_velocity[0] = this->gyro_data.data[0];
+    this->angular_velocity[1] = this->gyro_data.data[1];
+    this->angular_velocity[2] = this->gyro_data.data[2];
+    this->linear_acceleration[0] = this->accelerometer_data.data[0];
+    this->linear_acceleration[1] = this->accelerometer_data.data[1];
+    this->linear_acceleration[2] = this->accelerometer_data.data[2];
 }
 
 float Imu::get_angular_velocity(Axis axis) const {
