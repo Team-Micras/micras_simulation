@@ -34,6 +34,7 @@ set(ROS_CODE_DEPS
     sensor_msgs
     geometry_msgs
     nav_msgs
+    example_interfaces
     ament_index_cpp
 )
 
