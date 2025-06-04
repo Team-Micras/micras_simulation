@@ -57,36 +57,36 @@ const proxy::Storage::Config maze_storage_config {
  *****************************************/
 
 const proxy::Led::Config led_config {
-    micras_node, // node
-    "led"        // topic
+    .node = micras_node,
+    .topic = "led"
 };
 
 const proxy::Argb::Config argb_config {
-    micras_node,  // node
-    {
+    .node = micras_node,
+    .topic_array = {
         "rgb_0",
         "rgb_1"
-    },  // topic_array
+    }
 };
 
 const proxy::Button::Config button_config {
-    micras_node, // node
-    "button"     // topic
+    .node = micras_node,
+    .topic = "button"
 };
 
 const proxy::DipSwitch::Config dip_switch_config {
-    micras_node,  // node
-    {
+    .node = micras_node,
+    .topic_array = {
         "dip_switch_0",
         "dip_switch_1",
         "dip_switch_2",
         "dip_switch_3"
-    },  // topic_array
+    },
 };
 
 const proxy::Buzzer::Config buzzer_config {
-    micras_node, // node
-    "buzzer"     // topic
+    .node = micras_node,
+    .topic = "buzzer"
 };
 
 /*****************************************
@@ -104,8 +104,8 @@ const proxy::RotarySensor::Config rotary_sensor_right_config {
 };
 
 const proxy::TorqueSensors::Config torque_sensors_config {
-    micras_node,  // node
-    {
+    .node = micras_node,
+    .wheel_pairs_topics = {
         {
             {
                 "torque_flw",
@@ -116,10 +116,10 @@ const proxy::TorqueSensors::Config torque_sensors_config {
                 "torque_rrw"
             }  // front_topic, rear_topic
         }
-    },  // wheel_pairs_topics
-    0.04F * 20, // shunt_resistor
-    0.5F, // max_torque
-    3.3F  // reference_voltage
+    },
+    .shunt_resistor = 0.04F * 20,
+    .max_torque = 3.0F,
+    .reference_voltage = 3.3F
 };
 
 const proxy::WallSensors::Config wall_sensors_config {
@@ -144,16 +144,16 @@ const proxy::WallSensors::Config wall_sensors_config {
 };
 
 const proxy::Imu::Config imu_config {
-    micras_node, // node
-    "gyro",        // topic
-    "accelerometer" // topic
+    .node = micras_node,
+    .gyro_topic = "gyro",
+    .accelerometer_topic = "accelerometer"
 };
 
 const proxy::Battery::Config battery_config {
-    micras_node, // node
-    "battery",   // topic
-    9.9F,        // max_voltage
-    4095         // max_reading
+    .node = micras_node,
+    .topic = "battery",
+    .max_voltage = 9.9F,
+    .max_reading = 4095
 };
 
 
@@ -162,13 +162,13 @@ const proxy::Battery::Config battery_config {
  *****************************************/
 
 const proxy::Fan::Config fan_config {
-    micras_node, // node
-    "fan"        // topic
+    .node = micras_node,
+    .topic = "fan"
 };
 
 const proxy::Locomotion::Config locomotion_config {
-    micras_node, // node
-    "cmd_vel"    // topic
+    .node = micras_node,
+    .topic = "cmd_vel"
 };
 }  // namespace micras
 
