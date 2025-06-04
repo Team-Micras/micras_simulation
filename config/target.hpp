@@ -26,6 +26,8 @@
 #include "micras/proxy/storage.hpp"
 #include "micras/proxy/torque_sensors.hpp"
 
+#include "micras/proxy/debug_bridge.hpp"
+
 // clang-format off
 namespace micras {
 /*****************************************
@@ -93,12 +95,12 @@ const proxy::Buzzer::Config buzzer_config {
 
 const proxy::RotarySensor::Config rotary_sensor_left_config {
     micras_node,         // node
-    "rotary_sensor_left" // topic
+    "left_encoder" // topic
 };
 
 const proxy::RotarySensor::Config rotary_sensor_right_config {
     micras_node,          // node
-    "rotary_sensor_right" // topic
+    "right_encoder" // topic
 };
 
 const proxy::TorqueSensors::Config torque_sensors_config {
@@ -121,28 +123,30 @@ const proxy::TorqueSensors::Config torque_sensors_config {
 };
 
 const proxy::WallSensors::Config wall_sensors_config {
-    micras_node,  // node
-    {
-        "wall_sensor_0",
-        "wall_sensor_1",
-        "wall_sensor_2",
-        "wall_sensor_3"
-    },    // topic_array
-    0.3F, // max_distance
-    4095,  // max_reading
-    5.0F,  // filter_cutoff
-    {
-        0.413F,
-        0.161F,
-        0.177F,
-        0.230F,
-    },  // base_readings
-    0.5F   // uncertainty
+    .node = micras_node,
+    .topic_array = {
+        "lidar_0",
+        "lidar_1",
+        "lidar_2",
+        "lidar_3"
+    },
+    .uncertainty = 0.5F,
+    .base_readings = {
+        0.0666F,
+        0.1608F,
+        0.1608F,
+        0.0666F,
+    },
+    .max_sensor_reading = 0.6F,
+    .min_sensor_reading = 0.01F,
+    .max_sensor_distance = 0.18F * 2,
+    .filter_cutoff = 20.0F
 };
 
 const proxy::Imu::Config imu_config {
     micras_node, // node
-    "imu"        // topic
+    "gyro",        // topic
+    "accelerometer" // topic
 };
 
 const proxy::Battery::Config battery_config {

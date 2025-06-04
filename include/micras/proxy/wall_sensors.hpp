@@ -8,7 +8,7 @@
 #include <array>
 #include <cstdint>
 #include <rclcpp/rclcpp.hpp>
-#include <sensor_msgs/msg/laser_scan.hpp>
+#include <example_interfaces/msg/float64.hpp>
 
 #include "micras/core/butterworth_filter.hpp"
 
@@ -25,11 +25,12 @@ public:
     struct Config {
         std::shared_ptr<rclcpp::Node>&          node;
         std::array<std::string, num_of_sensors> topic_array;
-        float                                   max_distance;
-        uint16_t                                max_reading;
-        float                                   filter_cutoff;
-        std::array<float, num_of_sensors>       base_readings;
         float                                   uncertainty;
+        std::array<float, num_of_sensors>       base_readings;
+        float                                   max_sensor_reading;
+        float                                   min_sensor_reading;
+        float                                   max_sensor_distance;
+        float                                   filter_cutoff;
     };
 
     /**
@@ -96,7 +97,7 @@ private:
     /**
      * @brief Array of subscribers for distance sensors.
      */
-    std::array<rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr, num_of_sensors> subscribers;
+    std::array<rclcpp::Subscription<example_interfaces::msg::Float64>::SharedPtr, num_of_sensors> subscribers;
 
     /**
      * @brief Array of distances measured by the sensors.
@@ -106,12 +107,7 @@ private:
     /**
      * @brief Maximum distance detectable by the sensor.
      */
-    const float max_distance;
-
-    /**
-     * @brief Maximum ADC reading.
-     */
-    const uint16_t max_reading;
+    const float max_sensor_reading;
 
     /**
      * @brief LED state.
@@ -145,10 +141,6 @@ private:
 
     /**
      * @brief Buffer to store the ADC values.
-     *
-     *
-     *
-     *
      */
     std::array<uint16_t, 2 * num_of_sensors> buffer;
 
@@ -166,6 +158,11 @@ private:
      * @brief Ratio of the base reading to still consider as seeing a wall.
      */
     float uncertainty;
+
+    /**
+     * @brief Constant value for the wall sensor.
+     */
+    float constant;
 };
 }  // namespace micras::proxy
 
