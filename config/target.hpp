@@ -71,7 +71,9 @@ const proxy::Argb::Config argb_config {
 
 const proxy::Button::Config button_config {
     .node = micras_node,
-    .topic = "button"
+    .topic = "button",
+    .long_press_delay = 4000U,
+    .extra_long_press_delay = 4001U
 };
 
 const proxy::DipSwitch::Config dip_switch_config {
@@ -95,12 +97,12 @@ const proxy::Buzzer::Config buzzer_config {
 
 const proxy::RotarySensor::Config rotary_sensor_left_config {
     .node = micras_node,
-    .topic = "left_encoder"
+    .topic = "sensors/encoder_left"
 };
 
 const proxy::RotarySensor::Config rotary_sensor_right_config {
     .node = micras_node,
-    .topic = "right_encoder"
+    .topic = "sensors/encoder_right"
 };
 
 const proxy::TorqueSensors::Config torque_sensors_config {
@@ -125,17 +127,17 @@ const proxy::TorqueSensors::Config torque_sensors_config {
 const proxy::WallSensors::Config wall_sensors_config {
     .node = micras_node,
     .topic_array = {
-        "lidar_0",
-        "lidar_1",
-        "lidar_2",
-        "lidar_3"
+        "sensors/lidar_0",
+        "sensors/lidar_1",
+        "sensors/lidar_2",
+        "sensors/lidar_3"
     },
     .uncertainty = 0.5F,
     .base_readings = {
-        0.0666F,
-        0.1608F,
-        0.1608F,
-        0.0666F,
+        0.0696F,
+        0.1090F,
+        0.1090F,
+        0.0696F,
     },
     .max_sensor_reading = 0.6F,
     .min_sensor_reading = 0.01F,
@@ -145,8 +147,8 @@ const proxy::WallSensors::Config wall_sensors_config {
 
 const proxy::Imu::Config imu_config {
     .node = micras_node,
-    .gyro_topic = "gyro",
-    .accelerometer_topic = "accelerometer"
+    .gyro_topic = "sensors/gyro",
+    .accelerometer_topic = "sensors/accelerometer"
 };
 
 const proxy::Battery::Config battery_config {
@@ -167,8 +169,14 @@ const proxy::Fan::Config fan_config {
 };
 
 const proxy::Locomotion::Config locomotion_config {
-    .node = micras_node,
-    .topic = "cmd_vel"
+    .left_motor = {
+        .node = micras_node,
+        .topic = "actuators/motor_left/command",
+    },
+    .right_motor = {
+        .node = micras_node,
+        .topic = "actuators/motor_right/command"
+    }
 };
 }  // namespace micras
 
