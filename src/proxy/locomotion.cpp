@@ -5,8 +5,7 @@
 #include "micras/proxy/locomotion.hpp"
 
 namespace micras::proxy {
-Locomotion::Locomotion(const Config& config) {
-    this->publisher = config.node->create_publisher<geometry_msgs::msg::Twist>(config.topic, 1);
+Locomotion::Locomotion(const Config& config) : left_motor{config.left_motor}, right_motor{config.right_motor} {
     this->stop();
     this->disable();
 }
@@ -20,26 +19,28 @@ void Locomotion::disable() {
 }
 
 void Locomotion::set_wheel_command(float left_command, float right_command) {
-    this->twist.linear.x = (left_command + right_command) / 2;
-    this->twist.angular.z = (right_command - left_command) / 2;
-
-    if (this->enabled) {
-        this->publisher->publish(this->twist);
-    }
+    this->left_motor.set_command(left_command);
+    this->right_motor.set_command(right_command);
 }
 
 void Locomotion::set_command(float linear, float angular) {
-    this->twist.linear.x = linear;
-    this->twist.angular.z = angular;
+    float left_command = linear - angular;
+    float right_command = linear + angular;
 
-    if (this->enabled) {
-        this->publisher->publish(this->twist);
+    if (std::abs(left_command) > 100.0F) {
+        left_command *= 100.0F / std::abs(left_command);
+        right_command *= 100.0F / std::abs(left_command);
     }
+
+    if (std::abs(right_command) > 100.0F) {
+        left_command *= 100.0F / std::abs(right_command);
+        right_command *= 100.0F / std::abs(right_command);
+    }
+
+    this->set_wheel_command(left_command, right_command);
 }
 
 void Locomotion::stop() {
-    this->twist.linear.x = 0.0;
-    this->twist.angular.z = 0.0;
-    this->publisher->publish(this->twist);
+    this->set_wheel_command(0.0F, 0.0F);
 }
 }  // namespace micras::proxy

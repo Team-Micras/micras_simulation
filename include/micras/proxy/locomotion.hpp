@@ -9,6 +9,8 @@
 #include <rclcpp/rclcpp.hpp>
 #include <geometry_msgs/msg/twist.hpp>
 
+#include "micras/proxy/motor.hpp"
+
 namespace micras::proxy {
 /**
  * @brief Class for controlling the locomotion driver.
@@ -19,8 +21,8 @@ public:
      * @brief Configuration struct for the locomotion.
      */
     struct Config {
-        std::shared_ptr<rclcpp::Node>& node;
-        std::string                    topic;
+        Motor::Config left_motor;
+        Motor::Config right_motor;
     };
 
     /**
@@ -63,17 +65,17 @@ public:
 
 private:
     /**
-     * @brief Publisher para enviar comandos de movimento.
+     * @brief Left motor of the robot.
      */
-    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr publisher;
+    Motor left_motor;
 
     /**
-     * @brief Mensagem twist para controle de movimento.
+     * @brief Right motor of the robot.
      */
-    geometry_msgs::msg::Twist twist;
+    Motor right_motor;
 
     /**
-     * @brief Estado de habilitação dos motores.
+     * @brief Flag to indicate if the locomotion is enabled.
      */
     bool enabled{false};
 };
