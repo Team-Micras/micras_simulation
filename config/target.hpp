@@ -26,8 +26,6 @@
 #include "micras/proxy/storage.hpp"
 #include "micras/proxy/torque_sensors.hpp"
 
-#include "micras/proxy/debug_bridge.hpp"
-
 // clang-format off
 namespace micras {
 /*****************************************
