@@ -1,9 +1,8 @@
-# Name: CMakeLists.txt
-# Micras Team
-# Brief: CMake configuration file for the project
-# 04/2024
-
 cmake_minimum_required(VERSION 3.16.3)
+
+###############################################################################
+## CMake Configuration
+###############################################################################
 
 project(micras_simulation)
 
@@ -26,6 +25,10 @@ endif()
 
 add_subdirectory(gazebo/micras_plugin)
 
+###############################################################################
+## Find ROS2 Dependencies
+###############################################################################
+
 find_package(ament_cmake REQUIRED)
 
 set(ROS_CODE_DEPS
@@ -42,11 +45,19 @@ foreach(dependency ${ROS_CODE_DEPS})
     find_package(${dependency} REQUIRED)
 endforeach()
 
+###############################################################################
+## Input Files
+###############################################################################
+
 file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "src/**/*.c*" "MicrasFirmware/src/*.c*")
-file(GLOB_RECURSE LIB_SOURCES CONFIGURE_DEPENDS "MicrasFirmware/micras_nav/src/*.c*" "MicrasFirmware/micras_core/src/*.c*")
+file(GLOB_RECURSE LIB_SOURCES CONFIGURE_DEPENDS "MicrasFirmware/micras_nav/src/*.c*" "MicrasFirmware/micras_comm/src/*.c*" "MicrasFirmware/micras_core/src/*.c*")
 file(GLOB_RECURSE SIMULATION_PROXY_SOURCES CONFIGURE_DEPENDS "src/proxy/*.c*")
 file(GLOB_RECURSE PROJECT_TESTS CONFIGURE_DEPENDS "MicrasFirmware/tests/src/*/*.c*")
 list(REMOVE_ITEM PROJECT_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/src/main.cpp")
+
+###############################################################################
+## Add Micras Simulation Library
+###############################################################################
 
 add_library(${PROJECT_NAME}_lib
     ${LIB_SOURCES}
@@ -62,8 +73,13 @@ target_include_directories(${PROJECT_NAME}_lib PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/tests/include>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/include>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/micras_nav/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/micras_comm/include>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/micras_core/include>
 )
+
+###############################################################################
+## Add main executable
+###############################################################################
 
 add_executable(micras_node
     src/micras_node.cpp
@@ -77,6 +93,10 @@ target_link_libraries(micras_node
 )
 
 add_dependencies(micras_node MicrasPlugin)
+
+###############################################################################
+## Install targets and directories
+###############################################################################
 
 install(DIRECTORY include
     DESTINATION include
@@ -111,6 +131,10 @@ install(TARGETS MicrasPlugin
     DESTINATION share/${PROJECT_NAME}/micras_plugin
 )
 
+###############################################################################
+## Add Tests
+###############################################################################
+
 if(COMPILE_TESTS)
     foreach(TEST_FILE ${PROJECT_TESTS})
 
@@ -128,6 +152,7 @@ if(COMPILE_TESTS)
             ${CMAKE_CURRENT_SOURCE_DIR}/tests/include
             ${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/include
             ${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/micras_nav/include
+            ${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/micras_comm/include
             ${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/micras_core/include
         )
 
