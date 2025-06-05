@@ -5,7 +5,8 @@
 #ifndef MICRAS_PROXY_MOTOR_HPP
 #define MICRAS_PROXY_MOTOR_HPP
 
-#include "micras/hal/pwm.hpp"
+#include <rclcpp/rclcpp.hpp>
+#include <example_interfaces/msg/float64.hpp>
 
 namespace micras::proxy {
 /**
@@ -17,10 +18,8 @@ public:
      * @brief Configuration struct for the motor.
      */
     struct Config {
-        hal::Pwm::Config backwards_pwm;
-        hal::Pwm::Config forward_pwm;
-        float            max_stopped_command;
-        float            deadzone;
+        std::shared_ptr<rclcpp::Node>& node;
+        std::string                    topic;
     };
 
     /**
@@ -39,24 +38,14 @@ public:
 
 private:
     /**
-     * @brief PWM object for controlling the motor in the backwards direction.
+     * @brief Publisher for the motor command.
      */
-    hal::Pwm backwards_pwm;
+    rclcpp::Publisher<example_interfaces::msg::Float64>::SharedPtr publisher;
 
     /**
-     * @brief PWM object for controlling the motor in the forward direction.
+     * @brief Command message for the motor.
      */
-    hal::Pwm forward_pwm;
-
-    /**
-     * @brief Maximum command value for the motor to be considered stopped.
-     */
-    float max_stopped_command;
-
-    /**
-     * @brief Deadzone for the motor.
-     */
-    float deadzone;
+    example_interfaces::msg::Float64 command;
 };
 }  // namespace micras::proxy
 
