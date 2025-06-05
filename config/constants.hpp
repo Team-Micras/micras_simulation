@@ -24,7 +24,7 @@ constexpr uint8_t  maze_height{16};
 constexpr float    cell_size{0.18};
 constexpr uint32_t loop_time_us{1042};
 constexpr float    wall_thickness{0.012F};
-constexpr float    start_offset{0.05F + wall_thickness / 2.0F};
+constexpr float    start_offset{0.05F};
 constexpr float    max_angular_acceleration{400.0F};
 constexpr float    crash_acceleration{1000000.0F};
 constexpr float    fan_speed{100.0F};
@@ -51,7 +51,7 @@ using Maze = TMaze<maze_width, maze_height>;
 const nav::ActionQueuer::Config action_queuer_config{
     .cell_size = cell_size,
     .start_offset = start_offset,
-    .curve_safety_margin = 0.0375F + 0.015F,
+    .curve_safety_margin = 0.053F,
     .exploring =
         {
             .max_linear_speed = 0.2F,
@@ -83,7 +83,7 @@ const nav::FollowWall::Config follow_wall_config{
     .wall_sensor_index = wall_sensors_index,
     .max_angular_acceleration = max_angular_acceleration,
     .cell_size = cell_size,
-    .post_threshold = 4.0F,
+    .post_threshold = 400.0F,
     .post_reference = 0.44F * cell_size,
     .post_clearance = 0.035F,
 };
