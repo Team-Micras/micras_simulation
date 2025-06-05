@@ -11,16 +11,15 @@
 namespace micras::proxy {
 template <uint8_t num_of_sensors>
 TWallSensors<num_of_sensors>::TWallSensors(const Config& config) :
-    leds_on{false},
     max_sensor_reading{config.max_sensor_reading},
+    leds_on{false},
     filters{core::make_array<core::ButterworthFilter, num_of_sensors>(config.filter_cutoff)},
     base_readings{config.base_readings},
     uncertainty{config.uncertainty},
     constant{static_cast<float>(
         -std::pow(config.max_sensor_distance, 2) *
         std::log(1.0f - config.min_sensor_reading / config.max_sensor_reading)
-    )},
-{
+    )} {
     this->turn_off();
 
     for (uint8_t i = 0; i < num_of_sensors; i++) {
@@ -38,7 +37,7 @@ void TWallSensors<num_of_sensors>::turn_on() {
 
 template <uint8_t num_of_sensors>
 void TWallSensors<num_of_sensors>::turn_off() {
-    this->leds_on = false;
+    this->leds_on = true;
 }
 
 template <uint8_t num_of_sensors>
@@ -63,12 +62,10 @@ template <uint8_t num_of_sensors>
 float TWallSensors<num_of_sensors>::get_adc_reading(uint8_t sensor_index) const {
     float raw_reading = this->readings.at(sensor_index);
     if (raw_reading < 0.0F) {
-        raw_reading = this->max_sensor_reading;
-    } else if (raw_reading == 0.0F) {
-        raw_reading = this->max_sensor_reading;
-    } else {
-        raw_reading = this->readings.at(sensor_index);
+        return 0.0F;
     }
+
+    raw_reading = this->readings.at(sensor_index);
 
     float intensity = 1 / std::pow(raw_reading, 2.0F);
     float reading = this->max_sensor_reading * (1 - std::exp(-this->constant * intensity));
