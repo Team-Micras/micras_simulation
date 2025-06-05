@@ -18,7 +18,6 @@
             "request": "launch",
             "type": "cppdbg",
             "miDebuggerPath": "gdb",
-            "miDebuggerArgs": "-x ${workspaceFolder}/scripts/pause_gazebo.py",
             "miDebuggerServerAddress": "localhost:3000",
             "cwd": "${workspaceFolder}",
             "program": "${workspaceFolder}/../../install/micras_simulation/lib/micras_simulation/${input:args}",
