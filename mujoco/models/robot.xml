@@ -40,6 +40,7 @@
       <joint type="hinge" frictionloss="0.000645"/>
       <geom type="cylinder" size=".011 .004" rgba=".5 .5 1 1"/>
       <site type="box" rgba=".5 1 .5 1" size="0.01 0.001 0.0041"/>
+      <pair friction="1 1 0.005 0.0001 0.0001"/>
     </default>
     <default class="dc_motor">
         <general biastype="affine" gainprm="0.0106 0 0" biasprm="0 0 -0.0000115" gear="10"/>
@@ -49,7 +50,7 @@
   <worldbody>
     <attach model="maze" prefix="maze_"/>
 
-    <geom type="plane" size="0 0 .01" pos="0 0 0" material="grid"/>
+    <geom name="floor" type="plane" size="0 0 .01" pos="0 0 0" material="grid"/>
     <light name="ambient_light" pos="0 0 3" dir="0 0 -1" directional="true" castshadow="false"/>
 
     <body name="micras" pos="0.09 0.09 .03">
@@ -70,16 +71,21 @@
 
       <body name="left_wheel" pos="-0.031 0.0 0.01" zaxis="-1 0 0">
         <joint name="left_wheel" class="wheel"/>
-        <geom class="wheel"/>
+        <geom name="left_wheel" class="wheel"/>
         <site class="wheel"/>
       </body>
       <body name="right_wheel" pos="0.031 0.0 0.01" zaxis="-1 0 0">
         <joint name="right_wheel" class="wheel"/>
-        <geom class="wheel"/>
+        <geom name="right_wheel" class="wheel"/>
         <site class="wheel"/>
       </body>
     </body>
   </worldbody>
+
+  <contact>
+    <pair class="wheel" geom1="left_wheel" geom2="floor"/>
+    <pair class="wheel" geom1="right_wheel" geom2="floor"/>
+  </contact>
 
   <actuator>
     <general name="left_motor" class="dc_motor" joint="left_wheel"/>
