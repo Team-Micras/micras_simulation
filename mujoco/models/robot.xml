@@ -42,7 +42,7 @@
       <site type="box" rgba=".5 1 .5 1" size="0.01 0.001 0.0041"/>
     </default>
     <default class="dc_motor">
-        <general biastype="affine" gainprm="0.0106 0 0" biasprm="0 0 -0.0000115" gear="10"/>
+        <general biastype="affine" gainprm="0.000106 0 0" biasprm="0 0 -0.0000115" gear="10"/>
     </default>
   </default>
 
@@ -52,7 +52,7 @@
     <geom name="floor" type="plane" size="0 0 .01" pos="0 0 0" material="grid"/>
     <light name="ambient_light" pos="0 0 3" dir="0 0 -1" directional="true" castshadow="false"/>
 
-    <body name="micras" pos="0.09 0.09 .03">
+    <body name="micras" pos="0.09 0.05 .03">
       <freejoint/>
 
       <camera name="overhead"      mode="track" pos=" 0.000  0.000 0.500" euler=" 0 0 0"  fovy="60"/>
@@ -82,19 +82,19 @@
   </worldbody>
 
   <actuator>
-    <general name="left_motor" class="dc_motor" joint="left_wheel"/>
-    <general name="right_motor" class="dc_motor" joint="right_wheel"/>
+    <general name="motor_left" class="dc_motor" joint="left_wheel"/>
+    <general name="motor_right" class="dc_motor" joint="right_wheel"/>
   </actuator>
 
   <sensor>
-    <jointactuatorfrc name="left_torque"  joint="left_wheel"/>
-    <jointactuatorfrc name="right_torque" joint="right_wheel"/>
+    <jointactuatorfrc name="torque_left"  joint="left_wheel"/>
+    <jointactuatorfrc name="torque_right" joint="right_wheel"/>
 
     <gyro name="gyro" site="imu"/>
     <accelerometer name="accelerometer" site="imu"/>
 
-    <jointpos name="left_encoder" joint="left_wheel"/>
-    <jointpos name="right_encoder" joint="right_wheel"/>
+    <jointpos name="encoder_left" joint="left_wheel"/>
+    <jointpos name="encoder_right" joint="right_wheel"/>
 
     <rangefinder name="lidar_0" site="lidar_0"/>
     <rangefinder name="lidar_1" site="lidar_1"/>
