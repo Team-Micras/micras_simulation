@@ -7,7 +7,7 @@
 namespace micras::proxy {
 RotarySensor::RotarySensor(const Config& config) {
     this->subscriber = config.node->create_subscription<example_interfaces::msg::Float64>(
-        config.topic, 1, [this](const example_interfaces::msg::Float64& msg) { this->data = msg; }
+        config.topic, 1, [this](const example_interfaces::msg::Float64& msg) { this->data = msg.data; }
     );
 }
 
