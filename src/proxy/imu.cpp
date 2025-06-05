@@ -16,6 +16,17 @@ Imu::Imu(const Config& config) {
         config.accelerometer_topic, 1,
         [this](const example_interfaces::msg::Float64MultiArray& msg) { this->accelerometer_data = msg; }
     );
+
+    this->gyro_data.layout.dim.resize(1);
+    this->gyro_data.layout.dim[0].label = "gyro";
+    this->gyro_data.layout.dim[0].size = 3;
+    this->gyro_data.layout.dim[0].stride = 3;
+    this->gyro_data.data.resize(3, 0.0);
+    this->accelerometer_data.layout.dim.resize(1);
+    this->accelerometer_data.layout.dim[0].label = "accelerometer";
+    this->accelerometer_data.layout.dim[0].size = 3;
+    this->accelerometer_data.layout.dim[0].stride = 3;
+    this->accelerometer_data.data.resize(3, 0.0);
 }
 
 void Imu::update() {
