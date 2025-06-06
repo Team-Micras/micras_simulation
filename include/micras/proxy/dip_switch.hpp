@@ -21,6 +21,7 @@ public:
      * @brief Configuration struct for the Dip Switch.
      */
     struct Config {
+        // NOLINTNEXTLINE(cppcoreguidelines-avoid-const-or-ref-data-members)
         std::shared_ptr<rclcpp::Node>&           node;
         std::array<std::string, num_of_switches> topic_array;
     };

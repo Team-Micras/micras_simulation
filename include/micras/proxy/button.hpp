@@ -39,6 +39,7 @@ public:
      * @brief Configuration structure for button.
      */
     struct Config {
+        // NOLINTNEXTLINE(cppcoreguidelines-avoid-const-or-ref-data-members)
         std::shared_ptr<rclcpp::Node>& node;
         std::string                    topic;
         uint16_t                       long_press_delay{500};

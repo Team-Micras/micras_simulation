@@ -21,6 +21,7 @@ public:
      * @brief Configuration struct for the locomotion.
      */
     struct Config {
+        // NOLINTNEXTLINE(cppcoreguidelines-avoid-const-or-ref-data-members)
         Motor::Config left_motor;
         Motor::Config right_motor;
     };

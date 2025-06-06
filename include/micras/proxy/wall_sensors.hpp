@@ -23,6 +23,7 @@ public:
      * @brief Configuration struct for wall sensors.
      */
     struct Config {
+        // NOLINTNEXTLINE(cppcoreguidelines-avoid-const-or-ref-data-members)
         std::shared_ptr<rclcpp::Node>&          node;
         std::array<std::string, num_of_sensors> topic_array;
         float                                   uncertainty;
@@ -113,11 +114,6 @@ private:
      * @brief LED state.
      */
     bool leds_on{true};
-
-    // /**
-    //  * @brief Uncertainty of the wall sensors.
-    //  */
-    // float uncertainty{0.1f};
 
     /**
      * @brief Measured wall value during calibration.

@@ -21,6 +21,7 @@ public:
      * @brief IMU configuration struct.
      */
     struct Config {
+        // NOLINTNEXTLINE(cppcoreguidelines-avoid-const-or-ref-data-members)
         std::shared_ptr<rclcpp::Node>& node;
         std::string                    gyro_topic;
         std::string                    accelerometer_topic;

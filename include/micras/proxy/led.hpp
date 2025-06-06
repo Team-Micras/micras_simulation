@@ -18,6 +18,7 @@ public:
      * @brief Configuration struct for LED.
      */
     struct Config {
+        // NOLINTNEXTLINE(cppcoreguidelines-avoid-const-or-ref-data-members)
         std::shared_ptr<rclcpp::Node>& node;
         std::string                    topic;
     };

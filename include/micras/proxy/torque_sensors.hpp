@@ -21,10 +21,12 @@ public:
      * @brief Estrutura para armazenar dados de um par de rodas.
      */
     struct WheelPair {
+        // NOLINTBEGIN(cppcoreguidelines-avoid-const-or-ref-data-members)
         rclcpp::Subscription<geometry_msgs::msg::WrenchStamped>::SharedPtr front_subscriber;
         rclcpp::Subscription<geometry_msgs::msg::WrenchStamped>::SharedPtr rear_subscriber;
-        float                                                              front_torque{0.0f};
-        float                                                              rear_torque{0.0f};
+        // NOLINTEND(cppcoreguidelines-avoid-const-or-ref-data-members)
+        float front_torque{0.0f};
+        float rear_torque{0.0f};
     };
 
     /**
