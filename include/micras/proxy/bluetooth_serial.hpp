@@ -34,8 +34,8 @@ public:
      * @brief Configuration struct for the BluetoothSerial.
      */
     struct Config {
-        uint16_t port = 9002;       ///< WebSocket server port
-        std::string host = "0.0.0.0"; ///< WebSocket server host
+        uint16_t    port = 9002;
+        std::string host = "0.0.0.0";
     };
 
     /**
@@ -72,6 +72,13 @@ public:
      */
     std::vector<uint8_t> get_data();
 
+    /**
+     * @brief Check if the WebSocket server is running and listening
+     *
+     * @return true if server is running and listening, false otherwise
+     */
+    bool is_running() const;
+
 private:
     /**
      * @brief Initialize the WebSocket server
@@ -80,21 +87,21 @@ private:
 
     /**
      * @brief Handle a new WebSocket connection
-     * 
+     *
      * @param hdl Handle to the connection
      */
     void on_open(ConnectionHdl hdl);
 
     /**
      * @brief Handle a closed WebSocket connection
-     * 
+     *
      * @param hdl Handle to the connection
      */
     void on_close(ConnectionHdl hdl);
 
     /**
      * @brief Handle a message received from a WebSocket connection
-     * 
+     *
      * @param hdl Handle to the connection
      * @param msg The received message
      */
@@ -103,54 +110,54 @@ private:
     /**
      * @brief WebSocket server instance
      */
-    WebSocketServer server_;
+    WebSocketServer server;
 
     /**
      * @brief Thread for the WebSocket server
      */
-    std::thread server_thread_;
+    std::thread server_thread;
 
     /**
      * @brief Flag to indicate if the server is running
      */
-    std::atomic<bool> running_{true};
+    std::atomic<bool> running{true};
 
     /**
      * @brief Mutex to protect the received data
      */
-    std::mutex rx_mutex_;
+    std::mutex rx_mutex;
 
     /**
      * @brief Mutex to protect the data to be sent
      */
-    std::mutex tx_mutex_;
+    std::mutex tx_mutex;
 
     /**
      * @brief Buffer for received data waiting to be retrieved
      */
-    std::vector<uint8_t> received_data_;
+    std::vector<uint8_t> received_data;
 
     /**
      * @brief Buffer for data waiting to be sent in the next update
      */
-    std::vector<uint8_t> tx_queue_;
+    std::vector<uint8_t> tx_queue;
 
     /**
      * @brief Set of active connections
      */
-    std::set<ConnectionHdl, std::owner_less<ConnectionHdl>> connections_;
+    std::set<ConnectionHdl, std::owner_less<ConnectionHdl>> connections;
 
     /**
      * @brief Mutex to protect the connections set
      */
-    std::mutex connection_mutex_;
+    std::mutex connection_mutex;
 
     /**
      * @brief Server configuration
      */
-    Config config_;
+    Config config;
 };
 
-} // namespace micras::proxy::mock
+}  // namespace micras::proxy
 
-#endif // MICRAS_PROXY_BLUETOOTH_SERIAL_HPP
+#endif  // MICRAS_PROXY_BLUETOOTH_SERIAL_HPP
