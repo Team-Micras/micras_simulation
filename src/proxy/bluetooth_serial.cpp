@@ -10,7 +10,7 @@
 
 namespace micras::proxy {
 
-BluetoothSerial::BluetoothSerial(const Config& config) : port{port} {
+BluetoothSerial::BluetoothSerial(const Config& config) : port{config.port} {
     init_websocket_server();
 }
 
@@ -127,7 +127,7 @@ void BluetoothSerial::on_close(ConnectionHdl hdl) {
     std::cout << "WebSocket connection closed. Total connections: " << this->connections.size() << std::endl;
 }
 
-void BluetoothSerial::on_message(ConnectionHdl hdl, MessagePtr msg) {
+void BluetoothSerial::on_message(ConnectionHdl /*hdl*/, MessagePtr msg) {
     auto payload = msg->get_payload();
 
     {
