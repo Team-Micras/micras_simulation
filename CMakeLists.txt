@@ -46,6 +46,25 @@ foreach(dependency ${ROS_CODE_DEPS})
 endforeach()
 
 ###############################################################################
+## Find WebSocketpp
+###############################################################################
+
+find_package(Boost REQUIRED COMPONENTS system thread)
+
+include(FetchContent)
+
+FetchContent_Declare(
+    websocketpp
+    GIT_REPOSITORY https://github.com/zaphoyd/websocketpp.git
+    GIT_TAG develop
+)
+
+# Suppress CMake deprecation warnings from websocketpp
+set(CMAKE_WARN_DEPRECATED OFF CACHE BOOL "Whether to issue deprecation warnings." FORCE)
+FetchContent_MakeAvailable(websocketpp)
+set(CMAKE_WARN_DEPRECATED ON CACHE BOOL "Whether to issue deprecation warnings." FORCE)
+
+###############################################################################
 ## Input Files
 ###############################################################################
 
@@ -75,6 +94,12 @@ target_include_directories(${PROJECT_NAME}_lib PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/micras_nav/include>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/micras_comm/include>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/micras_core/include>
+    $<BUILD_INTERFACE:${websocketpp_SOURCE_DIR}>
+)
+
+target_link_libraries(${PROJECT_NAME}_lib
+    Boost::system
+    Boost::thread
 )
 
 ###############################################################################
@@ -154,6 +179,7 @@ if(COMPILE_TESTS)
             ${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/micras_nav/include
             ${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/micras_comm/include
             ${CMAKE_CURRENT_SOURCE_DIR}/MicrasFirmware/micras_core/include
+            ${websocketpp_SOURCE_DIR}
         )
 
         target_link_libraries(${TEST_NAME}
