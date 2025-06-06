@@ -34,8 +34,7 @@ public:
      * @brief Configuration struct for the BluetoothSerial.
      */
     struct Config {
-        uint16_t    port = 9002;
-        std::string host = "0.0.0.0";
+        uint16_t port = 9002;
     };
 
     /**
@@ -153,9 +152,9 @@ private:
     std::mutex connection_mutex;
 
     /**
-     * @brief Server configuration
+     * @brief Port on which the WebSocket server listens
      */
-    Config config;
+    uint16_t port;
 };
 
 }  // namespace micras::proxy

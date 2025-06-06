@@ -10,7 +10,7 @@
 
 namespace micras::proxy {
 
-BluetoothSerial::BluetoothSerial(const Config& config) : config(config) {
+BluetoothSerial::BluetoothSerial(const Config& config) : port{port} {
     init_websocket_server();
 }
 
@@ -54,7 +54,7 @@ void BluetoothSerial::init_websocket_server() {
             std::bind(&BluetoothSerial::on_message, this, std::placeholders::_1, std::placeholders::_2)
         );
 
-        this->server.listen(this->config.port);
+        this->server.listen(this->port);
         this->server.start_accept();
 
         this->server_thread = std::thread([this]() {
@@ -65,8 +65,8 @@ void BluetoothSerial::init_websocket_server() {
             }
         });
 
-        std::cout << "WebSocket server started on port " << config.port;
-        std::cout << " -> ws://localhost:" << config.port << std::endl;
+        std::cout << "WebSocket server started on port " << this->port;
+        std::cout << " -> ws://localhost:" << this->port << std::endl;
     } catch (const websocketpp::exception& e) {
         std::cerr << "WebSocket initialization error: " << e.what() << std::endl;
         throw;

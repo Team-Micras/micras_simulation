@@ -25,6 +25,7 @@
 #include "micras/proxy/rotary_sensor.hpp"
 #include "micras/proxy/storage.hpp"
 #include "micras/proxy/torque_sensors.hpp"
+#include "micras/proxy/bluetooth_serial.hpp"
 
 // clang-format off
 namespace micras {
@@ -87,6 +88,10 @@ const proxy::DipSwitch::Config dip_switch_config {
 const proxy::Buzzer::Config buzzer_config {
     .node = micras_node,
     .topic = "buzzer"
+};
+
+const proxy::BluetoothSerial::Config bluetooth_config = {
+    .port = 8080,
 };
 
 /*****************************************
