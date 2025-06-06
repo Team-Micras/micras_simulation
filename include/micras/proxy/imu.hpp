@@ -7,9 +7,9 @@
 
 #include <array>
 #include <cstdint>
+#include <example_interfaces/msg/float64_multi_array.hpp>
 #include <numbers>
 #include <rclcpp/rclcpp.hpp>
-#include <example_interfaces/msg/float64_multi_array.hpp>
 
 namespace micras::proxy {
 /**

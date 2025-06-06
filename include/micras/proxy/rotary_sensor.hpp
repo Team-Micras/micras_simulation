@@ -6,8 +6,8 @@
 #define MICRAS_PROXY_ROTARY_SENSOR_HPP
 
 #include <cstdint>
-#include <rclcpp/rclcpp.hpp>
 #include <example_interfaces/msg/float64.hpp>
+#include <rclcpp/rclcpp.hpp>
 
 namespace micras::proxy {
 /**

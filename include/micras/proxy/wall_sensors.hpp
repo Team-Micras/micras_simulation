@@ -7,8 +7,8 @@
 
 #include <array>
 #include <cstdint>
-#include <rclcpp/rclcpp.hpp>
 #include <example_interfaces/msg/float64.hpp>
+#include <rclcpp/rclcpp.hpp>
 
 #include "micras/core/butterworth_filter.hpp"
 
