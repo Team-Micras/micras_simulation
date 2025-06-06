@@ -71,13 +71,6 @@ public:
      */
     std::vector<uint8_t> get_data();
 
-    /**
-     * @brief Check if the WebSocket server is running and listening
-     *
-     * @return true if server is running and listening, false otherwise
-     */
-    bool is_running() const;
-
 private:
     /**
      * @brief Initialize the WebSocket server
@@ -115,11 +108,6 @@ private:
      * @brief Thread for the WebSocket server
      */
     std::thread server_thread;
-
-    /**
-     * @brief Flag to indicate if the server is running
-     */
-    std::atomic<bool> running{true};
 
     /**
      * @brief Mutex to protect the received data

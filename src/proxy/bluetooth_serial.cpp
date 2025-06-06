@@ -15,7 +15,6 @@ BluetoothSerial::BluetoothSerial(const Config& config) : port{port} {
 }
 
 BluetoothSerial::~BluetoothSerial() {
-    this->running = false;
     this->server.stop();
 
     if (this->server.is_listening()) {
@@ -114,10 +113,6 @@ std::vector<uint8_t> BluetoothSerial::get_data() {
     std::vector<uint8_t>        data = std::move(this->received_data);
     this->received_data.clear();
     return data;
-}
-
-bool BluetoothSerial::is_running() const {
-    return this->running && this->server.is_listening();
 }
 
 void BluetoothSerial::on_open(ConnectionHdl hdl) {
