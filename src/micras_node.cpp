@@ -1,14 +1,10 @@
 /**
- * @file micras_node.cpp
- *
- * @brief Micras Node class implementation
- *
- * @date 03/2024
+ * @file
  */
 
 #include <rclcpp/rclcpp.hpp>
 
-#include "micras/micras_controller.hpp"
+#include "micras/micras.hpp"
 #include "target.hpp"
 
 using namespace std::chrono_literals;
@@ -21,10 +17,10 @@ int main(int argc, char** argv) {
 
     rclcpp::executors::MultiThreadedExecutor executor;
 
-    micras::MicrasController micras_controller;
+    micras::Micras micras;
 
     try {
-        auto timer = main_node->create_wall_timer(10ms, [&micras_controller]() { micras_controller.run(); });
+        auto timer = main_node->create_wall_timer(10ms, [&micras]() { micras.update(); });
 
         executor.add_node(main_node);
         executor.add_node(micras::micras_node);

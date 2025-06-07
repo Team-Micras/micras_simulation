@@ -1,9 +1,5 @@
 /**
- * @file battery.cpp
- *
- * @brief Proxy Battery class implementation
- *
- * @date 04/2024
+ * @file
  */
 
 #include "micras/proxy/battery.hpp"
@@ -15,11 +11,19 @@ Battery::Battery(const Config& config) : max_voltage{config.max_voltage}, max_re
     );
 }
 
+void Battery::update() {
+    // A atualização é feita automaticamente pelo callback do subscriber
+}
+
 float Battery::get_voltage() const {
     return this->reading;
 }
 
-uint32_t Battery::get_voltage_raw() const {
-    return ((this->reading) / this->max_voltage) * this->max_reading;
+float Battery::get_voltage_raw() const {
+    return (this->reading / this->max_voltage) * this->max_reading;
+}
+
+float Battery::get_adc_reading() const {
+    return this->reading / this->max_voltage;
 }
 }  // namespace micras::proxy

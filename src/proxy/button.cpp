@@ -1,9 +1,5 @@
 /**
- * @file button.cpp
- *
- * @brief Proxy Button class source
- *
- * @date 03/2024
+ * @file
  */
 
 #include "micras/proxy/button.hpp"
@@ -21,28 +17,35 @@ bool Button::is_pressed() const {
     return this->state.data;
 }
 
-Button::Status Button::get_status() {
+Button::Status Button::get_status() const {
+    return this->current_status;
+}
+
+void Button::update() {
+    this->previous_state = this->current_state;
     this->update_state();
 
     if (this->is_rising_edge()) {
-        this->status_timer.reset_ms();
+        this->status_stopwatch.reset_ms();
     } else if (this->is_falling_edge()) {
-        if (this->status_timer.elapsed_time_ms() > this->extra_long_press_delay) {
-            return EXTRA_LONG_PRESS;
+        if (this->status_stopwatch.elapsed_time_ms() > extra_long_press_delay) {
+            this->current_status = EXTRA_LONG_PRESS;
+            return;
         }
 
-        if (this->status_timer.elapsed_time_ms() > this->long_press_delay) {
-            return LONG_PRESS;
+        if (this->status_stopwatch.elapsed_time_ms() > long_press_delay) {
+            this->current_status = LONG_PRESS;
+            return;
         }
 
-        return SHORT_PRESS;
+        this->current_status = SHORT_PRESS;
+        return;
     }
 
-    return NO_PRESS;
+    this->current_status = NO_PRESS;
 }
 
 void Button::update_state() {
-    this->previous_state = this->current_state;
     this->current_state = this->state.data;
 }
 
@@ -51,6 +54,6 @@ bool Button::is_rising_edge() const {
 }
 
 bool Button::is_falling_edge() const {
-    return not this->current_state and this->previous_state;
+    return !this->current_state and this->previous_state;
 }
 }  // namespace micras::proxy

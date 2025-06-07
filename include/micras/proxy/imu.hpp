@@ -1,27 +1,24 @@
 /**
- * @file imu.hpp
- *
- * @brief STM32 IMU HAL wrapper
- *
- * @date 03/2024
+ * @file
  */
 
 #ifndef MICRAS_PROXY_IMU_HPP
 #define MICRAS_PROXY_IMU_HPP
 
+#include <array>
 #include <cstdint>
+#include <numbers>
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/imu.hpp>
-#include <string>
 
 namespace micras::proxy {
 /**
- * @brief Class to handle IMU peripheral on STM32 microcontrollers
+ * @brief Class for acquiring IMU data.
  */
 class Imu {
 public:
     /**
-     * @brief IMU configuration struct
+     * @brief IMU configuration struct.
      */
     struct Config {
         std::shared_ptr<rclcpp::Node>& node;
@@ -29,65 +26,74 @@ public:
     };
 
     /**
-     * @brief Construct a new Imu object
-     *
-     * @param config Configuration for the IMU
+     * @brief Enum to select the axis of the IMU.
      */
-    explicit Imu(const Config& config);
-
     enum Axis : uint8_t {
-        X,
-        Y,
-        Z
+        X = 0,
+        Y = 1,
+        Z = 2
     };
 
     /**
-     * @brief Update the IMU data
+     * @brief Construct a new Imu object.
+     *
+     * @param config Configuration for the IMU.
      */
-    void update_data();
+    explicit Imu(const Config& config);
 
     /**
-     * @brief Get the IMU orientation over an axis
-     *
-     * @param axis Axis to get the orientation from
-     *
-     * @return float Orientation over the desired axis using quaternions
+     * @brief Update the IMU data.
      */
-    float get_orientation(Axis axis) const;
+    void update();
 
     /**
-     * @brief Get the IMU angular velocity over an axis
+     * @brief Get the IMU angular velocity over an axis.
      *
-     * @param axis Axis to get the angular velocity from
-     *
-     * @return float Angular velocity over the desired axis in rad/s
+     * @param axis Axis to get the angular velocity from.
+     * @return Angular velocity over the desired axis in rad/s.
      */
     float get_angular_velocity(Axis axis) const;
 
     /**
-     * @brief Get the IMU linear acceleration over an axis
+     * @brief Get the IMU linear acceleration over an axis.
      *
-     * @param axis Axis to get the linear acceleration from
-     *
-     * @return float Linear acceleration over the desired axis in m/s²
+     * @param axis Axis to get the linear acceleration from.
+     * @return Linear acceleration over the desired axis in m/s².
      */
     float get_linear_acceleration(Axis axis) const;
 
-private:
     /**
-     * @brief Current data of the IMU
+     * @brief Define the base reading to be removed from the IMU value.
      */
-    sensor_msgs::msg::Imu data;
+    void calibrate();
 
     /**
-     * @brief Subscriber for the IMU topic
+     * @brief Check if IMU was initialized.
+     *
+     * @return True if the device was successfully initialized, false otherwise.
+     */
+    bool was_initialized() const;
+
+private:
+    /**
+     * @brief Subscriber para os dados do IMU.
      */
     rclcpp::Subscription<sensor_msgs::msg::Imu>::SharedPtr subscriber;
 
     /**
-     * @brief Array to store the IMU orientation in euler angles
+     * @brief Dados do IMU recebidos.
      */
-    std::array<float, 3> orientation{};
+    sensor_msgs::msg::Imu data;
+
+    /**
+     * @brief Current angular velocity on each axis.
+     */
+    std::array<float, 3> angular_velocity{};
+
+    /**
+     * @brief Current linear acceleration on each axis.
+     */
+    std::array<float, 3> linear_acceleration{};
 };
 }  // namespace micras::proxy
 

@@ -1,9 +1,5 @@
 /**
- * @file led.cpp
- *
- * @brief Proxy Led class source
- *
- * @date 03/2024
+ * @file
  */
 
 #include "micras/proxy/led.hpp"
@@ -24,7 +20,7 @@ void Led::turn_off() {
 }
 
 void Led::toggle() {
-    this->state.data = not this->state.data;
+    this->state.data = !this->state.data;
     this->publisher->publish(this->state);
 }
 }  // namespace micras::proxy

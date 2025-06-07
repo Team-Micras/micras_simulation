@@ -1,5 +1,10 @@
 <launch>
     <arg name="name" default="micras_node"/>
+    <arg name="debug" default="false"/>
 
-    <node name="micras_node" pkg="micras_simulation" exec="$(var name)" output="screen" namespace="micras" on_exit="shutdown"/>
+    <let name="prefix_string" value="$(eval '\'gdbserver --no-startup-with-shell localhost:3000\' if \'$(var debug)\' == \'true\' else \'\'')"/>
+
+    <node name="micras_node" pkg="micras_simulation" exec="$(var name)"
+          output="screen" namespace="micras" on_exit="shutdown"
+          launch-prefix="$(var prefix_string)"/>
 </launch>

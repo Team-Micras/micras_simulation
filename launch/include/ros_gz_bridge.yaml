@@ -118,7 +118,7 @@
   publisher_queue: 1
   direction: GZ_TO_ROS
 
-- ros_topic_name: "distance_sensor_0"
+- ros_topic_name: "wall_sensor_0"
   gz_topic_name: "/lidar_0"
   ros_type_name: "sensor_msgs/msg/LaserScan"
   gz_type_name: "gz.msgs.LaserScan"
@@ -126,7 +126,7 @@
   publisher_queue: 1
   direction: GZ_TO_ROS
 
-- ros_topic_name: "distance_sensor_1"
+- ros_topic_name: "wall_sensor_1"
   gz_topic_name: "/lidar_1"
   ros_type_name: "sensor_msgs/msg/LaserScan"
   gz_type_name: "gz.msgs.LaserScan"
@@ -134,7 +134,7 @@
   publisher_queue: 1
   direction: GZ_TO_ROS
 
-- ros_topic_name: "distance_sensor_2"
+- ros_topic_name: "wall_sensor_2"
   gz_topic_name: "/lidar_2"
   ros_type_name: "sensor_msgs/msg/LaserScan"
   gz_type_name: "gz.msgs.LaserScan"
@@ -142,7 +142,7 @@
   publisher_queue: 1
   direction: GZ_TO_ROS
 
-- ros_topic_name: "distance_sensor_3"
+- ros_topic_name: "wall_sensor_3"
   gz_topic_name: "/lidar_3"
   ros_type_name: "sensor_msgs/msg/LaserScan"
   gz_type_name: "gz.msgs.LaserScan"

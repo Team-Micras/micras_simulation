@@ -1,12 +1,10 @@
 /**
- * @file buzzer.cpp
- *
- * @brief Proxy Buzzer class implementation
- *
- * @date 03/2024
+ * @file
  */
 
 #include "micras/proxy/buzzer.hpp"
+
+#include <std_msgs/msg/u_int32.hpp>
 
 namespace micras::proxy {
 Buzzer::Buzzer(const Config& config) {
@@ -22,24 +20,24 @@ void Buzzer::play(uint32_t frequency, uint32_t duration) {
     this->duration = duration;
 
     if (duration > 0) {
-        this->playing_timer.reset_ms();
+        this->stopwatch.reset_ms();
     }
 }
 
 void Buzzer::update() {
-    if (this->is_playing and this->duration > 0 and this->playing_timer.elapsed_time_ms() > this->duration) {
+    if (this->is_playing && this->duration > 0 && this->stopwatch.elapsed_time_ms() > this->duration) {
         this->stop();
     }
 }
 
-void Buzzer::wait(uint32_t duration) {
-    while (this->duration > 0 and this->is_playing) {
+void Buzzer::wait(uint32_t interval) {
+    while (this->duration > 0 && this->is_playing) {
         this->update();
     }
 
-    hal::Timer wait_timer;
+    Stopwatch wait_timer;
 
-    while (wait_timer.elapsed_time_ms() < duration) {
+    while (wait_timer.elapsed_time_ms() < interval) {
         this->update();
     }
 }
