@@ -7,7 +7,7 @@
 
 #include <cstdint>
 #include <rclcpp/rclcpp.hpp>
-#include <std_msgs/msg/float32.hpp>
+#include <example_interfaces/msg/float64.hpp>
 
 #include "micras/proxy/stopwatch.hpp"
 
@@ -66,12 +66,12 @@ private:
     /**
      * @brief Publisher para controlar a velocidade do ventilador.
      */
-    rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr publisher;
+    rclcpp::Publisher<example_interfaces::msg::Float64>::SharedPtr publisher;
 
     /**
      * @brief Mensagem contendo a velocidade do ventilador.
      */
-    std_msgs::msg::Float32 message;
+    example_interfaces::msg::Float64 message;
 
     /**
      * @brief Flag para verificar se o ventilador está habilitado.
