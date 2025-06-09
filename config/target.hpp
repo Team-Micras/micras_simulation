@@ -168,7 +168,7 @@ const proxy::Battery::Config battery_config {
 
 const proxy::Fan::Config fan_config {
     .node = micras_node,
-    .topic = "fan"
+    .topic = "actuators/fan/command"
 };
 
 const proxy::Locomotion::Config locomotion_config {
