@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
     micras::Micras micras;
 
     try {
-        auto timer = main_node->create_wall_timer(10ms, [&micras]() { micras.update(); });
+        auto timer = main_node->create_wall_timer(1ms, [&micras]() { micras.update(); });
 
         executor.add_node(main_node);
         executor.add_node(micras::micras_node);

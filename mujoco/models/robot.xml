@@ -64,7 +64,7 @@
       <site name="lidar_1" pos="-0.01  0.061 0.02" zaxis="-1 1 0"/>
       <site name="lidar_2" pos=" 0.01  0.061 0.02" zaxis=" 1 1 0"/>
       <site name="lidar_3" pos=" 0.026 0.041 0.02" zaxis=" 0 1 0"/>
-      <site name="fan" pos="0.0 0.015 0.0"/>
+      <site name="fan" pos="0.0 0.015 0.0" zaxis="1 0 0"/>
 
       <geom name="base" type="mesh" mesh="base" mass="0.08" rgba="0.0 0.4 0.2 1" contype="1" conaffinity="1"/>
       <geom name="front wheel" pos="0.0 0.06 -0.0003" type="sphere" size=".001" friction="0.05" priority="1"/>

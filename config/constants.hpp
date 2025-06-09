@@ -55,11 +55,11 @@ const nav::ActionQueuer::Config action_queuer_config{
     .curve_safety_margin = 0.053F,
     .exploring =
         {
-            .max_linear_speed = 0.2F,
-            .max_linear_acceleration = 9.0F,
-            .max_linear_deceleration = 9.0F,
-            .max_centrifugal_acceleration = 2.0F,
-            .max_angular_acceleration = 300.0F,
+            .max_linear_speed = 0.3F,
+            .max_linear_acceleration = 5.0F,
+            .max_linear_deceleration = 5.0F,
+            .max_centrifugal_acceleration = 1.0F,
+            .max_angular_acceleration = 200.0F,
         },
     .solving =
         {
@@ -102,15 +102,15 @@ const nav::Maze::Config maze_config{
 };
 
 const nav::Odometry::Config odometry_config{
-    .linear_cutoff_frequency = 50.0F,
-    .wheel_radius = 0.0112F,
+    .linear_cutoff_frequency = 10.0F,
+    .wheel_radius = 0.011F,
     .initial_pose = {{cell_size / 2.0f, start_offset}, std::numbers::pi_v<float> / 2.0f},
 };
 
 const nav::SpeedController::Config speed_controller_config{
     .linear_pid =
         {
-            .kp = 10.0F,
+            .kp = 0.0F,
             .ki = 10.0F,
             .kd = 0.0F,
             .setpoint = 0.0F,
@@ -119,7 +119,7 @@ const nav::SpeedController::Config speed_controller_config{
         },
     .angular_pid =
         {
-            .kp = 0.7F,
+            .kp = 0.0F,
             .ki = 5.0F,
             .kd = 0.0F,
             .setpoint = 0.0F,
@@ -128,17 +128,17 @@ const nav::SpeedController::Config speed_controller_config{
         },
     .left_feed_forward =
         {
-            .linear_speed = 16.4F,
-            .linear_acceleration = 3.98F,
-            .angular_speed = -0.55F,
-            .angular_acceleration = -0.143F,
+            .linear_speed = 102.0F,
+            .linear_acceleration = 0.3F,
+            .angular_speed = -4.9F,
+            .angular_acceleration = -0.1F,
         },
     .right_feed_forward =
         {
-            .linear_speed = 16.4F,
-            .linear_acceleration = 3.98F,
-            .angular_speed = +0.55F,
-            .angular_acceleration = +0.143F,
+            .linear_speed = 102.0F,
+            .linear_acceleration = 0.3F,
+            .angular_speed = +4.9F,
+            .angular_acceleration = +0.1F,
         },
 };
 }  // namespace micras
