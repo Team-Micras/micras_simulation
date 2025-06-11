@@ -6,6 +6,7 @@
 #define MICRAS_PROXY_STOPWATCH_HPP
 
 #include <cstdint>
+#include <builtin_interfaces/msg/time.hpp>
 #include <rclcpp/rclcpp.hpp>
 
 namespace micras::proxy {
@@ -17,9 +18,7 @@ public:
     /**
      * @brief Stopwatch configuration struct.
      */
-    struct Config {
-        // Configurações específicas para ROS 2 poderiam ser adicionadas aqui
-    };
+    struct Config { };
 
     /**
      * @brief Construct a new Stopwatch object.
@@ -90,6 +89,16 @@ private:
      * @brief Stopwatch counter.
      */
     uint32_t counter{};
+
+    /**
+     * @brief Subscription to the clock topic.
+     */
+    rclcpp::Subscription<builtin_interfaces::msg::Time>::SharedPtr clock_subscriber;
+
+    /**
+     * @brief Last clock message received (shared between all instances).
+     */
+    static inline builtin_interfaces::msg::Time clock_msg{};
 };
 }  // namespace micras::proxy
 
