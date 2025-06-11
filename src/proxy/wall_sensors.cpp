@@ -24,8 +24,7 @@ TWallSensors<num_of_sensors>::TWallSensors(const Config& config) :
 
     for (uint8_t i = 0; i < num_of_sensors; i++) {
         this->subscribers[i] = config.node->template create_subscription<example_interfaces::msg::Float64>(
-            config.topic_array[i], 1,
-            [this, i](const example_interfaces::msg::Float64& msg) { this->readings[i] = this->leds_on ? msg.data : 0; }
+            config.topic_array[i], 1, [](const example_interfaces::msg::Float64& /*msg*/) {}
         );
     }
 }
@@ -60,12 +59,17 @@ float TWallSensors<num_of_sensors>::get_reading(uint8_t sensor_index) const {
 
 template <uint8_t num_of_sensors>
 float TWallSensors<num_of_sensors>::get_adc_reading(uint8_t sensor_index) const {
+    example_interfaces::msg::Float64 msg;
+    rclcpp::MessageInfo              info;
+
+    if (this->subscribers[sensor_index]->take(msg, info)) {
+        this->readings.at(sensor_index) = msg.data;
+    }
     float raw_reading = this->readings.at(sensor_index);
+
     if (raw_reading < 0.0F) {
         return 0.0F;
     }
-
-    raw_reading = this->readings.at(sensor_index);
 
     float intensity = 1 / std::pow(raw_reading, 2.0F);
     float reading = this->max_sensor_reading * (1 - std::exp(-this->constant * intensity));

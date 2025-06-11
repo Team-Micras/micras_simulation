@@ -9,8 +9,6 @@
 #include <rclcpp/rclcpp.hpp>
 #include <example_interfaces/msg/float64.hpp>
 
-#include "micras/proxy/stopwatch.hpp"
-
 namespace micras::proxy {
 /**
  * @brief Class for controlling the fan driver.

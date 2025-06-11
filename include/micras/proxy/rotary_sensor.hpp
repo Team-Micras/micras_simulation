@@ -47,7 +47,7 @@ private:
     /**
      * @brief Received data from the rotary sensor.
      */
-    double data{0.0};
+    mutable double data{0.0};
 };
 }  // namespace micras::proxy
 

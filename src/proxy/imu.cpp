@@ -9,33 +9,32 @@
 namespace micras::proxy {
 Imu::Imu(const Config& config) {
     this->gyro_subscriber = config.node->create_subscription<example_interfaces::msg::Float64MultiArray>(
-        config.gyro_topic, 1, [this](const example_interfaces::msg::Float64MultiArray& msg) { this->gyro_data = msg; }
+        config.gyro_topic, 1, [](const example_interfaces::msg::Float64MultiArray& /*msg*/) {}
     );
 
     this->accelerometer_subscriber = config.node->create_subscription<example_interfaces::msg::Float64MultiArray>(
-        config.accelerometer_topic, 1,
-        [this](const example_interfaces::msg::Float64MultiArray& msg) { this->accelerometer_data = msg; }
+        config.accelerometer_topic, 1, [](const example_interfaces::msg::Float64MultiArray& /*msg*/) {}
     );
 
-    this->gyro_data.layout.dim.resize(1);
-    this->gyro_data.layout.dim[0].label = "gyro";
-    this->gyro_data.layout.dim[0].size = 3;
-    this->gyro_data.layout.dim[0].stride = 3;
-    this->gyro_data.data.resize(3, 0.0);
-    this->accelerometer_data.layout.dim.resize(1);
-    this->accelerometer_data.layout.dim[0].label = "accelerometer";
-    this->accelerometer_data.layout.dim[0].size = 3;
-    this->accelerometer_data.layout.dim[0].stride = 3;
-    this->accelerometer_data.data.resize(3, 0.0);
+    this->angular_velocity.fill(0.0F);
+    this->linear_acceleration.fill(0.0F);
 }
 
 void Imu::update() {
-    this->angular_velocity[0] = this->gyro_data.data[0];
-    this->angular_velocity[1] = this->gyro_data.data[1];
-    this->angular_velocity[2] = this->gyro_data.data[2];
-    this->linear_acceleration[0] = this->accelerometer_data.data[0];
-    this->linear_acceleration[1] = this->accelerometer_data.data[1];
-    this->linear_acceleration[2] = this->accelerometer_data.data[2];
+    example_interfaces::msg::Float64MultiArray msg;
+    rclcpp::MessageInfo                        info;
+
+    if (this->gyro_subscriber->take(msg, info)) {
+        this->angular_velocity[0] = msg.data[0];
+        this->angular_velocity[1] = msg.data[1];
+        this->angular_velocity[2] = msg.data[2];
+    }
+
+    if (this->accelerometer_subscriber->take(msg, info)) {
+        this->linear_acceleration[0] = msg.data[0];
+        this->linear_acceleration[1] = msg.data[1];
+        this->linear_acceleration[2] = msg.data[2];
+    }
 }
 
 float Imu::get_angular_velocity(Axis axis) const {

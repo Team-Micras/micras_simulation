@@ -103,7 +103,7 @@ private:
     /**
      * @brief Array of distances measured by the sensors.
      */
-    std::array<float, num_of_sensors> readings;
+    mutable std::array<float, num_of_sensors> readings;
 
     /**
      * @brief Maximum distance detectable by the sensor.
